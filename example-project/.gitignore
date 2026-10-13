@@ -1,0 +1,29 @@
+# Secrets: never committed
+.env
+*.key
+
+# Data: raw data is usually too big or too sensitive for git. Keep the README, ignore the files.
+data/raw/*
+!data/raw/README.md
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Literature PDFs: copyrighted, keep them local
+literature/*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Agent working files
+_trash/

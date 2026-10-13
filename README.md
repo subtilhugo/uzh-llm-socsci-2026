@@ -12,7 +12,7 @@ Every participant starts their own research project in Session 1 and advances it
 | --- | --- |
 | `setup/` | Installation guide and the verification test to do before Session 1 |
 | `template/` | The project template every participant copies in Session 1 (README, CLAUDE.md, PROJECT_HISTORY, prompts) |
-| `example-project/` | The instructor's example project, "Who votes far right? Party competition in France, 2022–2024", with a git tag after each session (`after-s1`, `after-s2`, ...). Use it to catch up on a missed session. **Added after Session 1.** |
+| `example-project/` | The instructor's example project, **"Who votes far right? The local rise of the FN/RN in France"**. **It grows after each session.** Use it if you have no project of your own, or to catch up on a missed session. |
 | `sessions/01` to `05` | Slides (PDF), worksheet, notebooks and data packs for each session |
 
 ## Session 1: setting up an agentic research project

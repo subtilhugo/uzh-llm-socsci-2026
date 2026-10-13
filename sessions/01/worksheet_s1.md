@@ -4,7 +4,7 @@
 
 **Goal for 12:00.** A git folder for your own project containing a filled `CLAUDE.md`, three to five literature notes, a one-page research memo, a critique of that memo, and a first commit. And you have caught at least one error the agent made.
 
-Work on your own project. If you have no project or no PDFs today, use the example project: **ask Hugo for its research question and its PDFs**.
+Work on your own project. If you have no project or no PDFs today, use the example project: **its question and its literature are in `example-project/README.md`; ask Hugo for the PDFs**.
 
 Each step has a prompt to paste (in `template/prompts/`) and a "done when" criterion. Do the steps in order. Steps 1 to 3 are mandatory before anything else. If you get stuck for more than five minutes, paste your error message in the shared document and ask your neighbour.
 
