@@ -17,3 +17,13 @@ Template for an entry:
 **Open.** What is unresolved, what the next session should start with.
 
 ---
+
+## 2026-10-13
+
+**Done.** Project created from the workshop template. `README.md` filled (question, design, data sources, literature). Conventions written in `CLAUDE.md` (INSEE codes as strings, arrondissements, FN/RN label, valid votes as denominator, no causal language yet). `literature/README.md` and `references.bib` list the five works. No PDF in the folder yet.
+
+**Decided.** Unit of analysis is the municipality; period 2002–2024, to confirm against data availability. Books (Coquard, Ternullo) enter as one chapter each, not whole.
+
+**Verified by a human.** The references in `literature/README.md` (DOIs checked). Nothing else yet: no note has been written.
+
+**Open.** Put the PDFs in `literature/`. Run prompt 02, then verify one note against its PDF (Session 1, step 5). Complete the Betting Alone reference.

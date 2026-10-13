@@ -2,6 +2,8 @@
 
 **Course repository: https://github.com/subtilhugo/uzh-llm-socsci-2026**
 
+**Timing.** Steps 0–1 during the clinic (9:35–9:50). Steps 2–8 during the hands-on (10:40–11:40), about 60 minutes: 15 for the context, 10 for the notes, 10 to verify, 10 for the memo, 10 for the critique, 5 to log and commit.
+
 **Goal for 12:00.** A git folder for your own project containing a filled `CLAUDE.md`, three to five literature notes, a one-page research memo, a critique of that memo, and a first commit. And you have caught at least one error the agent made.
 
 Work on your own project. If you have no project or no PDFs today, use the example project: **its question and its literature are in `example-project/README.md`; ask Hugo for the PDFs**.
@@ -83,9 +85,13 @@ Then close the agent, start a fresh session in the same folder, and ask: "Where 
 
 Done when: the agent answers from `PROJECT_HISTORY.md` without you explaining anything.
 
-## Bonus, if you finish early
+## Bonus 1, if you finish early
 
 Drop your dataset (or the example dataset) in `data/raw/<source>/` and ask the agent to fill `data/raw/README.md` with the provenance table and the quirks it notices (separator, encoding, missing-value codes, identifiers). This is the first step of Session 2.
+
+## Bonus 2, for the sceptics
+
+Who verifies the verifier? Take a note you have *not* checked yet. Before you open the PDF, ask the agent: "Re-read `literature/<file>.pdf` and grade your own note `notes/literature/<file>.md`: list every claim you cannot locate in the PDF, with your confidence." Then verify the note yourself. Did it find its own errors? Did it flag correct claims as doubtful? Write one line in the shared document: how many errors you found, how many it found.
 
 ---
 

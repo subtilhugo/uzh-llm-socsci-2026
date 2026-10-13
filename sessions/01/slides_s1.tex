@@ -57,7 +57,7 @@
   \centering
   \vfill
   {\LARGE \textbf{\textcolor{titleblue}{Before We Start}}}\\[0.4cm]
-  {\large \textit{9:00 -- 9:15}}\\[0.3cm]
+  {\large \textit{9:00 -- 9:20}}\\[0.3cm]
   {The idea of this session, and why it is debatable}
   \vfill
 \end{frame}
@@ -235,11 +235,7 @@ But you remain accountable for what you delegate, so you have to understand it.
 Otherwise, when nobody knows how to do it any more, we all depend on someone else.
 \end{alertblock}
 
-\vspace{0.2cm}
-
-{\small A researcher with AI beats AI alone. But the frontier is jagged: on a task just outside it, consultants with GPT-4 were 19\% less likely to get it right (Dell'Acqua et al.\ 2023). \alert{Knowing where the frontier lies is a skill.}}
-
-\vspace{0.15cm}
+\vspace{0.3cm}
 
 \begin{enumerate}
     \item \textbf{You delegate execution, never understanding.} You must be able to explain every file in your project.
@@ -248,6 +244,10 @@ Otherwise, when nobody knows how to do it any more, we all depend on someone els
     \vspace{0.1cm}
     \item \textbf{Stop when you no longer know what it is doing.} Fatigue is the signal to stop, not to accept faster.
 \end{enumerate}
+
+\vspace{0.3cm}
+
+{\small Why rule 3: the frontier is jagged. On a task just outside what the model could do, consultants with GPT-4 were 19\% \emph{less} likely to get it right than without it (Dell'Acqua et al.\ 2023). \alert{Knowing where the frontier lies is a skill, and you learn it by doing.}}
 
 \end{frame}
 
@@ -284,18 +284,18 @@ We start with a folder: a project you own, read and understand.
 \vspace{0.1cm}
 \setlength{\leftmargini}{2.2cm}
 \begin{enumerate}
-    \item[\textbf{9:00--9:15}] Before We Start {\small (15 min)}
+    \item[\textbf{9:00--9:20}] Before We Start {\small (20 min)}
 
     \vspace{0.05cm}
 
-    \item[\textbf{9:15--9:30}] An Agentic Research Project {\small (15 min)}
+    \item[\textbf{9:20--9:35}] An Agentic Research Project {\small (15 min)}
     \begin{itemize}
         \item Chat vs agent, why a folder, the template, guardrails
     \end{itemize}
 
     \vspace{0.05cm}
 
-    \item[\textbf{9:30--9:50}] Installation Clinic {\small (20 min)}
+    \item[\textbf{9:35--9:50}] Installation Clinic {\small (15 min)}
     \begin{itemize}
         \item Worksheet, steps 0 and 1; problems go in the shared document
     \end{itemize}
@@ -329,7 +329,7 @@ We start with a folder: a project you own, read and understand.
   \centering
   \vfill
   {\Huge \textbf{\textcolor{titleblue}{An Agentic Research Project}}}\\[0.4cm]
-  {\Large \textit{9:15 -- 9:30}}\\[0.3cm]
+  {\Large \textit{9:20 -- 9:35}}\\[0.3cm]
   {\large From a chat that forgets to a folder that remembers}
   \vfill
 \end{frame}
@@ -344,7 +344,7 @@ We start with a folder: a project you own, read and understand.
 {\large \href{https://github.com/subtilhugo/uzh-llm-socsci-2026}{\texttt{github.com/subtilhugo/uzh-llm-socsci-2026}}}
 
 \vspace{0.4cm}
-Green ``Code'' button, then ``Download ZIP''.\\ You will need it at 9:30.
+Green ``Code'' button, then ``Download ZIP''.\\ You will need it at 9:35.
 
 \end{frame}
 
@@ -370,14 +370,15 @@ Green ``Code'' button, then ``Download ZIP''.\\ You will need it at 9:30.
 \vspace{0.4cm}
 
 \centering
-The permission prompt is the only thing that separates\\ an assistant from an unsupervised intern. \alert{Keep it on. Read it.}
+Same model as in the chat. What changes is the loop, the tools, and the permission prompt.\\
+\alert{That prompt is what separates an assistant from an unsupervised intern. Keep it on.}
 
 \end{frame}
 
 \begin{frame}{Why a Folder, Not a Chat}
 
 \begin{enumerate}
-    \item \textbf{Context.} The agent reads \texttt{CLAUDE.md} at the start of every session. You explain your project once, in a file, not in every conversation.
+    \item \textbf{Context.} The agent reads \texttt{CLAUDE.md} at the start of every session. You explain your project once, in a file, not in every conversation. A long chat degrades as it fills up; a file does not.
     \vspace{0.2cm}
     \item \textbf{Memory.} \texttt{PROJECT\_HISTORY.md} says where the project stands. A fresh session can answer ``where are we?'' from the file alone. Nothing lives in the chat.
     \vspace{0.2cm}
@@ -438,26 +439,28 @@ Change tool tomorrow, the folder stays. The same \texttt{CLAUDE.md} works in the
 
 \begin{frame}{Guardrails}
 
+\small
 \textbf{Written in \texttt{CLAUDE.md}}
 \begin{itemize}
     \item \texttt{data/raw/} is read-only. Always.
     \item Never invent a reference, a number, a result. Not in the folder = ``not found''.
-    \item Never delete. Never push. Nothing leaves the folder unless you asked.
-    \item Every claim about a paper cites file and page.
+    \item Never delete. Never push. Every claim about a paper cites file and page.
 \end{itemize}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \textbf{Written in your habits}
 \begin{itemize}
+    \item What the agent reads is sent to the vendor's servers; what it does not open stays on your machine. Confidential data: a sample, or a script that uses the file without the agent opening it.
     \item API keys live in \texttt{.env}; \texttt{.env} is in \texttt{.gitignore}.
-    \item Confidential data: a sample, anonymised, or never near an API.
+    \item Stay in ``ask'' mode: it proposes, you approve. Never switch off permissions.
     \item One agent at a time. Read the diff.
 \end{itemize}
 
-\vspace{0.4cm}
+\vspace{0.2cm}
 
 \centering
+\normalsize
 A rule in a file is a request, not a guarantee. \alert{You will see one fail today.}
 
 \end{frame}
@@ -493,7 +496,7 @@ Finding it is step 5 of the worksheet. \alert{It is the only step you cannot ski
   \centering
   \vfill
   {\Huge \textbf{\textcolor{titleblue}{Installation Clinic}}}\\[0.4cm]
-  {\Large \textit{9:30 -- 9:50}}\\[0.3cm]
+  {\Large \textit{9:35 -- 9:50}}\\[0.3cm]
   {\large Worksheet, step 0, then step 1}\\[0.4cm]
   {\small Stuck? Paste the error in the shared document and ask your neighbour.}
   \vfill
@@ -554,9 +557,17 @@ Finding it is step 5 of the worksheet. \alert{It is the only step you cannot ski
 
 \textbf{Three screens.} A \texttt{CLAUDE.md}. A literature note, with the error that was found. A critique, with the response.
 
-\vspace{0.4cm}
+\vspace{0.3cm}
 
 \textbf{The errors we found today.} Read from the shared document. The list is the lesson.
+
+\vspace{0.3cm}
+
+\textbf{One question.} Would you have caught that error in a paper you did not know? That is the gap between generation and verification, on your own desk.
+
+\vspace{0.3cm}
+
+\textbf{Before you leave.} One line in your \texttt{CLAUDE.md} that would have prevented it.
 
 \end{frame}
 
@@ -584,7 +595,7 @@ Next time the agent will clean and merge your data. How would you know that a me
 % REFERENCES
 % ============================================================================
 
-\begin{frame}[allowframebreaks]{References}
+\begin{frame}{References}
 
 {\scriptsize
 
@@ -617,10 +628,6 @@ Ning, L.\ (2026). The Ideation Bottleneck: Decomposing the Quality Gap Between A
 \vspace{0.05cm}
 
 Perrigo, B.\ (2023). OpenAI Used Kenyan Workers on Less Than \$2 Per Hour to Make ChatGPT Less Toxic. \textit{TIME}, 18 January.
-
-\vspace{0.05cm}
-
-Social Catalyst Lab (2026). Autonomous Policy Evaluation (APE). \url{https://ape.socialcatalystlab.org}.
 
 \vspace{0.05cm}
 
