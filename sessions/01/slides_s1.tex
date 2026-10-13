@@ -12,6 +12,7 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc,fit,decorations.pathreplacing}
 \usepackage[font=footnotesize]{caption}
+\usepackage{qrcode}
 
 \definecolor{color1bg}{HTML}{005e9e}
 \setbeamercolor*{palette primary}{fg=white,bg=color1bg}
@@ -24,16 +25,26 @@
 \setbeamercolor{alerted text}{fg=color2bg}
 \beamertemplatenavigationsymbolsempty
 
+% --- This deck: one blue everywhere, the blue of the title page (Beamer's default, #3333B2).
+% --- Delete this block to go back to color1bg / color2bg.
+\definecolor{titleblue}{HTML}{3333B2}
+\colorlet{color1bg}{titleblue}
+\colorlet{color2bg}{titleblue!75!black}
+\setbeamercolor*{frametitle}{fg=titleblue}
+\setbeamercolor*{block title}{bg=titleblue,fg=white}
+\setbeamercolor{block title alerted}{bg=titleblue,fg=white}
+\setbeamercolor{block body alerted}{bg=titleblue!8}
+\setbeamercolor{alerted text}{fg=titleblue}
+
 % --- Change marker: everything modified is in \chg{...} (bold).
-% --- Once checked, switch off by uncommenting the second line.
+% --- Switched off in this version (too much bold); comment the second line to see the changes again.
 \newcommand{\chg}[1]{{\bfseries #1}}
-% \renewcommand{\chg}[1]{#1}
+\renewcommand{\chg}[1]{#1}
 
 \title[LLMs for Social Science Research]{\large \textbf{Large Language Models for Social Science Research} \\
-    \textit{\chg{Session 1. Setting Up an Agentic Research Project}}}
+    \textit{Session 1. Setting Up an Agentic Research Project}}
 \author[H. Subtil]{\textbf{Hugo Subtil}}
-\institute{\footnotesize Course repository: \url{https://github.com/subtilhugo/uzh-llm-socsci-2026}}
-\date{\chg{October 14, 2026}}
+\date{October 14, 2026}
 
 \begin{document}
 \frame{\titlepage}
@@ -45,9 +56,9 @@
 \begin{frame}[plain]
   \centering
   \vfill
-  {\Huge \textbf{Before We Start}}\\[0.4cm]
-  {\Large \textit{9:25 -- 9:35}}\\[0.3cm]
-  {\large The idea of this session, and why it is debatable}
+  {\LARGE \textbf{\textcolor{titleblue}{Before We Start}}}\\[0.4cm]
+  {\large \textit{9:00 -- 9:15}}\\[0.3cm]
+  {The idea of this session, and why it is debatable}
   \vfill
 \end{frame}
 
@@ -56,14 +67,14 @@
 \begin{itemize}
     \item An AI system picks a policy question, finds public data, writes the code, estimates the effect, writes the paper.
     \item No human in the loop.
-    \item The project: \textbf{Autonomous Policy Evaluation (APE)}, Social Catalyst Lab, \textbf{University of Zurich}. Two buildings from here.
+    \item The project: Autonomous Policy Evaluation (APE), Social Catalyst Lab, University of Zurich. Two buildings from here.
     \item Hundreds of papers (900+ by spring 2026), judged by LLM referees in a tournament against published economics papers.
 \end{itemize}
 
 \vspace{0.5cm}
 
 \centering
-{\Large \textcolor{color1bg}{$\blacktriangleright$} \textbf{Video, 2 minutes}}\\[0.2cm]
+{\Large \textcolor{titleblue}{$\blacktriangleright$} Video, 2 minutes}\\[0.2cm]
 {\footnotesize Posted on LinkedIn by the project's author, February 2026}\\[0.1cm]
 {\footnotesize \url{https://ape.socialcatalystlab.org}}
 
@@ -80,7 +91,7 @@
 \vspace{0.4cm}
 
 \textbf{His conclusion.} In a world of machine-speed papers, we have a problem either way.
-\alert{\textbf{Generation speed $\gg$ verification speed.}} This was never the case historically.
+\alert{Generation speed $\gg$ verification speed.} This was never the case historically.
 Anybody, with no expertise, can now produce a paper that looks legitimate at first glance.
 
 \vspace{0.3cm}
@@ -89,13 +100,13 @@ Anybody, with no expertise, can now produce a paper that looks legitimate at fir
 
 \vspace{0.3cm}
 
-\centering \textbf{Neither do I. But we can push this a little further, and it changes what we do in this room.}
+\centering Neither do I. But we can push this a little further,\\ and it changes what we do in this room.
 
 \end{frame}
 
-\begin{frame}{\chg{Pushing Further (1):} The Bottleneck Moved}
+\begin{frame}{Pushing Further (1): The Bottleneck Moved}
 
-\textbf{His two worlds have one consequence in common.}
+His two worlds have one consequence in common.
 Either way, the scarce resource is no longer production. It is \alert{qualified verification}. The bottleneck moved from \emph{doing} to \emph{judging}.
 
 \vspace{0.2cm}
@@ -106,8 +117,8 @@ Either way, the scarce resource is no longer production. It is \alert{qualified 
 \textbf{Why did this never happen before?}
 \begin{itemize}
     \item Verification was always slow. But generation was slow too.
-    \item The cost of writing a paper was a \textbf{filter}: you did not write one you did not believe in.
-    \item It was also a \textbf{signal} of competence (Spence 1973): costly, hence informative.
+    \item The cost of writing a paper was a filter: you did not write one you did not believe in.
+    \item It was also a signal of competence (Spence 1973): costly, hence informative.
     \item Peer review was calibrated for a world where submitting cost a year.
 \end{itemize}
 
@@ -116,16 +127,16 @@ Either way, the scarce resource is no longer production. It is \alert{qualified 
 \begin{tikzpicture}[font=\scriptsize, x=0.66cm, y=0.75cm]
   \draw[->] (0,0) -- (0,3.4) node[above] {cost};
   \draw (0,0) -- (5.2,0);
-  \fill[color1bg!60] (0.5,0) rectangle (1.1,2.4);
+  \fill[color1bg!45] (0.5,0) rectangle (1.1,2.4);
   \fill[color1bg]    (1.2,0) rectangle (1.8,0.15);
   \node[below, font=\tiny] at (0.8,0) {then};
   \node[below, font=\tiny] at (1.5,0) {now};
-  \node[above] at (1.15,2.5) {\textbf{generate}};
-  \fill[color2bg!60] (3.2,0) rectangle (3.8,2.4);
+  \node[above] at (1.15,2.5) {generate};
+  \fill[color2bg!45] (3.2,0) rectangle (3.8,2.4);
   \fill[color2bg]    (3.9,0) rectangle (4.5,3.0);
   \node[below, font=\tiny] at (3.5,0) {then};
   \node[below, font=\tiny] at (4.2,0) {now};
-  \node[above] at (3.85,3.05) {\textbf{verify}};
+  \node[above] at (3.85,3.05) {verify};
 \end{tikzpicture}
 
 \vspace{0.1cm}
@@ -134,35 +145,35 @@ Either way, the scarce resource is no longer production. It is \alert{qualified 
 
 \end{frame}
 
-\begin{frame}{\chg{Pushing Further (2):} Verification at Machine Speed}
+\begin{frame}{Pushing Further (2): Verification at Machine Speed}
 
-\textbf{This is not hypothetical. People have already looked at the APE papers from the outside.}
+This is not hypothetical. People have already looked at the APE papers from the outside.
 
 \vspace{0.2cm}
 
 \begin{itemize}
-    \item \textbf{Cunningham (2026)} went through 651 APE papers: systematic p-hacking patterns\chg{.}
-    \item \textbf{Ning (2026)} compared 912 APE papers with 41 \chg{\emph{AER} and \emph{AEJ} papers: the human papers win 83\% of head-to-head comparisons, and most of the gap is on the \emph{idea} (originality, relevance, choice of design), not on execution.}
+    \item \textbf{Cunningham (2026)} went through 651 APE papers: systematic p-hacking patterns.
+    \item \textbf{Ning (2026)} compared 912 APE papers with 41 \emph{AER} and \emph{AEJ} papers: the human papers win 83\% of head-to-head comparisons, and most of the gap is on the \emph{idea} (originality, relevance, choice of design), not on execution.
 \end{itemize}
 
 \vspace{0.3cm}
 
 \textbf{The detail that matters for us.} To verify 651 papers, Cunningham used a large language model. The APE tournament itself is judged by LLM referees.
 
-\vspace{0.25cm}
+\vspace{0.3cm}
 
-\centering {\Large \alert{\textbf{Who verifies the verifier?}}}
+\centering {\Large \alert{Who verifies the verifier?}}
 
-\vspace{0.25cm}
+\vspace{0.3cm}
 
 \raggedright
 {\small Verification at machine speed is possible. It is also the same machine. The chain has to end with a human who understands what was done.}
 
 \end{frame}
 
-\begin{frame}{\chg{Pushing Further (3):} The Dependence Trap}
+\begin{frame}{Pushing Further (3): The Dependence Trap}
 
-\textbf{The capacity to verify is produced by doing.}
+The capacity to verify is produced by doing.
 If nobody does the thing any more, then within one cohort nobody can check the thing. And when nobody can check, everybody depends on whoever still can.
 
 \vspace{0.4cm}
@@ -173,7 +184,7 @@ Countries that had stopped making basic goods (masks, paracetamol) found they co
 \vspace{0.3cm}
 
 \textbf{The academic version.}
-The senior PI who delegates everything to research assistants and stops checking. When it breaks, it is \emph{their} name on the paper. \alert{\textbf{Responsibility does not delegate.}}
+The senior PI who delegates everything to research assistants and stops checking. When it breaks, it is \emph{their} name on the paper. \alert{Responsibility does not delegate.}
 
 \vspace{0.4cm}
 
@@ -194,12 +205,12 @@ Expertise is a common-pool resource. Every person who stops understanding deplet
 \vspace{0.4cm}
 
 \textbf{And the feeling of productivity is not productivity.}
-In a randomised trial (Becker et al.\ 2025), experienced open-source developers were \alert{\textbf{19\% slower}} with AI tools on their own code, while believing they had been about 20\% faster. A narrow setting, but keep the gap between the feeling and the measurement.
+In a randomised trial (Becker et al.\ 2025), experienced open-source developers were \alert{19\% slower} with AI tools on their own code, while believing they had been about 20\% faster. A narrow setting, but keep the gap between the feeling and the measurement.
 
 \vspace{0.4cm}
 
 \centering
-\textbf{I am not going to pretend this trade-off is balanced.\\ It is your choice. Here is mine.}
+I am not going to pretend this trade-off is balanced.\\ It is your choice. Here is mine.
 
 \end{frame}
 
@@ -224,7 +235,7 @@ Otherwise we will not know how to do it, and when nobody knows, we all depend on
 \vspace{0.3cm}
 
 \centering
-\textbf{This is exactly why we do not start with a chat.\\ We start with a folder.}
+This is exactly why we do not start with a chat.\\ We start with a folder.
 
 \end{frame}
 
@@ -232,44 +243,44 @@ Otherwise we will not know how to do it, and when nobody knows, we all depend on
 % SESSION OVERVIEW
 % ============================================================================
 
-\begin{frame}{\chg{Today's Session Overview (9:00--12:00)}}
+\begin{frame}{Today's Session Overview (9:00--12:00)}
 
 \vspace{0.1cm}
 \setlength{\leftmargini}{2.2cm}
 \begin{enumerate}
-    \item[\textbf{9:00--9:25}] \chg{\textbf{Installation Clinic} {\small (25 min)}}
+    \item[\textbf{9:00--9:15}] Before We Start {\small (15 min)}
+
+    \vspace{0.05cm}
+
+    \item[\textbf{9:15--9:30}] An Agentic Research Project {\small (15 min)}
     \begin{itemize}
-        \item \chg{Worksheet, steps 0 and 1; problems go in the shared document}
+        \item Chat vs agent, why a folder, the template, guardrails
     \end{itemize}
 
     \vspace{0.05cm}
 
-    \item[\textbf{9:25--9:35}] \chg{\textbf{Before We Start} {\small (10 min)}}
-
-    \vspace{0.05cm}
-
-    \item[\textbf{9:35--9:50}] \chg{\textbf{An Agentic Research Project} {\small (15 min)}}
+    \item[\textbf{9:30--9:50}] Installation Clinic {\small (20 min)}
     \begin{itemize}
-        \item \chg{Chat vs agent, why a folder, the template, guardrails}
+        \item Worksheet, steps 0 and 1; problems go in the shared document
     \end{itemize}
 
     \vspace{0.05cm}
 
-    \item[\textbf{9:50--10:25}] \chg{\textbf{Live Demo} {\small (35 min)}, then a 15-min break}
+    \item[\textbf{9:50--10:25}] Live Demo {\small (35 min)}, then a 15-min break
     \begin{itemize}
-        \item \chg{The example project, from an empty folder to a first commit}
+        \item The example project, from an empty folder to a first commit
     \end{itemize}
 
     \vspace{0.05cm}
 
-    \item[\textbf{10:40--11:40}] \chg{\textbf{Hands-on} {\small (60 min)}}
+    \item[\textbf{10:40--11:40}] Hands-on {\small (60 min)}
     \begin{itemize}
-        \item \chg{The same thing, on your project: worksheet, steps 1 to 8}
+        \item The same thing, on your project: worksheet, steps 1 to 8
     \end{itemize}
 
     \vspace{0.05cm}
 
-    \item[\textbf{11:40--12:00}] \chg{\textbf{Debrief and Next Session} {\small (20 min)}}
+    \item[\textbf{11:40--12:00}] Debrief and Next Session {\small (20 min)}
 \end{enumerate}
 
 \end{frame}
@@ -281,10 +292,42 @@ Otherwise we will not know how to do it, and when nobody knows, we all depend on
 \begin{frame}[plain]
   \centering
   \vfill
-  {\Huge \textbf{An Agentic Research Project}}\\[0.4cm]
-  {\Large \textit{9:35 -- 9:50}}\\[0.3cm]
+  {\Huge \textbf{\textcolor{titleblue}{An Agentic Research Project}}}\\[0.4cm]
+  {\Large \textit{9:15 -- 9:30}}\\[0.3cm]
   {\large From a chat that forgets to a folder that remembers}
   \vfill
+\end{frame}
+
+\begin{frame}{Course Repository}
+
+\begin{columns}[c]
+\column{0.40\textwidth}
+\centering
+\qrcode[height=3.4cm]{https://github.com/subtilhugo/uzh-llm-socsci-2026}
+
+\column{0.56\textwidth}
+\small
+\textbf{What is in it}
+\begin{itemize}
+    \item \texttt{template/}: the project folder you copy today
+    \item \texttt{sessions/01/}: these slides, the worksheet
+    \item \texttt{setup/}: installation guide and test
+    \item \texttt{example-project/}: my project, session after session
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{To get it}\\
+Green ``Code'' button, then ``Download ZIP''.\\
+Or: \texttt{git clone} the address above.
+
+\vspace{0.3cm}
+\textbf{Shared document} for errors and questions: link on the board.
+\end{columns}
+
+\vspace{0.5cm}
+\centering
+{\large \texttt{github.com/subtilhugo/uzh-llm-socsci-2026}}
+
 \end{frame}
 
 \begin{frame}{Chat vs Agent}
@@ -300,8 +343,8 @@ Otherwise we will not know how to do it, and when nobody knows, we all depend on
 
 \textbf{An agent}
 \begin{itemize}
-    \item It works \textbf{inside a folder} on your machine.
-    \item The loop: \textbf{read} files $\rightarrow$ \textbf{run} commands $\rightarrow$ \textbf{write} files $\rightarrow$ report.
+    \item It works inside a folder on your machine.
+    \item The loop: read files $\rightarrow$ run commands $\rightarrow$ write files $\rightarrow$ report.
     \item It asks permission before each action that changes something.
     \item Claude Code, Gemini CLI, Codex: same idea, different vendors.
 \end{itemize}
@@ -309,7 +352,7 @@ Otherwise we will not know how to do it, and when nobody knows, we all depend on
 \vspace{0.4cm}
 
 \centering
-\textbf{The permission prompt is the only thing that separates\\ an assistant from an unsupervised intern.} Keep it on. Read it.
+The permission prompt is the only thing that separates\\ an assistant from an unsupervised intern. \alert{Keep it on. Read it.}
 
 \end{frame}
 
@@ -339,14 +382,14 @@ Change tool tomorrow, the folder stays. The same \texttt{CLAUDE.md} works in the
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}ll@{}}
 \texttt{my-project/} & \\
-\texttt{\ \ README.md} & \textcolor{color1bg}{\textbf{what the project is}} \\
-\texttt{\ \ CLAUDE.md} & \textcolor{color1bg}{\textbf{how the agent behaves}} \\
-\texttt{\ \ PROJECT\_HISTORY.md} & \textcolor{color1bg}{\textbf{where we stand}} \\
+\texttt{\ \ README.md} & \textcolor{titleblue}{what the project is} \\
+\texttt{\ \ CLAUDE.md} & \textcolor{titleblue}{how the agent behaves} \\
+\texttt{\ \ PROJECT\_HISTORY.md} & \textcolor{titleblue}{where we stand} \\
 \texttt{\ \ literature/} & PDFs (read-only) \\
 \texttt{\ \ notes/literature/} & one note per paper \\
 \texttt{\ \ notes/} & memos, critiques \\
 \texttt{\ \ data/raw/} & never modified \\
-\texttt{\ \ data/processed/} & \chg{rebuilt by scripts} \\
+\texttt{\ \ data/processed/} & rebuilt by scripts \\
 \texttt{\ \ code/} & numbered scripts \\
 \texttt{\ \ outputs/} & figures, tables \\
 \texttt{\ \ prompts/} & the prompts, versioned \\
@@ -397,17 +440,17 @@ Change tool tomorrow, the folder stays. The same \texttt{CLAUDE.md} works in the
 \vspace{0.4cm}
 
 \centering
-A rule in a file is a request, not a guarantee. \alert{\textbf{You will see one fail today.}}
+A rule in a file is a request, not a guarantee. \alert{You will see one fail today.}
 
 \end{frame}
 
 \begin{frame}{What You Leave With at Noon}
 
-A git folder for \textbf{your} project, containing:
+A git folder for your project, containing:
 \begin{itemize}
     \item \texttt{README.md} with your question, in your words
     \item \texttt{CLAUDE.md} with your conventions
-    \item 3 to 5 literature notes, one \textbf{verified by you} against the PDF
+    \item 3 to 5 literature notes, one verified by you against the PDF
     \item a one-page research memo
     \item a hostile critique of that memo, and your response
     \item an entry in \texttt{PROJECT\_HISTORY.md} and a first commit
@@ -416,12 +459,26 @@ A git folder for \textbf{your} project, containing:
 \vspace{0.3cm}
 
 \textbf{And one thing you will have seen:} the agent making a mistake in a literature note. A wrong number, a wrong page, a finding that is not in the paper.
-Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you cannot skip.}}
+Finding it is step 5 of the worksheet. \alert{It is the only step you cannot skip.}
 
 \vspace{0.3cm}
 
 {\small No project yet, or no PDFs today? Use the example project. You lose nothing.}
 
+\end{frame}
+
+% ============================================================================
+% INSTALLATION CLINIC
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\Huge \textbf{\textcolor{titleblue}{Installation Clinic}}}\\[0.4cm]
+  {\Large \textit{9:30 -- 9:50}}\\[0.3cm]
+  {\large Worksheet, step 0, then step 1}\\[0.4cm]
+  {\small Stuck? Paste the error in the shared document and ask your neighbour.}
+  \vfill
 \end{frame}
 
 % ============================================================================
@@ -431,20 +488,20 @@ Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you ca
 \begin{frame}[plain]
   \centering
   \vfill
-  {\Huge \textbf{Live Demo}}\\[0.4cm]
+  {\Huge \textbf{\textcolor{titleblue}{Live Demo}}}\\[0.4cm]
   {\Large \textit{9:50 -- 10:25}}\\[0.3cm]
-  {\large \chg{Who votes far right? The local rise of the FN/RN}}
+  {\large Who votes far right? The local rise of the FN/RN}
   \vfill
 \end{frame}
 
-\begin{frame}{\chg{The Demo in Seven Steps}}
+\begin{frame}{The Demo in Seven Steps}
 
 \vspace{0.1cm}
 \begin{enumerate}
     \item Empty folder, template, \texttt{git init}, start the agent
     \item Fill the context (prompt 01)
     \item Literature notes from the PDFs (prompt 02)
-    \item \textbf{Verify a note against the PDF}
+    \item \alert{Verify a note against the PDF}
     \item Research memo (prompt 03)
     \item Hostile reviewer (prompt 04)
     \item Log, commit, close; ask a fresh session where we stand (prompt 05)
@@ -452,7 +509,7 @@ Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you ca
 
 \vspace{0.4cm}
 
-\chg{{\small All prompts are in \texttt{template/prompts/}. You will paste the same ones on your project.}}
+{\small All prompts are in \texttt{template/prompts/}. You will paste the same ones on your project.}
 
 \end{frame}
 
@@ -463,7 +520,7 @@ Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you ca
 \begin{frame}[plain]
   \centering
   \vfill
-  {\Huge \textbf{Hands-on}}\\[0.4cm]
+  {\Huge \textbf{\textcolor{titleblue}{Hands-on}}}\\[0.4cm]
   {\Large \textit{10:40 -- 11:40}}\\[0.3cm]
   {\large Worksheet, steps 1 to 8. Your project, your PDFs.}\\[0.3cm]
   {\normalsize Steps 1--3 first. Step 5 is mandatory.}\\[0.4cm]
@@ -485,7 +542,7 @@ Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you ca
 
 \end{frame}
 
-\begin{frame}{\chg{Next Session:} 28 October 2026}
+\begin{frame}{Next Session: 28 October 2026}
 
 \textbf{Session 2: Structured Data with an Agent}
 
@@ -499,11 +556,9 @@ Finding it is step 5 of the worksheet. \alert{\textbf{It is the only step you ca
 
 \vspace{0.3cm}
 
-\chg{
 \begin{alertblock}{Carry-over question}
 Next time the agent will clean and merge your data. How would you know that a merge it wrote silently dropped a tenth of your observations?
 \end{alertblock}
-}
 
 \end{frame}
 
@@ -511,9 +566,8 @@ Next time the agent will clean and merge your data. How would you know that a me
 % REFERENCES
 % ============================================================================
 
-\begin{frame}{\chg{References}}
+\begin{frame}{References}
 
-\chg{
 {\small
 
 Becker, J., Rush, N., Barnes, E., \& Rein, D.\ (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. \textit{METR}, arXiv:2507.09089.
@@ -534,7 +588,6 @@ Social Catalyst Lab (2026). Autonomous Policy Evaluation (APE). \url{https://ape
 
 Spence, M.\ (1973). Job Market Signaling. \textit{Quarterly Journal of Economics}, 87(3), 355--374.
 
-}
 }
 
 \end{frame}
