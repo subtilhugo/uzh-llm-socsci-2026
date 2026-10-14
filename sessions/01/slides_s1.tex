@@ -388,7 +388,7 @@ Same model as in the chat. What changes is the loop, the tools,\\ and the permis
 \begin{frame}{Why a Folder, Not a Chat}
 
 \begin{enumerate}
-    \item \textbf{Context.} The agent reads \texttt{CLAUDE.md} at the start of every session. You explain your project once, in a file, not in every conversation. A long chat degrades as it fills up; a file does not.
+    \item \textbf{Context.} The agent reads \texttt{CLAUDE.md} at every start. It grows with the project: you edit it, or ask the agent to. A long chat degrades; a fresh start does not.
     \vspace{0.2cm}
     \item \textbf{Memory.} \texttt{PROJECT\_HISTORY.md} says where the project stands. A fresh session can answer ``where are we?'' from the file alone. Nothing lives in the chat.
     \vspace{0.2cm}
@@ -398,7 +398,7 @@ Same model as in the chat. What changes is the loop, the tools,\\ and the permis
 \vspace{0.4cm}
 
 \textbf{And one more: the folder is yours.}
-Change tool tomorrow, the folder stays. The same \texttt{CLAUDE.md} works in the terminal, in Cursor or VS Code, in the desktop app. A chat history belongs to a vendor; a folder belongs to you.
+Change tool tomorrow, the folder stays: the same \texttt{CLAUDE.md} works in the terminal, Cursor or the desktop app. A chat is the vendor's; the folder is yours.
 
 \end{frame}
 
