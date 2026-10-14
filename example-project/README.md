@@ -36,7 +36,7 @@ Details, URLs and access conditions in `data/raw/README.md`.
 
 ## Literature
 
-Five works this project builds on. Full references in `literature/README.md`; one note per work in
+Six works this project builds on. Full references in `literature/README.md`; one note per work in
 `notes/literature/` (written by the agent from the PDF, then verified).
 
 - **Subtil (2026), *Betting Alone: Café Closures and Far-Right Voting in France*.** Café closures and the
@@ -45,6 +45,8 @@ Five works this project builds on. Full references in `literature/README.md`; on
   in Western European regions. The trade-exposure channel.
 - **Autor, Dorn, Hanson & Majlesi (2020, AER).** Trade exposure and political polarisation in the United States.
   The same channel, with a shift-share design to learn from.
+- **Guriev & Papaioannou (2022, JEL).** A survey of the political economy of populism: economic and cultural
+  drivers, and the evidence for each. The map in which the project sits.
 - **Coquard (2019), *Ceux qui restent*.** Ethnography of young adults in declining rural areas of eastern France.
   What "those who stay" live through, and why the RN speaks to them.
 - **Ternullo (2024), *How the Heartland Went Red*.** Why local institutions (unions, churches, civic life)
