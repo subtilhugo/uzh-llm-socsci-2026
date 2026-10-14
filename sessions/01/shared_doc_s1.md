@@ -6,7 +6,7 @@ Paste this at the top of a blank Google Doc, shared with "anyone with the link c
 
 # LLMs for Social Science Research, Session 1 (14 October 2026)
 
-Course repository: <paste the GitHub link>
+Course repository: https://github.com/subtilhugo/uzh-llm-socsci-2026
 Worksheet: `sessions/01/worksheet_s1.md`
 Template: `template/`
 

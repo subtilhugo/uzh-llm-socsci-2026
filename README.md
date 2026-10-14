@@ -4,6 +4,8 @@ PhD workshop, University of Zurich, autumn 2026. Hugo Subtil (IPZ).
 
 Five sessions, Wednesdays 9:00 to 12:00, room AFL-E-003: 14 October, 28 October, 4 November, 18 November, 2 December.
 
+**Shared document (errors, questions, notes for the debrief): [open it here](https://docs.google.com/document/d/1gTubrDtw8KHepmuR8dNzSeI7UypQhjzgEBJ7KX75Xq0/edit?usp=sharing).**
+
 Every participant starts their own research project in Session 1 and advances it in every session. The project lives in a git folder, and an agent (Claude Code or equivalent) works inside that folder.
 
 ## Contents

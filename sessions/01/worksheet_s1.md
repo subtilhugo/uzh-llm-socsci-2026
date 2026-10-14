@@ -2,6 +2,8 @@
 
 **Course repository: https://github.com/subtilhugo/uzh-llm-socsci-2026**
 
+**Shared document: [open it here](https://docs.google.com/document/d/1gTubrDtw8KHepmuR8dNzSeI7UypQhjzgEBJ7KX75Xq0/edit?usp=sharing).** Errors, questions, and your step 5 result go there.
+
 **Timing.** Steps 0–1 during the clinic (9:35–9:50). Steps 2–8 during the hands-on (10:40–11:40), about 60 minutes: 15 for the context, 10 for the notes, 10 to verify, 10 for the memo, 10 for the critique, 5 to log and commit.
 
 **Goal for 12:00.** A git folder for your own project containing a filled `CLAUDE.md`, three to five literature notes, a one-page research memo, a critique of that memo, and a first commit. And you have caught at least one error the agent made.
