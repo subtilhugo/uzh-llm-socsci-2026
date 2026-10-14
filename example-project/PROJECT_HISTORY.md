@@ -26,4 +26,4 @@ Template for an entry:
 
 **Verified by a human.** The references in `literature/README.md` (DOIs checked). Nothing else yet: no note has been written.
 
-**Open.** Put the PDFs in `literature/`. Run prompt 02, then verify one note against its PDF (Session 1, step 5). Complete the Betting Alone reference.
+**Open.** Put the PDFs in `literature/`. Run prompt 02, then verify one note against its PDF (Session 1, step 5).

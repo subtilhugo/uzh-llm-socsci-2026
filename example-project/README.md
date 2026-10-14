@@ -39,8 +39,8 @@ Details, URLs and access conditions in `data/raw/README.md`.
 Five works this project builds on. Full references in `literature/README.md`; one note per work in
 `notes/literature/` (written by the agent from the PDF, then verified).
 
-- **Subtil (2026), *Betting Alone*.** The closing of PMU betting points and the RN vote: the loss of
-  places of local sociability as a channel. Our own paper; the design to compare with.
+- **Subtil (2026), *Betting Alone: Café Closures and Far-Right Voting in France*.** Café closures and the
+  far-right vote: the loss of places of encounter as a channel. Our own paper; the design to compare with.
 - **Colantone & Stanig (2018, AJPS).** Import competition from China and nationalist, radical-right voting
   in Western European regions. The trade-exposure channel.
 - **Autor, Dorn, Hanson & Majlesi (2020, AER).** Trade exposure and political polarisation in the United States.
