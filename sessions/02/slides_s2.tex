@@ -1,0 +1,672 @@
+\documentclass[svgnames,x11names,dvipsnames]{beamer}
+% --- Self-contained preamble (same conventions as the course decks).
+% --- If you prefer, replace this block with \input{preamble}.
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,decorations.pathreplacing}
+\usepackage[font=footnotesize]{caption}
+\usepackage{qrcode}
+
+\definecolor{color1bg}{HTML}{005e9e}
+\setbeamercolor*{palette primary}{fg=white,bg=color1bg}
+\setbeamercolor*{block title}{bg=color1bg,fg=white}
+\setbeamercolor*{frametitle}{fg=color1bg}
+\setbeamertemplate{caption}[numbered]
+\definecolor{color2bg}{HTML}{003a63}
+\setbeamercolor{block title alerted}{bg=color2bg,fg=white}
+\setbeamercolor{block body alerted}{bg=color2bg!8}
+\setbeamercolor{alerted text}{fg=color2bg}
+\beamertemplatenavigationsymbolsempty
+
+% --- This deck: one blue everywhere, the blue of the title page (Beamer's default, #3333B2).
+% --- Delete this block to go back to color1bg / color2bg.
+\definecolor{titleblue}{HTML}{3333B2}
+\definecolor{accentred}{HTML}{B22222}
+\colorlet{color1bg}{titleblue}
+\colorlet{color2bg}{titleblue!75!black}
+\setbeamercolor*{frametitle}{fg=titleblue}
+\setbeamercolor*{block title}{bg=titleblue,fg=white}
+\setbeamercolor{block title alerted}{bg=titleblue,fg=white}
+\setbeamercolor{block body alerted}{bg=titleblue!8}
+\setbeamercolor{alerted text}{fg=titleblue}
+
+% --- Change marker: everything modified since the 15 October draft is in ... (bold).
+% --- New or rewritten frames have their title in \chg; inside kept frames, only the changed text.
+% --- Switched off in this version; comment the second line to see the changes.
+\newcommand{\chg}[1]{{\bfseries #1}}
+\renewcommand{\chg}[1]{#1}
+
+\title[LLMs for Social Science Research]{\large \textbf{Large Language Models for Social Science Research} \\
+    \textit{Session 2. Structured Data with an Agent}}
+\author[H. Subtil]{\textbf{Hugo Subtil}}
+\institute{PhD Workshop, University of Zurich}
+\date{October 28, 2026}
+
+\begin{document}
+\frame{\titlepage}
+
+% ============================================================================
+% SESSION OVERVIEW (first, as requested)
+% ============================================================================
+
+\begin{frame}{Today's Session Overview (9:00--12:00)}
+
+\setlength{\leftmargini}{2.3cm}
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{1pt}
+    \item[\textbf{9:00--9:10}] Last Week, and What to Keep in Mind {\footnotesize (10 min)}
+
+    \item[\textbf{9:10--9:30}] How I Actually Work {\footnotesize (20 min)}
+
+    \item[\textbf{9:30--9:45}] Tokens and Models {\footnotesize (15 min)}
+
+    \item[\textbf{9:45--10:25}] Block 1. Specify {\footnotesize (40 min)}, then a 15-min break
+    \begin{itemize}
+        \item Your analysis plan, with the agent (06)
+    \end{itemize}
+
+    \item[\textbf{10:40--11:15}] Block 2. Implement {\footnotesize (35 min)}
+    \begin{itemize}
+        \item The agent codes, you read the row counts (07)
+    \end{itemize}
+
+    \item[\textbf{11:15--11:45}] Block 3. Review and Decide {\footnotesize (30 min)}
+    \begin{itemize}
+        \item A fresh session reviews, you decide (08, then 05)
+    \end{itemize}
+
+    \item[\textbf{11:45--12:00}] Debrief and Next Session {\footnotesize (15 min)}
+\end{enumerate}
+
+\vspace{0.25cm}
+{\footnotesize Slower than last time: every block is \emph{I show} (10 min), \emph{you do}, \emph{we check} (5 min).\\
+Today is structured data. Brought a text corpus? Keep it for Sessions 3 and 4.}
+
+\end{frame}
+
+% ============================================================================
+% PART 1: LAST WEEK
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{Last Week}}}\\[0.4cm]
+  {\large \textit{9:00 -- 9:10}}\\[0.3cm]
+  {What we saw, and what to keep in mind}
+  \vfill
+\end{frame}
+
+\begin{frame}{Last Week, in One Slide}
+
+\small
+\textbf{The argument.} An AI system now writes economics papers on its own (APE). Generating a paper is almost free; verifying one is not. The bottleneck moved from \emph{doing} to \emph{judging}, and the chain has to end with a human who understands.
+
+\vspace{0.25cm}
+
+\textbf{The position.} Delegate the work. Keep the skill to check it, and the responsibility for it. Three rules:
+\begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item You delegate execution, never understanding.
+    \item Read before you accept.
+    \item Stop when you no longer know what it is doing.
+\end{enumerate}
+
+\vspace{0.25cm}
+
+\textbf{The tool.} A folder that remembers: \texttt{README.md} (what the project is), \texttt{CLAUDE.md} (how the agent behaves), \texttt{PROJECT\_HISTORY.md} (where we stand). Raw data read-only, prompts versioned, every session ends with a commit.
+
+\vspace{0.25cm}
+
+\textbf{The exercise.} Literature notes on your papers, then one note checked against the PDF, looking for the agent's mistake.
+
+\end{frame}
+
+\begin{frame}{What to Keep in Mind}
+
+\textbf{This is still an open debate.} How much to delegate, and how much to check, is not settled. Reasonable people draw the line in different places.
+
+\vspace{0.45cm}
+
+\textbf{Since last week, I asked many colleagues one question:}
+
+\vspace{0.3cm}
+
+\centering
+{\Large \alert{Where is your limit on review?}}\\[0.2cm]
+{\small What do you read line by line, and what do you let go?}
+
+\vspace{0.45cm}
+\raggedright
+
+\textbf{Today, one answer I find convincing}, from Germain Gauthier (Bocconi).
+Not \emph{the} answer: a workable one, which you can adapt.
+
+\vspace{0.35cm}
+
+\end{frame}
+
+% ============================================================================
+% PART 2: HOW I ACTUALLY WORK (after Germain Gauthier)
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{How I Actually Work}}}\\[0.4cm]
+  {\large \textit{9:10 -- 9:30}}\\[0.3cm]
+  {Inspired by Germain Gauthier (Bocconi)}
+  \vfill
+\end{frame}
+
+\begin{frame}{How I Use AI}
+
+\begin{itemize}
+    \item AI is part of pretty much everything I do on my laptop.
+\end{itemize}
+
+\vspace{0.2cm}
+
+\textbf{Some use cases}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item A quick overview of papers I am unfamiliar with
+    \item Writing code, organising project folders, updating results in a paper
+    \item Proof-checking that the code, the paper and the slides are consistent
+    \item Discussing ideas and analyses while I work on a project
+    \item Improving the clarity of my writing and presentations
+\end{itemize}
+
+\vspace{0.4cm}
+
+\textbf{Pen and paper} when I need to fully understand something (theory, statistics), or for mental clarity (a to-do list, planning ahead).
+
+\end{frame}
+
+\begin{frame}{How I Do Not Use AI}
+
+\textbf{The one thing not to do:}
+
+\vspace{0.15cm}
+\centering
+\textit{``Write me a full paper and a full slide set on this vague idea\\ \chg{while I go swim in the Limmat.}''}
+
+\vspace{0.4cm}
+\raggedright
+
+\begin{itemize}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{First, current AIs are terrible at this when left unattended.} It is a very iterative process, and you need to be in the loop.
+    \item \textbf{Second, you will present the paper and the results.} Being in the loop is how you understand what you are doing.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\centering
+\alert{The journey is almost as important as the destination in research.}
+
+\vspace{0.3cm}
+\raggedright
+{\small AI can still speed things up, and by a lot. Last week's APE is what happens when nobody is in the loop.}
+
+\end{frame}
+
+\begin{frame}{The Setup: One Project Folder}
+
+\small
+\begin{columns}[T]
+\column{0.52\textwidth}
+\textbf{Germain's agent is connected to five tools}
+
+\vspace{0.1cm}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
+Dropbox & project files and data \\
+GitHub & code history and repository \\
+Overleaf & paper and slides \\
+HPC cluster & heavy computation \\
+Gmail & co-authors' comments \\
+\end{tabular}}
+
+\vspace{0.35cm}
+\textbf{The project folder}
+
+\vspace{0.1cm}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
+\texttt{my-project/} & \\
+\texttt{\ \ overleaf/} & local copy of the paper \\
+\texttt{\ \ code/} & code repository \\
+\texttt{\ \ data/} & raw and processed data \\
+\texttt{\ \ notes/} & working notes \\
+\end{tabular}}
+
+\column{0.45\textwidth}
+\textbf{How it runs}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item The agent runs from the project folder.
+    \item He talks to it in the browser, to see PDFs and figures as they are produced.
+    \item The local copy of the paper and the Overleaf project are always in sync.
+\end{itemize}
+\end{columns}
+
+\vspace{0.45cm}
+
+\centering
+\normalsize
+The same idea as your folder from last week.\\
+You do not need five tools today: one git folder is enough.
+
+\end{frame}
+
+\begin{frame}{Principle 1: You Are in Charge}
+
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item Agents overproduce, expand the scope, and overreact to details.
+    \item Do not let them run unattended for long (overnight), unless the task is very well defined: for example, monitoring jobs on a cluster and relaunching the ones that fail.
+    \item Stay hands-on: in the loop, correcting course, making the judgement calls.
+    \item Being hands-on is also how you keep understanding what you are doing, and keep a map of it in your head, even when you no longer write the code.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Principle 2: Accuracy, Not Speed or Cost-Cutting}
+
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item Run the models at maximum reasoning. For \emph{everything}.
+    \item A mistake in a paper costs far more than extra tokens or waiting time.
+    \item The difference in intelligence between reasoning levels is large.
+    \item More reasoning does not remove the need for verification.
+\end{itemize}
+
+\vspace{0.6cm}
+
+\centering
+You asked how to save tokens. This principle says: not here.\\
+At 9:30: what it costs, and where you can save without breaking it.
+
+\end{frame}
+
+\begin{frame}{A Typical Loop}
+
+
+
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{Specify the task in writing.} Sample, equation, estimator, clustering, expected output: as in a detailed pre-analysis plan. Germain writes it in Overleaf; you, in \texttt{notes/analysis\_plan.md}.
+    \item \textbf{A first agent implements it.} It flags ambiguities \emph{before} coding: there is high value in being on the same page.
+    \item \textbf{Other agents review it in a fresh context.} They read the plan, the code and the outputs, and list the discrepancies.
+    \item \textbf{You decide what to revise or accept.} A reviewer asked to find problems always finds something. Resolve, rerun, repeat until satisfied.
+\end{enumerate}
+
+\vspace{0.2cm}
+{\footnotesize Not exotic: Anthropic's own guide to Claude Code recommends the same steps.}
+
+\end{frame}
+
+\begin{frame}{\chg{The Typical Failure: Silent Decisions}}
+
+\chg{A typical failure mode is the AI making consequential decisions without asking. For example, dropping some observations.}
+
+\vspace{0.3cm}
+
+\textbf{On data, it looks like this}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item rows lost in a merge (inner join instead of left join)
+    \item a missing code (\texttt{-9}, \texttt{99}) read as a value
+    \item a duplicate removed
+    \item an identifier read as a number (\texttt{01001} becomes \texttt{1001})
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Two defences}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Every script prints the number of rows before and after each step. A change the plan does not explain stops the agent.
+    \item I always ask the reviewing agents to check for this too.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\centering
+Last week's question: how would you know a merge dropped a tenth of your observations?
+
+\end{frame}
+
+\begin{frame}{\chg{Two Phases: Prototyping, Then Sharpening}}
+
+\textbf{Prototyping phase:}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item It is an exploratory phase.
+    \item I do not review the code or the prose.
+    \item I treat these outputs as probable but provisional.
+\end{itemize}
+
+\vspace{0.4cm}
+
+\textbf{Sharpening phase:}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item If I think there is something there, I get involved in the writing and coding process.
+    \item I audit the code, paying special attention to the number of rows in the dataset and results that ``look weird''. I have many independent agents check the code.
+    \item I rewrite the paper and work with AI to iterate on the visuals.
+    \item I take responsibility for the results and claims.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Communication with Co-authors}
+
+\small
+Keep three distinctions explicit.
+
+\vspace{0.15cm}
+{\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Origin} & what the AI produced; what I produced \\
+\textbf{Status} & what is exploratory; what is polished \\
+\textbf{Responsibility} & what I have not checked; what I am ready to stand behind \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.3cm}
+
+Your co-authors will not look at exploratory and polished results in the same way, and will not make the same comments. AI use and understanding vary across co-authors: be transparent, and take responsibility for your work.
+
+\vspace{0.3cm}
+
+\end{frame}
+
+% ============================================================================
+% PART 3: TOKENS AND MODELS
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{Tokens and Models}}}\\[0.4cm]
+  {\large \textit{9:30 -- 9:45}}\\[0.3cm]
+  {What Principle 2 costs, and where you can save}
+  \vfill
+\end{frame}
+
+\begin{frame}{\chg{What Costs Tokens}}
+
+\begin{itemize}
+    \setlength{\itemsep}{8pt}
+    \item \textbf{Every message re-sends the whole conversation} to the model: the files it read, its outputs, all previous turns. Turn 40 re-reads turns 1 to 39.
+    \item \textbf{The cache discounts what was already sent}, while it is warm: about an hour on a subscription, five minutes with an API key. Back from lunch, the first message pays full price.
+    \item \textbf{Effort multiplies tokens}: more files read, more checks, more thinking.
+    \item \textbf{A bigger model costs more per turn.}
+    \item \textbf{Subagents} spend tokens while you are not typing.
+\end{itemize}
+
+\vspace{0.4cm}
+
+\centering
+Subscription: tokens are quota. API key: tokens are money.\\
+\texttt{/usage} shows where yours went.
+
+\end{frame}
+
+\begin{frame}{\chg{Model and Effort: Two Dials}}
+
+\textbf{Model: how capable.} A bigger model understands more: unfamiliar libraries, ambiguous instructions, subtle bugs. It costs more per token.
+
+\vspace{0.3cm}
+
+\textbf{Effort: how thorough.} The same model works longer: it reads more files, thinks more, checks its own work before answering. It costs more tokens.
+
+\vspace{0.5cm}
+
+\textbf{When the answer is wrong, ask which one it is.}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item It \emph{did not know}: it misread an ambiguous variable, or did not know how a package behaves. Change the \textbf{model}.
+    \item It \emph{did not try}: it skipped a file, did not rerun the code, did not check. Raise the \textbf{effort}.
+\end{itemize}
+
+\vspace{0.4cm}
+
+\centering
+\texttt{/model} to see and change the model. \texttt{/effort} for the effort:\\
+\texttt{low}, \texttt{medium}, \texttt{high}, \texttt{xhigh}, \texttt{max}.
+
+\end{frame}
+
+\begin{frame}{\chg{Which Model, Which Effort, for Which Task}}
+
+\centering
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}ll>{\raggedright\arraybackslash}p{3.3cm}@{}}
+\toprule
+\textbf{Task} & \textbf{Model} & \textbf{Effort} & \textbf{Why} \\
+\midrule
+Rename, reformat a table, commit message & Sonnet & \texttt{low} & you check each result anyway \\
+Prototyping: exploratory scripts, quick plots & Sonnet & \texttt{medium} & provisional by design \\
+Writing: the paper, memos, the analysis plan & \chg{Fable} & \chg{\texttt{high}} & \chg{long, ambiguous tasks} \\
+Code that enters the paper: cleaning, merging, estimation & Opus & \texttt{high} & errors hide in cases that are easy to overlook \\
+Independent review & Opus & \texttt{xhigh} & the last check before yours \\
+\bottomrule
+\end{tabular}}
+
+\vspace{0.5cm}
+
+{\footnotesize Default in Claude Code: Opus 5.5 at \texttt{medium}. Fable is the most expensive per token: select it with \texttt{/model fable}, and keep it for what needs it.}
+
+\end{frame}
+
+\begin{frame}{Save on Context, Not on Reasoning}
+
+\small
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \textbf{One task, one session.} \texttt{/clear} between unrelated tasks costs nothing and loses nothing: the project's memory is in the folder (\texttt{PROJECT\_HISTORY.md}), not in the chat.
+    \item \textbf{Watch the first minute.} \texttt{Esc} as soon as it drifts; \texttt{/rewind} to go back. After two failed corrections: \texttt{/clear} and one better prompt, not a third correction.
+    \item \textbf{Never paste data.} The agent writes a script that prints summaries (types, counts, missing values); only the summaries enter the context. It also protects confidential data.
+    \item \textbf{Point, do not paste.} \texttt{@code/03\_merge.py}, not the file's content. PDFs: only the pages you need.
+    \item \textbf{A short \texttt{CLAUDE.md}}: under about 200 lines. Long procedures go in \texttt{prompts/}.
+    \item \textbf{A long task:} \texttt{/compact} with a focus (``keep the merge decisions''). Back after more than an hour: a fresh session costs less.
+\end{itemize}
+
+\vspace{0.15cm}
+
+\centering
+\normalsize
+Save on context. Never on reasoning for what enters the paper.
+
+\end{frame}
+
+% ============================================================================
+% WHAT YOU LEAVE WITH
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{\chg{Your Project, Three Blocks}}}}\\[0.4cm]
+  {\large \textit{\chg{9:45 -- 11:45}}}\\[0.3cm]
+  {\chg{I show, you do, we check}}
+  \vfill
+\end{frame}
+
+\begin{frame}{What You Leave With at Noon}
+
+In your folder:
+\begin{itemize}
+    \item \texttt{notes/analysis\_plan.md}, in your words, with its open questions settled
+    \item numbered scripts in \texttt{code/} that print their row counts
+    \item a cleaned dataset in \texttt{data/processed/} and a first table or figure in \texttt{outputs/}
+    \item a review written by a fresh session, and your decision on each point it raised
+    \item an entry in \texttt{PROJECT\_HISTORY.md} \chg{and a commit}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{And one thing you will have seen:} a decision the agent took on your data without asking. Finding it is Block 3. \alert{It is the only step you cannot skip.}
+
+\end{frame}
+
+% ============================================================================
+% PART 4: THREE BLOCKS
+% ============================================================================
+
+\begin{frame}{Block 1. Specify (9:45--10:25)}
+
+\small
+\textbf{I show (10 min).} The example project: two raw files, election results and municipal indicators. Prompt 06: the agent inspects the files without changing them and interviews me. I answer; it writes the plan.
+
+\vspace{0.3cm}
+
+\textbf{You do (25 min)}
+\begin{enumerate}
+    \setlength{\itemsep}{3pt}
+    \item Your data in \texttt{data/raw/}, its source in \texttt{data/raw/README.md}. No data? The example pack, in the course repository.
+    \item A new session in your project folder. Paste prompt 06, from the course repository (\texttt{template/prompts/}).
+    \item Answer its questions. What you do not know yet goes to ``Open questions''. It asks; it does not decide.
+    \item Read the plan, then let it save \texttt{notes/analysis\_plan.md}.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{We check (5 min).} Two plans on screen. What is in their ``Open questions''? Which merge has no rule for the rows that do not match?
+
+\end{frame}
+
+\begin{frame}{Block 2. Implement (10:40--11:15)}
+
+\small
+\textbf{I show (10 min).} \texttt{/clear}, then prompt 07. The agent lists what the plan leaves open; I answer. It writes the scripts and prints the row counts. We read them together: where did the rows go?
+
+\vspace{0.3cm}
+
+\textbf{You do (20 min)}
+\begin{enumerate}
+    \setlength{\itemsep}{3pt}
+    \item \texttt{/clear}: the plan is in the folder, not in the chat. Paste prompt 07.
+    \item Answer its list of ambiguities before it writes any code.
+    \item Read the row-count trail it gives you, step by step.
+    \item Rows that change without the plan saying so: paste the step in the shared document.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{We check (5 min).} The shared document: who lost rows, at which step, and was it in the plan?
+
+\end{frame}
+
+\begin{frame}{Block 3. Review and Decide (11:15--11:45)}
+
+\small
+\textbf{I show (10 min).} I close the session and open a fresh one. Prompt 08: a reviewer that did not see the code being written. I go through its review and decide, point by point.
+
+\vspace{0.3cm}
+
+\textbf{You do (15 min)}
+\begin{enumerate}
+    \setlength{\itemsep}{3pt}
+    \item Close the session. Open a new one. Paste prompt 08. \alert{Not optional.}
+    \item For each point of the review: fix it, or accept it and write down why.
+    \item Rerun. Every change in the row counts now follows from the plan.
+    \item Prompt 05: the entry in \texttt{PROJECT\_HISTORY.md}, \chg{and} the commit.
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\textbf{We check.} That is the debrief.
+
+\end{frame}
+
+% ============================================================================
+% WRAP-UP
+% ============================================================================
+
+\begin{frame}{Debrief}
+
+\textbf{Three screens.} An analysis plan. A row-count trail. A review, with the discrepancy it found.
+
+\vspace{0.3cm}
+
+\textbf{The decisions the agent took alone today.} Read from the shared document. The list is the lesson.
+
+\vspace{0.3cm}
+
+\textbf{One question.} The table you would have sent your supervisor an hour ago: which \chg{status, exploratory or polished,} would it have carried?
+
+\vspace{0.3cm}
+
+\textbf{Before you leave.} \chg{Ask the agent to copy the section ``Row counts and silent decisions'' of \texttt{template/CLAUDE.md} into yours. Then add one line of your own that would have caught today's error.}
+
+\end{frame}
+
+\begin{frame}{Next Session: 4 November 2026}
+
+\textbf{Session 3: Building Datasets from APIs, and Classic Text-as-Data}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+    \item Collecting structured and unstructured data through APIs, with the agent writing the collector
+    \item Information extraction without an LLM: dictionaries, embeddings
+    \item Bring one source you would like to collect from: an API, a website, a set of documents
+    \item Keep working in your folder. End every session with prompt 05.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{alertblock}{Carry-over question}
+An API returns 10,000 documents and the agent reports that the collection is complete. How would you know?
+\end{alertblock}
+
+\end{frame}
+
+% ============================================================================
+% REFERENCES
+% ============================================================================
+
+\begin{frame}{References}
+
+{\scriptsize
+
+Gauthier, G.\ (2026). Using AI in Research Workflows. Slides, Bocconi University, September 2026. \href{https://pinchofdata.github.io/germaingauthier/pdfs/teaching/ai_research_workflow.pdf}{\textcolor{titleblue}{pinchofdata.github.io/germaingauthier}}. The section ``How I Actually Work'' follows his slides closely.
+
+\vspace{0.1cm}
+
+Anthropic (2026). Best Practices for Claude Code. \href{https://code.claude.com/docs/en/best-practices}{\textcolor{titleblue}{code.claude.com/docs/en/best-practices}}.
+
+\vspace{0.1cm}
+
+Anthropic (2026). Model Configuration: Aliases and Effort Levels. \href{https://code.claude.com/docs/en/model-config}{\textcolor{titleblue}{code.claude.com/docs/en/model-config}}.
+
+\vspace{0.1cm}
+
+Anthropic Support (2026). Models and Usage Limits in Claude Code. \href{https://support.claude.com/en/articles/14552983-models-usage-limits-in-claude-code}{\textcolor{titleblue}{support.claude.com}}.
+
+\vspace{0.1cm}
+
+Hallie, L.\ (2026). Choosing a Claude Model and Effort Level in Claude Code. \textit{Claude Blog}, 7 July 2026.
+
+}
+
+\end{frame}
+
+\end{document}

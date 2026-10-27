@@ -1,7 +1,7 @@
 # Prompt 06: the analysis plan
 
 Before pasting: your raw data is in `data/raw/<source>/`, and its source is written in `data/raw/README.md`.
-Suggested setting: Opus, effort `medium`.
+Suggested setting: Fable (`/model fable`), effort `high`. Without access to Fable: Opus, effort `high`.
 
 ---
 

@@ -40,16 +40,6 @@ every session. Follow it. If something here conflicts with a request, say so bef
 - If a row count changes and the plan does not explain why, stop and report. Do not fix it on your own.
 - Identifiers are text, never numbers.
 
-## Three labels on every output
-
-Every file you write in `data/processed/`, `outputs/` or `notes/` carries three labels, listed in the session entry of `PROJECT_HISTORY.md`:
-
-- Origin: agent, user, or agent then user.
-- Status: exploratory or polished.
-- Checked: "not yet", or who checked it and against what.
-
-You write the origin, "exploratory" and "not yet". Only the user changes status and checked.
-
 ## Conventions of this project
 
 - Notes, code comments and memos in English. Citations author-year: (Colantone & Stanig 2018).
@@ -65,4 +55,4 @@ You write the origin, "exploratory" and "not yet". Only the user changes status 
 ## End of every session
 
 Before the user leaves: write a dated entry in `PROJECT_HISTORY.md` (what was done, what was decided,
-what was verified by a human, what is still open, and the three labels of every output) and list the files you changed.
+what was verified by a human, what is still open) and list the files you changed.

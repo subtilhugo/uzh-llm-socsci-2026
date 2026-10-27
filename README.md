@@ -30,7 +30,7 @@ Every participant starts their own research project in Session 1 and advances it
 - `sessions/02/slides_s2.pdf`
 - `sessions/02/worksheet_s2.md`
 - `sessions/02/example_pack/`: two raw files (2022 presidential results and INSEE municipal series), for those without data
-- New in `template/`: prompts 06 (analysis plan), 07 (implementation), 08 (independent review), an updated prompt 05, `notes/templates/analysis_plan.md`, and two sections of `CLAUDE.md`
+- New in `template/`: prompts 06 (analysis plan), 07 (implementation), 08 (independent review), an updated prompt 05, `notes/templates/analysis_plan.md`, and a new section of `CLAUDE.md`, "Row counts and silent decisions"
 
 ## Rules of the workshop
 

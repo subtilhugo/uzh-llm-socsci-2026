@@ -13,11 +13,11 @@
 | 2. Implement | 10:40 | 10:50–11:10, steps 3–4 | 11:10 |
 | 3. Review and decide | 11:15 | 11:25–11:40, steps 5–7 | debrief, 11:45 |
 
-**Goal for 12:00.** In your folder: `notes/analysis_plan.md` in your words, with its open questions settled; numbered scripts in `code/` that print their row counts; a cleaned dataset in `data/processed/` and a first table or figure in `outputs/`; a review written by a fresh session, with your decision on each point; an entry in `PROJECT_HISTORY.md` with the three labels, and a commit.
+**Goal for 12:00.** In your folder: `notes/analysis_plan.md` in your words, with its open questions settled; numbered scripts in `code/` that print their row counts; a cleaned dataset in `data/processed/` and a first table or figure in `outputs/`; a review written by a fresh session, with your decision on each point; an entry in `PROJECT_HISTORY.md` and a commit.
 
 **One rule for the morning: read the row counts before you look at the result.**
 
-**Model and effort** (slide "Which model, which effort"): the plan at `medium`, the implementation at `high`, the review at `xhigh`. Type `/effort high` and so on in the agent. Tight quota: `/model opusplan` (Opus plans, Sonnet codes).
+**Model and effort** (slide "Which model, which effort, for which task"): the plan with Fable at `high` (`/model fable`; without access to Fable, Opus); the implementation with Opus at `high`; the review with Opus at `xhigh`. Type `/model` and `/effort` in the agent.
 
 ---
 
@@ -33,7 +33,7 @@ Done when: `prompts/` contains 06, 07 and 08, and `data/raw/README.md` has a lin
 
 ### Step 2. The analysis plan (20 min)
 
-Start a new session in your project folder, effort `medium`. Type `Follow @prompts/06_analysis_plan.md`.
+Start a new session in your project folder: `/model fable` (or Opus), effort `high`. Type `Follow @prompts/06_analysis_plan.md`.
 
 - The agent first writes and runs an inspection script. Read its summary: number of rows, identifiers, missing-value codes, period and geography.
 - Then it interviews you. Answer in your words. When you do not know, say "don't know": it goes to "Open questions". **It asks; it does not decide.**
@@ -47,7 +47,7 @@ Done when: `notes/analysis_plan.md` exists, says what one row is in each file, a
 
 ### Step 3. Implementation (15 min)
 
-Type `/clear` (the plan is in the folder, not in the chat). Effort `high`. Type `Follow @prompts/07_implement.md`.
+Type `/clear` (the plan is in the folder, not in the chat). `/model opus`, `/effort high`. Type `Follow @prompts/07_implement.md`.
 
 - First, it lists what the plan leaves open. **Answer every point before it writes any code.**
 - Then it writes numbered scripts, runs them, and gives you the row-count trail (`outputs/row_counts.md`) and a first table or figure.
@@ -64,7 +64,7 @@ Done when: you have written in the shared document, in one line, the step where 
 
 ### Step 5. The review (7 min). Not optional.
 
-Close the session and open a new one in the same folder: the reviewer must not have seen the code being written. Effort `xhigh`. Type `Follow @prompts/08_review.md`.
+Close the session and open a new one in the same folder: the reviewer must not have seen the code being written. `/model opus`, `/effort xhigh`. Type `Follow @prompts/08_review.md`.
 
 Done when: `notes/review_<date>.md` exists, with a table of discrepancies and an empty "Decision" column.
 
@@ -76,15 +76,15 @@ Done when: every row has a decision, and every change in the row counts now foll
 
 ### Step 7. Close (3 min)
 
-Type `Follow @prompts/05_session_log.md`. Read the table of labels: for each output, origin, status, checked. Change status and checked only for what you actually checked. Then "ok" to the commit.
+Type `Follow @prompts/05_session_log.md`. Read the entry: under "Verified by a human", only what you actually checked. Then "ok" to the commit.
 
 Done when: `git log` shows today's commit. If the time is up, do this step at home, but do it.
 
 ## Debrief
 
-### Step 8. Two sections in your `CLAUDE.md` (2 min)
+### Step 8. One section in your `CLAUDE.md` (2 min)
 
-Ask the agent: *"Copy the sections 'Row counts and silent decisions' and 'Three labels on every output' from `<course folder>/template/CLAUDE.md` into my `CLAUDE.md`."* Then add one line of your own that would have caught today's error.
+Ask the agent: *"Copy the section 'Row counts and silent decisions' from `<course folder>/template/CLAUDE.md` into my `CLAUDE.md`."* Then add one line of your own that would have caught today's error.
 
 ## Bonus 1, for the sceptics: who reviews the reviewer?
 
