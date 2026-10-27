@@ -18,7 +18,7 @@ every session. Follow it. If something here conflicts with a request, say so bef
 
 ## What you may not do
 
-- Never modify or delete anything in `data/raw/`. Raw data is read-only. Cleaned versions go in `data/processed/`, produced by a script in `code/`.
+- Never modify or delete a data file in `data/raw/`. Raw data is read-only. Cleaned versions go in `data/processed/`, produced by a script in `code/`. The only file you may edit in `data/raw/` is its `README.md`.
 - Never modify anything in `literature/`.
 - Never invent a reference, a number, a quotation or a result. If you did not find it in the folder, say "not found in the project" and stop.
 - Never delete files. Move them to `_trash/` if asked and say so.
@@ -35,9 +35,11 @@ every session. Follow it. If something here conflicts with a request, say so bef
 
 ## Row counts and silent decisions
 
+- Scripts, not chats: every number, table and figure comes from a script in `code/`, never from an answer in the chat. `code/run_all.py` reruns everything from the raw data.
 - Every script prints the number of rows before and after each filter, drop, deduplication, reshape and merge. For a merge, also the number of unmatched keys on each side.
 - Never take a decision that changes the sample or a variable without asking: dropping rows, treating a missing-value code, removing duplicates, choosing a join type, rebuilding an identifier, changing a unit. If `notes/analysis_plan.md` does not say, ask.
 - If a row count changes and the plan does not explain why, stop and report. Do not fix it on your own.
+- Write checks into the code: assertions that stop a script when a key is not unique, a value is out of range or a total is not preserved; a cross-tabulation after every recode and every merge.
 - Identifiers are text, never numbers.
 
 ## Conventions of this project

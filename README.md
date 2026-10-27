@@ -25,12 +25,12 @@ Every participant starts their own research project in Session 1 and advances it
 
 **To get everything: green "Code" button on this page, then "Download ZIP". Or, in a terminal: `git clone https://github.com/subtilhugo/uzh-llm-socsci-2026.git`.**
 
-## Session 2: structured data with an agent
+## Session 2: exploring structured data with an agent
 
 - `sessions/02/slides_s2.pdf`
 - `sessions/02/worksheet_s2.md`
-- `sessions/02/example_pack/`: two raw files (2022 presidential results and INSEE municipal series), for those without data
-- New in `template/`: prompts 06 (analysis plan), 07 (implementation), 08 (independent review), an updated prompt 05, `notes/templates/analysis_plan.md`, and a new section of `CLAUDE.md`, "Row counts and silent decisions"
+- `sessions/02/example_pack/`: the 2022 presidential results and the INSEE historical series by municipality, for those without data, and INSEE's history of municipalities for the bonus
+- New in `template/`: prompts 06 (document and plan), 07 (clean, merge, describe), 08 (independent review) and 09 (audit one step by hand); an updated prompt 05; `notes/templates/analysis_plan.md` and `codebook.md`; and a new section of `CLAUDE.md`, "Row counts and silent decisions"
 
 ## Rules of the workshop
 
