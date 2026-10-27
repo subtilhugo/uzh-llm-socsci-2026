@@ -1,6 +1,6 @@
 # Example pack, Session 2
 
-Two raw files. Use them today if you have no structured data of your own.
+Two raw files, plus one for the bonus. Use them today if you have no structured data of your own.
 
 ## How to use it
 

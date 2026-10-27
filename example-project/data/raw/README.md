@@ -1,6 +1,6 @@
 # Raw data
 
-Nothing in this folder is ever modified. Cleaned versions are produced by scripts in `code/`
+No data file in this folder is ever modified; this README is the only file that changes. Cleaned versions are produced by scripts in `code/`
 and written to `data/processed/`. The data files themselves are not in the public repository
 (`.gitignore`); this README is.
 
