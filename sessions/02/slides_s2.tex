@@ -572,25 +572,23 @@ Save on context. Never on reasoning for what enters the paper.
 
 \begin{frame}{\chg{A Literature Watch, on a Schedule}}
 
-\small
-\chg{\textbf{Every Monday at 8:00}, a scheduled task opens a fresh session in my project folder. It looks for what came out last week on my topics, and writes a one-page digest in \texttt{notes/literature\_watch/}.}
+\footnotesize
+\chg{\textbf{Every Friday}, a scheduled task searches the web and writes a digest in French, readable in ten minutes. My instruction has five blocks.}
 
-\vspace{0.25cm}
+\vspace{0.15cm}
 
-\textbf{\chg{The instruction}}
+\begin{enumerate}
+    \setlength{\itemsep}{2pt}
+    \item \textbf{\chg{Cadence check, first.}} \chg{It runs \texttt{date +\%V}: odd week, stop; even week, continue. Weekly trigger, fortnightly digest.}
+    \item \textbf{\chg{Context and relevance filter.}} \chg{Who I am, the level of journals, then my current projects described literally and six monitoring axes derived from them.}
+    \item \textbf{\chg{Sources.}} \chg{Working papers first (NBER, CEPR, IZA\ldots), then the journals of each field, then preprints.}
+    \item \textbf{\chg{Quality bar.}} \chg{``Better six excellent items than thirty mediocre ones.'' Excluded: benchmark-chasing papers, ``we asked GPT-4 to do X'' without human validation, correlations with no identification strategy.}
+    \item \textbf{\chg{Output and rules.}} \chg{Must read (5--8): status, link, what it changes for which project, visible weaknesses. Worth noting, one line each. ``Never invent an article or URL. If you cannot confirm an item, remove it.''}
+\end{enumerate}
 
-\vspace{0.1cm}
-{\footnotesize \chg{\textit{Search for working papers and articles published in the last seven days on [my topics]. Read the abstracts only. Write \texttt{notes/literature\_watch/<date>.md}: at most ten papers, each with authors, title, link, one sentence on the finding, one on the link with \texttt{README.md}. Mark the three closest to this project. Never add a file to \texttt{literature/}. Never list a paper you could not open.}}}
+\vspace{0.15cm}
 
-\vspace{0.25cm}
-
-\textbf{\chg{How}}
-\begin{itemize}
-    \setlength{\itemsep}{1pt}
-    \item \chg{Claude Desktop, \textbf{Code} tab, \textbf{Scheduled}, \textbf{New task}: the instruction, the folder, \textbf{Weekly}. Or ask in any session: ``every Monday at 8am, \ldots''.}
-    \item \chg{It runs only while the app is open and the computer awake; a missed run is caught up once. A cloud task runs with the computer off, but without your local files.}
-    \item \chg{I still click every link. A paper that does not exist is the classic error.}
-\end{itemize}
+\textbf{\chg{How}}\chg{: Claude Desktop, \textbf{Code} tab, \textbf{Scheduled}, \textbf{New task}. Mine runs in the cloud: it works with the computer off, but cannot see local files. I still click every link.}
 
 \end{frame}
 
