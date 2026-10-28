@@ -26,9 +26,9 @@
 \setbeamercolor{alerted text}{fg=color2bg}
 \beamertemplatenavigationsymbolsempty
 
-% --- Slide numbers on every slide except the title page and the photo (pages 1 and 2).
+% --- Slide numbers on every slide except the title page and the photo (the photo frame switches them off).
 \setbeamertemplate{background}{%
-  \ifnum\value{page}>2
+  \ifnum\value{page}>1
     \begin{tikzpicture}[remember picture,overlay]
       \node[anchor=south east,font=\fontsize{7}{8}\fontfamily{lmr}\fontseries{l}\selectfont,text=gray!80] at ([xshift=-0.3cm,yshift=0.2cm]current page.south east) {\insertpagenumber};
     \end{tikzpicture}%
@@ -62,14 +62,34 @@
 \frame{\titlepage}
 
 % ============================================================================
-% A QUESTION (photo only)
+% COURSE REPOSITORY (QR code)
 % ============================================================================
 
+\begin{frame}{\chg{Course Repository}}
+
+\centering
+\vspace{0.2cm}
+\qrcode[height=3.6cm]{https://github.com/subtilhugo/uzh-llm-socsci-2026}
+
+\vspace{0.5cm}
+{\large \href{https://github.com/subtilhugo/uzh-llm-socsci-2026}{\texttt{github.com/subtilhugo/uzh-llm-socsci-2026}}}
+
+\vspace{0.4cm}
+{\small \chg{Downloaded it last week? Download it again: new prompts (06 to 09) and templates.}}
+
+\end{frame}
+
+% ============================================================================
+% A QUESTION (photo only, no slide number)
+% ============================================================================
+
+{\setbeamertemplate{background}{}
 \begin{frame}[plain]
 \begin{tikzpicture}[remember picture,overlay]
   \node at (current page.center) {\includegraphics[height=\paperheight]{figures/tiktok_download_data.jpg}};
 \end{tikzpicture}
 \end{frame}
+}
 
 % ============================================================================
 % SESSION OVERVIEW (first, as requested)
@@ -525,12 +545,12 @@ Rename, reformat, commit message & Sonnet & \texttt{low} & you check each result
 Prototyping: exploratory scripts, plots & Sonnet & \texttt{medium} & provisional by design \\
 \chg{Translate or rephrase a text} & \chg{Sonnet} & \chg{\texttt{low}/\texttt{medium}} & \chg{you reread it all} \\
 \chg{Format references, LaTeX tables, Beamer} & \chg{Sonnet} & \chg{\texttt{low}} & \chg{mechanical, easy to check} \\
-\chg{Annotate a corpus (Session 3)} & \chg{small model} & \chg{\texttt{low}} & \chg{calibrate against your own coding} \\
+\chg{Annotate a corpus (Session 3)} & \chg{Haiku} & \chg{\texttt{low}} & \chg{calibrate against your own coding} \\
 \chg{OCR, coding, websites, regular tasks} & \chg{Opus} & \chg{\texttt{high}} & \chg{the everyday workhorse} \\
 \chg{Debug an error} & \chg{Opus} & \chg{\texttt{high}} & \chg{needs the code's context} \\
 Code for the paper: cleaning, merging, estimation & Opus & \texttt{high} & errors hide in easy-to-miss cases \\
 Independent review & Opus & \texttt{xhigh} & the last check before yours \\
-\chg{Literature review, theory, paper review} & \chg{Fable} & \chg{\texttt{max}} & \chg{always max} \\
+\chg{Literature review, theory, paper review} & \chg{Fable} & \chg{\texttt{max}} & \chg{errors here cost the most} \\
 Writing: paper, memos, analysis plan & Fable & \texttt{high} & long, ambiguous tasks \\
 \bottomrule
 \end{tabular}}
@@ -624,14 +644,14 @@ Save on context. Never on reasoning for what enters the paper.
 
 \vspace{0.25cm}
 
-{\footnotesize \chg{\textit{Here are three academic sites I like: [link 1], [link 2], [link 3]. Build me a personal site that mixes them: [what you take from each]. Before you write any code, ask me which information and which files you need.}}}
+{\footnotesize \chg{Instruction template, fill in the brackets:} \chg{\textit{Here are three academic sites I like: [link 1], [link 2], [link 3]. Build me a personal site that mixes them: [what you take from each]. Before you write any code, ask me which information and which files you need.}}}
 
 \vspace{0.35cm}
 
 \textbf{\chg{Uploading to a site}}
 \begin{itemize}
     \setlength{\itemsep}{2pt}
-    \item \chg{The agent can do the clicking too: it opens your site in the browser and uploads the files, the new paper, the updated CV.}
+    \item \chg{With a browser connected, the agent can do the clicking too: open your site, upload the new paper, update the CV.}
     \item \chg{Example: my Google Site.}
     \item \chg{You still look at the page before it goes public.}
 \end{itemize}
@@ -672,13 +692,9 @@ Save on context. Never on reasoning for what enters the paper.
 \vfill
 \Large \chg{I am not using it.}
 
-\vspace{0.4cm}
+\vspace{0.6cm}
 
 \normalsize
-\chg{It is a research workbench for scientists, run on the lab's own machines.}
-
-\vspace{0.4cm}
-
 \chg{Happy to hear from anyone who is.}
 \vfill
 
@@ -712,7 +728,7 @@ But it took six decisions alone: the scope, the overseas codes, Paris, the far-r
 
 \vspace{0.1cm}
 \centering
-Did the far-right vote grow more between 2002 and 2022\\ where the population declined?
+Did the far-right vote grow more between 2002 and 2022\\ where the population declined\chg{, and where housing stands empty}?
 
 \vspace{0.35cm}
 \raggedright
@@ -881,7 +897,7 @@ Silent errors: bad merges, dropped observations, miscoded missing values, mislab
 \begin{frame}{Block 3. Audit and Decide (11:15--11:45)}
 
 \small
-\textbf{I show (10 min).} I close the session and open a fresh one. Prompt 08: a reviewer that did not see the code being written. Then prompt 09: I audit one step by hand, three municipalities that became one.
+\textbf{I show (10 min).} I close the session and open a fresh one. Prompt 08: a reviewer that did not see the code being written. Then prompt 09: I audit one step by hand, three municipalities that became one. \chg{Then a first descriptive regression.}
 
 \vspace{0.3cm}
 
