@@ -469,6 +469,40 @@ Subscription: tokens are quota. API key: tokens are money.\\
 
 \end{frame}
 
+\begin{frame}{\chg{What ``Thinking'' Means for a Model}}
+
+\centering
+\begin{tikzpicture}[font=\scriptsize,node distance=0.5cm]
+  \node[draw,rounded corners,fill=gray!15,minimum height=0.9cm,align=center] (q) {\chg{Your\\request}};
+  \node[draw,rounded corners,fill=titleblue!25,minimum height=0.9cm,minimum width=4.2cm,align=center,right=0.6cm of q] (t) {\chg{Thinking: text written for itself\\(plan, try, check, correct)}};
+  \node[draw,rounded corners,fill=titleblue!70,text=white,minimum height=0.9cm,align=center,right=0.6cm of t] (a) {\chg{Answer}};
+  \draw[->] (q)--(t); \draw[->] (t)--(a);
+\end{tikzpicture}
+
+\vspace{0.1cm}
+\raggedright
+\small
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \textbf{\chg{Thinking is more text, written before the answer.}} \chg{The model works in steps, tries, checks, backs up. The answer follows from that text.}
+    \item \textbf{\chg{It is paid like any output.}} \chg{Billed as output tokens, in full, even if the screen shows a summary. It also takes time.}
+    \item \textbf{\chg{Effort sets how often and how deeply it thinks.}} \chg{At \texttt{low}, a simple task gets no thinking; at \texttt{max}, as much as needed.}
+\end{itemize}
+
+\vspace{0.05cm}
+
+\textbf{\chg{On your data}}
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \chg{Little thinking: it writes the merge and stops.}
+    \item \chg{More thinking: it writes the merge, asks itself how many rows should come out, reruns, and notices the loss.}
+\end{itemize}
+
+\vspace{0.15cm}
+{\footnotesize \chg{Thinking helps when the model knows enough but must work in steps. It does not add missing knowledge (change the model), nor prove the answer right.}}
+
+\end{frame}
+
 \begin{frame}{Which Model, Which Effort, for Which Task}
 
 \centering
