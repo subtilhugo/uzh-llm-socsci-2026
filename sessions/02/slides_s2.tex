@@ -38,7 +38,7 @@
 \setbeamercolor{block body alerted}{bg=titleblue!8}
 \setbeamercolor{alerted text}{fg=titleblue}
 
-% --- Change marker: everything modified since the 27 October version (28 slides) is in bold.
+% --- Change marker: everything modified since the 27 October evening version (32 slides) is in bold.
 % --- New or rewritten frames have their title in \chg; inside kept frames, only the changed text.
 % --- Switched off in this version; comment the second line to see the changes.
 \newcommand{\chg}[1]{{\bfseries #1}}
@@ -67,21 +67,23 @@
 
     \item[\textbf{9:10--9:30}] How I Actually Work {\footnotesize (20 min)}
 
-    \item[\textbf{9:30--9:45}] Tokens and Models {\footnotesize (15 min)}
+    \item[\textbf{\chg{9:30--9:40}}] Tokens and Models {\footnotesize \chg{(10 min)}}
 
-    \item[\textbf{9:45--10:25}] Block 1. \chg{Document and Specify} {\footnotesize (40 min)}, then a 15-min break
+    \item[\textbf{\chg{9:40--9:45}}] \chg{Where I Also Use AI} {\footnotesize \chg{(5 min)}}
+
+    \item[\textbf{9:45--10:25}] Block 1. Document and Specify {\footnotesize (40 min)}, then a 15-min break
     \begin{itemize}
-        \item \chg{Data README, codebook, analysis plan} (06)
+        \item Data README, codebook, analysis plan (06)
     \end{itemize}
 
-    \item[\textbf{10:40--11:15}] Block 2. \chg{Clean, Merge, Describe} {\footnotesize (35 min)}
+    \item[\textbf{10:40--11:15}] Block 2. Clean, Merge, Describe {\footnotesize (35 min)}
     \begin{itemize}
-        \item \chg{Scripts that check themselves; statistics, plots, first insights} (07)
+        \item Scripts that check themselves; statistics, plots, first insights (07)
     \end{itemize}
 
-    \item[\textbf{11:15--11:45}] Block 3. \chg{Audit} and Decide {\footnotesize (30 min)}
+    \item[\textbf{11:15--11:45}] Block 3. Audit and Decide {\footnotesize (30 min)}
     \begin{itemize}
-        \item \chg{A fresh reviewer (08), then one step by hand (09)}
+        \item A fresh reviewer (08), then one step by hand (09)
     \end{itemize}
 
     \item[\textbf{11:45--12:00}] Debrief and Next Session {\footnotesize (15 min)}
@@ -402,7 +404,7 @@ Your co-authors will not look at exploratory and polished results in the same wa
   \centering
   \vfill
   {\LARGE \textbf{\textcolor{titleblue}{Tokens and Models}}}\\[0.4cm]
-  {\large \textit{9:30 -- 9:45}}\\[0.3cm]
+  {\large \textit{\chg{9:30 -- 9:40}}}\\[0.3cm]
   {What Principle 2 costs, and where you can save}
   \vfill
 \end{frame}
@@ -497,6 +499,62 @@ Save on context. Never on reasoning for what enters the paper.
 \end{frame}
 
 % ============================================================================
+% WHERE I ALSO USE AI
+% ============================================================================
+
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{\chg{Where I Also Use AI}}}}\\[0.4cm]
+  {\large \textit{\chg{9:40 -- 9:45}}}\\[0.3cm]
+  {\chg{Beyond the syllabus: small things that save hours}}
+  \vfill
+\end{frame}
+
+\begin{frame}{\chg{A Literature Watch, on a Schedule}}
+
+\small
+\chg{\textbf{Every Monday at 8:00}, a scheduled task opens a fresh session in my project folder. It looks for what came out last week on my topics, and writes a one-page digest in \texttt{notes/literature\_watch/}.}
+
+\vspace{0.25cm}
+
+\textbf{\chg{The instruction}}
+
+\vspace{0.1cm}
+{\footnotesize \chg{\textit{Search for working papers and articles published in the last seven days on [my topics]. Read the abstracts only. Write \texttt{notes/literature\_watch/<date>.md}: at most ten papers, each with authors, title, link, one sentence on the finding, one on the link with \texttt{README.md}. Mark the three closest to this project. Never add a file to \texttt{literature/}. Never list a paper you could not open.}}}
+
+\vspace{0.25cm}
+
+\textbf{\chg{How}}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item \chg{Claude Desktop, \textbf{Code} tab, \textbf{Scheduled}, \textbf{New task}: the instruction, the folder, \textbf{Weekly}. Or ask in any session: ``every Monday at 8am, \ldots''.}
+    \item \chg{It runs only while the app is open and the computer awake; a missed run is caught up once. A cloud task runs with the computer off, but without your local files.}
+    \item \chg{I still click every link. A paper that does not exist is the classic error.}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\chg{Other Easy Wins for Researchers}}
+
+\begin{itemize}
+    \setlength{\itemsep}{6pt}
+    \item \chg{\textbf{Before you submit}: rerun the replication package from a clean copy, and check every number in the paper and the slides against the outputs.}
+    \item \chg{\textbf{References}: check that every citation in a draft exists and matches its DOI; clean the \texttt{.bib}.}
+    \item \chg{\textbf{Referee reports}: one table with every comment, where the revision answers it (page, line), and a draft response that you rewrite.}
+    \item \chg{\textbf{Calls and applications}: check a proposal against the call (page limits, required sections, eligibility) before you send it.}
+    \item \chg{\textbf{Data releases}: a scheduled task that tells you when a new survey wave or a new election file is published.}
+    \item \chg{\textbf{Teaching}: exercises and solutions from your own slides; a check that slides, worksheet and code say the same thing.}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\centering
+\chg{Same rule as everything else today: the agent drafts, you check.}
+
+\end{frame}
+
+% ============================================================================
 % WHAT YOU LEAVE WITH
 % ============================================================================
 
@@ -509,31 +567,31 @@ Save on context. Never on reasoning for what enters the paper.
   \vfill
 \end{frame}
 
-\begin{frame}{\chg{The Example Project: One Step Further}}
+\begin{frame}{The Example Project: One Step Further}
 
 \small
-\chg{\textbf{In Session 1, at the end of the demo}, the agent downloaded five presidential elections (2002--2022) and cleaned them into one table of municipalities. Its checks passed.}
+\textbf{In Session 1, at the end of the demo}, the agent downloaded five presidential elections (2002--2022) and cleaned them into one table of municipalities. Its checks passed.
 
 \vspace{0.2cm}
 
-\chg{But it took six decisions alone: the scope, the overseas codes, Paris, the far-right candidate, Zemmour, blank ballots. And municipalities merged between elections: the same code does not always mean the same territory.}
+But it took six decisions alone: the scope, the overseas codes, Paris, the far-right candidate, Zemmour, blank ballots. And municipalities merged between elections: the same code does not always mean the same territory.
 
 \vspace{0.35cm}
 
-\textbf{\chg{Today's question}}
+\textbf{Today's question}
 
 \vspace{0.1cm}
 \centering
-\chg{Did the far-right vote grow more between 2002 and 2022\\ where the population declined?}
+Did the far-right vote grow more between 2002 and 2022\\ where the population declined?
 
 \vspace{0.35cm}
 \raggedright
-\textbf{\chg{Three sources, three geographies}}
+\textbf{Three sources, three geographies}
 \begin{itemize}
     \setlength{\itemsep}{1pt}
-    \item \chg{The five elections: each in the municipal geography of its year}
-    \item \chg{INSEE historical series, censuses 1968--2015: the geography of 2017}
-    \item \chg{INSEE history of municipalities: every merger, split and change of code}
+    \item The five elections: each in the municipal geography of its year
+    \item INSEE historical series, censuses 1968--2015: the geography of 2017
+    \item INSEE history of municipalities: every merger, split and change of code
 \end{itemize}
 
 \end{frame}
@@ -544,11 +602,11 @@ Save on context. Never on reasoning for what enters the paper.
 In your folder:
 \begin{itemize}
     \setlength{\itemsep}{2pt}
-    \item \chg{\texttt{data/raw/README.md} and \texttt{notes/codebook.md}: where each file comes from, what each variable means}
+    \item \texttt{data/raw/README.md} and \texttt{notes/codebook.md}: where each file comes from, what each variable means
     \item \texttt{notes/analysis\_plan.md}, in your words, with its open questions settled
-    \item numbered scripts in \texttt{code/} that print their row counts \chg{and check themselves, and \texttt{code/run\_all.py}}
-    \item a cleaned dataset in \texttt{data/processed/}, \chg{summary statistics, two figures, and \texttt{notes/insights.md}}
-    \item a review written by a fresh session, \chg{and one step you audited by hand}
+    \item numbered scripts in \texttt{code/} that print their row counts and check themselves, and \texttt{code/run\_all.py}
+    \item a cleaned dataset in \texttt{data/processed/}, summary statistics, two figures, and \texttt{notes/insights.md}
+    \item a review written by a fresh session, and one step you audited by hand
     \item an entry in \texttt{PROJECT\_HISTORY.md} and a commit
 \end{itemize}
 
@@ -562,66 +620,66 @@ In your folder:
 % PART 4: THREE BLOCKS
 % ============================================================================
 
-\begin{frame}{Block 1. \chg{Document and Specify} (9:45--10:25)}
+\begin{frame}{Block 1. Document and Specify (9:45--10:25)}
 
 \small
-\textbf{I show (10 min).} The example project. Prompt 06: \chg{a script inspects the three sources without changing them. The agent completes the data README, writes the codebook, interviews me, and writes the plan.}
+\textbf{I show (10 min).} The example project. Prompt 06: a script inspects the three sources without changing them. The agent completes the data README, writes the codebook, interviews me, and writes the plan.
 
 \vspace{0.3cm}
 
 \textbf{You do (25 min)}
 \begin{enumerate}
     \setlength{\itemsep}{3pt}
-    \item Your data in \texttt{data/raw/}. No data? The example pack, in the course repository \chg{(\texttt{sessions/02/})}.
-    \item \chg{Copy prompts 05 to 09 and \texttt{notes/templates/} from the course repository (\texttt{template/}) into your folder.} A new session. Prompt 06.
+    \item Your data in \texttt{data/raw/}. No data? The example pack, in the course repository (\texttt{sessions/02/}).
+    \item Copy prompts 05 to 09 and \texttt{notes/templates/} from the course repository (\texttt{template/}) into your folder. A new session. Prompt 06.
     \item Answer its questions. What you do not know yet goes to ``Open questions''. It asks; it does not decide.
-    \item \chg{Read the codebook and the plan before you say ``ok''.}
+    \item Read the codebook and the plan before you say ``ok''.
 \end{enumerate}
 
 \vspace{0.1cm}
-{\footnotesize \chg{Survey data: the codebook also records the weights, the filter questions, and the codes for refusal, don't know and not asked.}}
+{\footnotesize Survey data: the codebook also records the weights, the filter questions, and the codes for refusal, don't know and not asked.}
 
 \vspace{0.25cm}
 
-\textbf{We check (5 min).} \chg{Two codebooks on screen. A variable whose missing-value codes nobody documented?} A merge with no rule for the rows that do not match?
+\textbf{We check (5 min).} Two codebooks on screen. A variable whose missing-value codes nobody documented? A merge with no rule for the rows that do not match?
 
 \end{frame}
 
-\begin{frame}{\chg{Scripts, Not Chats}}
+\begin{frame}{Scripts, Not Chats}
 
 \begin{itemize}
     \setlength{\itemsep}{6pt}
-    \item \chg{The agent writes code into the project. It does not answer in the chat: a number in a chat is a claim nobody can rerun.}
-    \item \chg{Every table and figure has a script behind it. \texttt{python3 code/run\_all.py} rebuilds everything from \texttt{data/raw/}.}
-    \item \chg{Coding assistance, three uses:}
+    \item The agent writes code into the project. It does not answer in the chat: a number in a chat is a claim nobody can rerun.
+    \item Every table and figure has a script behind it. \texttt{python3 code/run\_all.py} rebuilds everything from \texttt{data/raw/}.
+    \item Coding assistance, three uses:
     \begin{itemize}
-        \item \chg{Writing: one script per step, each saying what it reads, writes and drops.}
-        \item \chg{Debugging: paste the error, and ask for the cause before the fix.}
-        \item \chg{Documenting: a docstring at the top of each script, the codebook for the variables.}
+        \item Writing: one script per step, each saying what it reads, writes and drops.
+        \item Debugging: paste the error, and ask for the cause before the fix.
+        \item Documenting: a docstring at the top of each script, the codebook for the variables.
     \end{itemize}
-    \item \chg{Reading the code stays your job. Ask the agent to explain it.}
+    \item Reading the code stays your job. Ask the agent to explain it.
 \end{itemize}
 
 \vspace{0.3cm}
 
-{\footnotesize \chg{Developers learning a new library with an AI assistant scored 50\% on a quiz, against 67\% for those coding by hand. Those who asked the AI for explanations scored about as well as by hand (Shen and Tamkin 2026).}}
+{\footnotesize Developers learning a new library with an AI assistant scored 50\% on a quiz, against 67\% for those coding by hand. Those who asked the AI for explanations scored about as well as by hand (Shen and Tamkin 2026).}
 
 \end{frame}
 
-\begin{frame}[fragile]{\chg{Checks to Request}}
+\begin{frame}[fragile]{Checks to Request}
 
 \small
-\chg{Silent errors: bad merges, dropped observations, miscoded missing values, mislabelled variables. Three checks catch most of them. Ask for them in the code, not in the chat.}
+Silent errors: bad merges, dropped observations, miscoded missing values, mislabelled variables. Three checks catch most of them. Ask for them in the code, not in the chat.
 
 \vspace{0.3cm}
 
-\textbf{\chg{Row counts}}\chg{, before and after every step}
+\textbf{Row counts}, before and after every step
 
 {\footnotesize \verb|merge: 1,000 rows -> 980; unmatched: 20 left, 5 right|}
 
 \vspace{0.25cm}
 
-\textbf{\chg{Assertions}}\chg{, which stop the script when they fail}
+\textbf{Assertions}, which stop the script when they fail
 
 {\footnotesize
 \verb|assert df["code_commune"].is_unique|\\
@@ -631,7 +689,7 @@ In your folder:
 
 \vspace{0.25cm}
 
-\textbf{\chg{Cross-tabulations}}\chg{, after every recode and every merge}
+\textbf{Cross-tabulations}, after every recode and every merge
 
 {\footnotesize
 \verb|pd.crosstab(df["q12_raw"], df["q12_clean"], dropna=False)|\\
@@ -639,10 +697,10 @@ In your folder:
 
 \end{frame}
 
-\begin{frame}{Block 2. \chg{Clean, Merge, Describe} (10:40--11:15)}
+\begin{frame}{Block 2. Clean, Merge, Describe (10:40--11:15)}
 
 \small
-\textbf{I show (10 min).} \texttt{/clear}, then prompt 07. The agent lists what the plan leaves open; I answer. It writes the scripts\chg{, with their checks, then the summary statistics, two figures and its first insights}. We read the row counts \chg{first, the figures last}.
+\textbf{I show (10 min).} \texttt{/clear}, then prompt 07. The agent lists what the plan leaves open; I answer. It writes the scripts, with their checks, then the summary statistics, two figures and its first insights. We read the row counts first, the figures last.
 
 \vspace{0.3cm}
 
@@ -651,7 +709,7 @@ In your folder:
     \setlength{\itemsep}{3pt}
     \item \texttt{/clear}: the plan is in the folder, not in the chat. Prompt 07.
     \item Answer its list of ambiguities before it writes any code.
-    \item \chg{Read in this order: the row counts, the assertions, the cross-tabulations, then the figures and the insights.}
+    \item Read in this order: the row counts, the assertions, the cross-tabulations, then the figures and the insights.
     \item Rows that change without the plan saying so: paste the step in the shared document.
 \end{enumerate}
 
@@ -661,48 +719,48 @@ In your folder:
 
 \end{frame}
 
-\begin{frame}{\chg{When to Trust, When to Intervene}}
+\begin{frame}{When to Trust, When to Intervene}
 
 \small
-\chg{\textbf{Trust a step} when a check exists for it, it passed, and you can rerun it.}
+\textbf{Trust a step} when a check exists for it, it passed, and you can rerun it.
 
 \vspace{0.2cm}
 
-\chg{\textbf{Intervene} when}
+\textbf{Intervene} when
 \begin{itemize}
     \setlength{\itemsep}{1pt}
-    \item \chg{a number moved and nobody can say why}
-    \item \chg{a match is right on the code and wrong on the territory, the wave or the period}
-    \item \chg{a label says one thing and the code computes another}
-    \item \chg{the result looks too clean}
+    \item a number moved and nobody can say why
+    \item a match is right on the code and wrong on the territory, the wave or the period
+    \item a label says one thing and the code computes another
+    \item the result looks too clean
 \end{itemize}
 
 \vspace{0.3cm}
 
-\chg{\textbf{Audit one step by hand} (prompt 09)}
+\textbf{Audit one step by hand} (prompt 09)
 \begin{enumerate}
     \setlength{\itemsep}{1pt}
-    \item \chg{Choose the riskiest step: a merge, a recode, a filter.}
-    \item \chg{Read its code. Ask the agent to explain each line.}
-    \item \chg{Follow three units from the raw file to the final table: one ordinary, one edge case, one dropped or unmatched.}
-    \item \chg{Read their values in the raw file yourself, and recompute one number by hand.}
+    \item Choose the riskiest step: a merge, a recode, a filter.
+    \item Read its code. Ask the agent to explain each line.
+    \item Follow three units from the raw file to the final table: one ordinary, one edge case, one dropped or unmatched.
+    \item Read their values in the raw file yourself, and recompute one number by hand.
 \end{enumerate}
 
 \end{frame}
 
-\begin{frame}{Block 3. \chg{Audit} and Decide (11:15--11:45)}
+\begin{frame}{Block 3. Audit and Decide (11:15--11:45)}
 
 \small
-\textbf{I show (10 min).} I close the session and open a fresh one. Prompt 08: a reviewer that did not see the code being written. \chg{Then prompt 09: I audit one step by hand, three municipalities that became one.}
+\textbf{I show (10 min).} I close the session and open a fresh one. Prompt 08: a reviewer that did not see the code being written. Then prompt 09: I audit one step by hand, three municipalities that became one.
 
 \vspace{0.3cm}
 
 \textbf{You do (15 min)}
 \begin{enumerate}
     \setlength{\itemsep}{3pt}
-    \item Close the session. Open a new one. Prompt 08. \chg{It runs for several minutes: do not wait.}
-    \item \chg{Prompt 09 on that step, in a second session. Read three units in the raw data yourself.} \alert{Not optional.}
-    \item For each point \chg{of the review and of your audit}: fix it, or accept it and write down why. \chg{Rerun \texttt{code/run\_all.py}.}
+    \item Close the session. Open a new one. Prompt 08. It runs for several minutes: do not wait.
+    \item Prompt 09 on that step, in a second session. Read three units in the raw data yourself. \alert{Not optional.}
+    \item For each point of the review and of your audit: fix it, or accept it and write down why. Rerun \texttt{code/run\_all.py}.
     \item Prompt 05: the entry in \texttt{PROJECT\_HISTORY.md}, and the commit.
 \end{enumerate}
 
@@ -718,7 +776,7 @@ In your folder:
 
 \begin{frame}{Debrief}
 
-\textbf{Three screens.} \chg{A codebook. A row-count trail. A step audited by hand, with what it found.}
+\textbf{Three screens.} A codebook. A row-count trail. A step audited by hand, with what it found.
 
 \vspace{0.3cm}
 
@@ -783,7 +841,7 @@ Hallie, L.\ (2026). Choosing a Claude Model and Effort Level in Claude Code. \te
 
 \vspace{0.1cm}
 
-\chg{Shen, J.\ H.\ and Tamkin, A.\ (2026). How AI Assistance Impacts the Formation of Coding Skills. Anthropic Research, 29 January 2026. \href{https://www.anthropic.com/research/AI-assistance-coding-skills}{\textcolor{titleblue}{anthropic.com/research}}.}
+Shen, J.\ H.\ and Tamkin, A.\ (2026). How AI Assistance Impacts the Formation of Coding Skills. Anthropic Research, 29 January 2026. \href{https://www.anthropic.com/research/AI-assistance-coding-skills}{\textcolor{titleblue}{anthropic.com/research}}.
 
 }
 
