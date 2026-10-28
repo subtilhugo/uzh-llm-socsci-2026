@@ -30,7 +30,7 @@
 \setbeamertemplate{background}{%
   \ifnum\value{page}>2
     \begin{tikzpicture}[remember picture,overlay]
-      \node[anchor=south east,font=\footnotesize,text=gray] at ([xshift=-0.35cm,yshift=0.25cm]current page.south east) {\insertpagenumber};
+      \node[anchor=south east,font=\fontsize{7}{8}\fontfamily{lmr}\fontseries{l}\selectfont,text=gray!80] at ([xshift=-0.3cm,yshift=0.2cm]current page.south east) {\insertpagenumber};
     \end{tikzpicture}%
   \fi}
 
