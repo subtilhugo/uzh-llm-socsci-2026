@@ -315,6 +315,7 @@ A typical failure mode is the AI making consequential decisions without asking. 
     \item a missing code (\texttt{-9}, \texttt{99}) read as a value
     \item a duplicate removed
     \item an identifier read as a number (\texttt{01001} becomes \texttt{1001})
+    \item \chg{missing values treated without asking: blank incomes set to 0, or every respondent who refused dropped. The regression runs on another sample, and the coefficient moves.}
 \end{itemize}
 
 \vspace{0.3cm}
@@ -390,8 +391,8 @@ Your co-authors will not look at exploratory and polished results in the same wa
 
 \begin{itemize}
     \setlength{\itemsep}{8pt}
-    \item \textbf{Every message re-sends the whole conversation} to the model: the files it read, its outputs, all previous turns. Turn 40 re-reads turns 1 to 39.
-    \item \textbf{The cache discounts what was already sent}, while it is warm: about an hour on a subscription, five minutes with an API key. Back from lunch, the first message pays full price.
+    \item \textbf{\chg{The model has no memory between messages.}} \chg{Each message re-sends everything: the instructions, \texttt{CLAUDE.md}, every file read, every output, every previous exchange. Your 40th message carries the 39 before it.}
+    \item \textbf{\chg{The cache makes this re-reading cheaper, not free}} \chg{(next slide).}
     \item \textbf{Effort multiplies tokens}: more files read, more checks, more thinking.
     \item \textbf{A bigger model costs more per turn.}
     \item \textbf{Subagents} spend tokens while you are not typing.
@@ -402,6 +403,44 @@ Your co-authors will not look at exploratory and polished results in the same wa
 \centering
 Subscription: tokens are quota. API key: tokens are money.\\
 \texttt{/usage} shows where yours went.
+
+\end{frame}
+
+\begin{frame}{\chg{The Cache: Why Pauses and Switches Cost}}
+
+\centering
+\begin{tikzpicture}[x=0.6cm,y=0.4cm,font=\scriptsize]
+  \tikzset{old/.style={fill=gray!25,draw=gray!60},new/.style={fill=titleblue!70,draw=titleblue},full/.style={fill=red!55,draw=red!70!black}}
+  % turn 1
+  \node[anchor=east] at (-0.1,3) {\chg{Message 1}};
+  \draw[new] (0,2.65) rectangle (1,3.35);
+  % turn 2
+  \node[anchor=east] at (-0.1,2) {\chg{Message 2}};
+  \draw[old] (0,1.65) rectangle (1,2.35); \draw[new] (1,1.65) rectangle (2,2.35);
+  % turn 3
+  \node[anchor=east] at (-0.1,1) {\chg{Message 3}};
+  \draw[old] (0,0.65) rectangle (2,1.35); \draw[new] (2,0.65) rectangle (3,1.35);
+  % after a break
+  \node[anchor=east] at (-0.1,0) {\chg{After a break}};
+  \draw[full] (0,-0.35) rectangle (3,0.35); \draw[new] (3,-0.35) rectangle (4,0.35);
+  % legend
+  \draw[old] (5,2.65) rectangle (5.5,3.35); \node[anchor=west] at (5.6,3) {\chg{cached: 5--10\% of the input price}};
+  \draw[new] (5,1.65) rectangle (5.5,2.35); \node[anchor=west] at (5.6,2) {\chg{new: full price}};
+  \draw[full] (5,0.65) rectangle (5.5,1.35); \node[anchor=west] at (5.6,1) {\chg{cache expired: all at full price}};
+\end{tikzpicture}
+
+\vspace{0.3cm}
+\raggedright
+\small
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item \textbf{\chg{The cache keeps what was already processed}}\chg{, for a while. The timer restarts at every message: one hour on a subscription, five minutes with an API key or once you pay for extra usage.}
+    \item \textbf{\chg{A pause longer than that empties it.}} \chg{The next message re-processes the whole conversation at full price. Back from lunch: a fresh session is cheaper than a long old one.}
+    \item \textbf{\chg{Changing the start of the conversation empties it too.}} \chg{Each model has its own cache: \texttt{/model} in the middle of a session re-reads everything. Choose the model at the start.}
+\end{itemize}
+
+\vspace{0.1cm}
+{\footnotesize \chg{\texttt{/usage} shows your cache hit rate. Sources: Anthropic, prompt caching (API and Claude Code documentation), October 2026.}}
 
 \end{frame}
 
