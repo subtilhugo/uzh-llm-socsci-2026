@@ -26,6 +26,14 @@
 \setbeamercolor{alerted text}{fg=color2bg}
 \beamertemplatenavigationsymbolsempty
 
+% --- Slide numbers on every slide except the title page and the photo (pages 1 and 2).
+\setbeamertemplate{background}{%
+  \ifnum\value{page}>2
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south east,font=\footnotesize,text=gray] at ([xshift=-0.35cm,yshift=0.25cm]current page.south east) {\insertpagenumber};
+    \end{tikzpicture}%
+  \fi}
+
 % --- This deck: one blue everywhere, the blue of the title page (Beamer's default, #3333B2).
 % --- Delete this block to go back to color1bg / color2bg.
 \definecolor{titleblue}{HTML}{3333B2}
@@ -392,7 +400,7 @@ Your co-authors will not look at exploratory and polished results in the same wa
 \begin{itemize}
     \setlength{\itemsep}{8pt}
     \item \textbf{\chg{The model has no memory between messages.}} \chg{Each message re-sends everything: the instructions, \texttt{CLAUDE.md}, every file read, every output, every previous exchange. Your 40th message carries the 39 before it.}
-    \item \textbf{\chg{The cache makes this re-reading cheaper, not free}} \chg{(next slide).}
+    \item \textbf{\chg{The cache makes this re-reading cheaper, not free.}}
     \item \textbf{Effort multiplies tokens}: more files read, more checks, more thinking.
     \item \textbf{A bigger model costs more per turn.}
     \item \textbf{Subagents} spend tokens while you are not typing.
@@ -515,7 +523,9 @@ Subscription: tokens are quota. API key: tokens are money.\\
 \midrule
 Rename, reformat a table, commit message & Sonnet & \texttt{low} & you check each result anyway \\
 Prototyping: exploratory scripts, quick plots & Sonnet & \texttt{medium} & provisional by design \\
+\chg{Literature review, theory, review of your paper} & \chg{Fable} & \chg{\texttt{max}} & \chg{always max} \\
 Writing: the paper, memos, the analysis plan & Fable & \texttt{high} & long, ambiguous tasks \\
+\chg{OCR, coding, building a website, regular tasks} & \chg{Opus} & \chg{\texttt{high}} & \chg{the everyday workhorse} \\
 Code that enters the paper: cleaning, merging, estimation & Opus & \texttt{high} & errors hide in cases that are easy to overlook \\
 Independent review & Opus & \texttt{xhigh} & the last check before yours \\
 \bottomrule
