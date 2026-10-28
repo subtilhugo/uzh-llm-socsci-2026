@@ -514,20 +514,24 @@ Subscription: tokens are quota. API key: tokens are money.\\
 \begin{frame}{Which Model, Which Effort, for Which Task}
 
 \centering
-{\footnotesize
-\renewcommand{\arraystretch}{1.25}
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.1cm}ll>{\raggedright\arraybackslash}p{3.3cm}@{}}
+{\scriptsize
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.6cm}l>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{3.4cm}@{}}
 \toprule
 \textbf{Task} & \textbf{Model} & \textbf{Effort} & \textbf{Why} \\
 \midrule
-Rename, reformat a table, commit message & Sonnet & \texttt{low} & you check each result anyway \\
-Prototyping: exploratory scripts, quick plots & Sonnet & \texttt{medium} & provisional by design \\
-\chg{OCR, coding, building a website, regular tasks} & \chg{Opus} & \chg{\texttt{high}} & \chg{the everyday workhorse} \\
-Code that enters the paper: cleaning, merging, estimation & Opus & \texttt{high} & errors hide in cases that are easy to overlook \\
+Rename, reformat, commit message & Sonnet & \texttt{low} & you check each result \\
+Prototyping: exploratory scripts, plots & Sonnet & \texttt{medium} & provisional by design \\
+\chg{Translate or rephrase a text} & \chg{Sonnet} & \chg{\texttt{low}/\texttt{medium}} & \chg{you reread it all} \\
+\chg{Format references, LaTeX tables, Beamer} & \chg{Sonnet} & \chg{\texttt{low}} & \chg{mechanical, easy to check} \\
+\chg{Annotate a corpus (Session 3)} & \chg{small model} & \chg{\texttt{low}} & \chg{calibrate against your own coding} \\
+\chg{OCR, coding, websites, regular tasks} & \chg{Opus} & \chg{\texttt{high}} & \chg{the everyday workhorse} \\
+\chg{Debug an error} & \chg{Opus} & \chg{\texttt{high}} & \chg{needs the code's context} \\
+Code for the paper: cleaning, merging, estimation & Opus & \texttt{high} & errors hide in easy-to-miss cases \\
 Independent review & Opus & \texttt{xhigh} & the last check before yours \\
-\chg{Literature review, theory, review of your paper} & \chg{Fable} & \chg{\texttt{max}} & \chg{always max} \\
-Writing: the paper, memos, the analysis plan & Fable & \texttt{high} & long, ambiguous tasks \\
+\chg{Literature review, theory, paper review} & \chg{Fable} & \chg{\texttt{max}} & \chg{always max} \\
+Writing: paper, memos, analysis plan & Fable & \texttt{high} & long, ambiguous tasks \\
 \bottomrule
 \end{tabular}}
 
