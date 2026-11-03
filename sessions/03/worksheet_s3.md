@@ -6,16 +6,14 @@
 
 **The notebook:** `sessions/03/s3_manifesto_annotation.ipynb`. [Open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/03/s3_manifesto_annotation.ipynb), then File, Save a copy in Drive (otherwise your changes are lost).
 
-**Timing.**
+**Timing.** Four parts. In each, Hugo shows, you do, we check. Faster than the others? Prompt 10 or 11 on your own project, in your own folder.
 
-| Part | Hugo shows | You do | We check |
-| --- | --- | --- | --- |
-| 1. APIs, and collecting the manifestos | 9:15 | 9:45–9:55, notebook Parts 1–2 | 9:55 |
-| 2. Annotating through an API | 10:00 | 10:20–10:40, Parts 3, 4, 6 | 10:40 |
-| Break | | 10:45–10:55 | |
-| 3. A model on your own machine | 10:55 | 11:10–11:25, Part 5, then Part 6 again | 11:25 |
-| 4. The ScienceCluster | 11:30, demo | | |
-| Debrief | 11:50 | | |
+| Part | You do | We check: paste in the shared document |
+| --- | --- | --- |
+| 1. APIs, and collecting the manifestos | notebook Parts 1–2 | requested / returned / missing, the published number you checked against |
+| 2. Annotating through an API | Parts 3, 4, 6 | your agreement with the coders, the model's kappa, one sentence where the model is right |
+| 3. A model on your own machine | Part 5, then Part 6 again | model, laptop or Colab, seconds per sentence, kappa |
+| 4. The ScienceCluster | demo | |
 
 **Goal for 12:00.** In your copy of the notebook (or in your project folder): the French manifestos of one election collected, with the four checks passed or explained; your own codes for 15 sentences; 200 sentences coded by Claude and by a local model; the scores of both against the Manifesto Project coders and against you; a reproducibility bundle in `outputs/annotation/<run_id>/`.
 
@@ -40,13 +38,13 @@ If something fails, write to Hugo before 8:30 with the error message.
 
 ## Part 1. APIs, and collecting the manifestos
 
-### Step 1. The first request (5 min)
+### Step 1. The first request
 
 Notebook Part 1. Read the response of `list_core_versions` before going on: what does it contain? Which version will you use?
 
 Done when: the cell prints the core dataset version and the corpus version.
 
-### Step 2. One election, and the four checks (10 min)
+### Step 2. One election, and the four checks
 
 Notebook Part 2. Change `ELECTION_YEAR` if the table of elections shows that another one has annotated texts.
 
@@ -61,19 +59,19 @@ Done when: you have pasted in the shared document *name, election, requested / r
 
 ## Part 2. Annotating through an API
 
-### Step 3. Code 15 sentences yourself (10 min)
+### Step 3. Code 15 sentences yourself
 
 Notebook Part 3. Read the seven domains. Code the 15 sentences printed in `MY_CODES`, **before** running anything in Part 4. Do not look at the column `human_domain`.
 
 Done when: `MY_CODES` has 15 entries.
 
-### Step 4. Claude codes 200 (10 min)
+### Step 4. Claude codes 200
 
 Notebook Part 4. Run the single call first and read everything it returns: the domain, the reason, the stop reason, the tokens. Then the loop.
 
 Done when: `claude: 200/200 annotated` and the cost is printed.
 
-### Step 5. The scores (5 min)
+### Step 5. The scores
 
 Notebook Part 6, the first three cells. Then read five disagreements: who is right?
 
@@ -81,7 +79,7 @@ Done when: you have pasted *your agreement with the coders on your 15, the model
 
 ## Part 3. A model on your own machine
 
-### Step 6. The same task, locally (15 min)
+### Step 6. The same task, locally
 
 Notebook Part 5.
 

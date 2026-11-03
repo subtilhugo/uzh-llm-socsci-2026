@@ -69,12 +69,7 @@
 \begin{document}
 \frame{\titlepage}
 
-% ============================================================================
-% COURSE REPOSITORY, REMOTE, OVERVIEW
-% ============================================================================
-
 \begin{frame}{Course Repository}
-
 \centering
 \vspace{0.2cm}
 \qrcode[height=3.6cm]{https://github.com/subtilhugo/uzh-llm-socsci-2026}
@@ -83,367 +78,220 @@
 {\large \href{https://github.com/subtilhugo/uzh-llm-socsci-2026}{\texttt{github.com/subtilhugo/uzh-llm-socsci-2026}}}
 
 \vspace{0.4cm}
-{\small New today, in \texttt{sessions/03/}: the notebook, the worksheet, and prompts 10 and 11 in \texttt{template/prompts/}.}
-
+{\small Download it again: \texttt{sessions/03/} and prompts 10 and 11.}
 \end{frame}
 
-\begin{frame}{Today, on Zoom}
-
-\begin{itemize}
-    \setlength{\itemsep}{8pt}
-    \item \textbf{Two windows}: Zoom, and your notebook (Colab or your laptop). The slides are in the repository.
-    \item \textbf{Stuck for more than two minutes?} Write in the Zoom chat, then share your screen when I call your name. Someone else is stuck on the same thing.
-    \item \textbf{The shared document} is where your numbers go: one line each, at each ``We check''.
-    \item \textbf{Keys}: paste them in Colab Secrets or in \texttt{.env}. Never in the chat, never on a shared screen.
-    \item \textbf{Camera on during ``We check''} if you can. It is a workshop.
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Today's Session Overview (9:00--12:00)}
-
-\setlength{\leftmargini}{2.3cm}
-\small
+\begin{frame}{Today}
+\setlength{\leftmargini}{1.6cm}
 \begin{enumerate}
-    \setlength{\itemsep}{1pt}
-    \item[\textbf{9:00--9:15}] Last Week, and Today's Question {\footnotesize (15 min)}
-
-    \item[\textbf{9:15--10:00}] Part 1. APIs: What They Are, How to Collect from One {\footnotesize (45 min)}
-    \begin{itemize}
-        \item Requests, keys, limits, versions; the Manifesto Project; is the collection complete?
-    \end{itemize}
-
-    \item[\textbf{10:00--10:45}] Part 2. Annotating Through an LLM API {\footnotesize (45 min)}
-    \begin{itemize}
-        \item You code 15 sentences, then Claude codes 200; you, the coders and the model
-    \end{itemize}
-
-    \item[\textbf{10:45--10:55}] Break
-
-    \item[\textbf{10:55--11:30}] Part 3. A Model on Your Own Machine {\footnotesize (35 min)}
-    \begin{itemize}
-        \item Ollama, and the alternatives; the same task, the same code
-    \end{itemize}
-
-    \item[\textbf{11:30--11:50}] Part 4. The UZH ScienceCluster {\footnotesize (20 min, demo)}
-    \begin{itemize}
-        \item Three doors: the terminal, an agent, the browser
-    \end{itemize}
-
-    \item[\textbf{11:50--12:00}] Debrief and Next Session
+    \setlength{\itemsep}{10pt}
+    \item[\textbf{Part 1}] \textbf{APIs.} Three kinds of API; collecting the French manifestos; is the collection complete?
+    \item[\textbf{Part 2}] \textbf{Annotating through an API.} You code 15 sentences; Claude codes 200; who is right?
+    \item[\textbf{Part 3}] \textbf{A model on your own machine.} Ollama; the same task, the same code.
+    \item[\textbf{Part 4}] \textbf{The UZH ScienceCluster.} Terminal, agent, browser. Demo.
 \end{enumerate}
 
-\end{frame}
-
-% ============================================================================
-% LAST WEEK
-% ============================================================================
-
-\sectionslide{Last Week}{What we saw, and the question we left open}
-
-\begin{frame}{Last Week, in One Slide}
-
+\vspace{0.6cm}
 \small
-\textbf{The method.} Document, then specify, then implement, then review, then audit by hand (prompts 06 to 09). The agent writes scripts, never numbers in a chat.
-
-\vspace{0.25cm}
-
-\textbf{The checks.} Row counts at every step, assertions that stop the script, cross-tabulations after every recode and merge.
-
-\vspace{0.25cm}
-
-\textbf{The lesson.} The agent took decisions alone on your data. Finding them was the point.
-
-\vspace{0.5cm}
-
-\textbf{The question we left open}
-
-\vspace{0.15cm}
-\centering
-\alert{An API returns 10,000 documents and the agent reports\\ that the collection is complete. How would you know?}
+\textbf{On Zoom}: your numbers go in the shared document; stuck more than two minutes, write in the chat; keys never on a shared screen.
 
 \vspace{0.2cm}
-{\small Keep your answer in mind. We answer it in Part 1, with real data.}
-
+\textbf{In parallel}: faster than the others? Prompt 10 or 11 on your own project, in your own folder.
 \end{frame}
 
-\begin{frame}{Today's Thread: One Dataset, Three Coders}
-
+\begin{frame}{Last Week, and the Question We Left Open}
 \small
-\textbf{The data.} French party manifestos, split into quasi-sentences and coded by trained human coders of the Manifesto Project. We download them through an API.
+\textbf{The method.} Document, specify, implement, review, audit by hand (prompts 06 to 09). Scripts, never numbers in a chat.
 
 \vspace{0.3cm}
+\textbf{The lesson.} The agent took decisions alone on your data. Finding them was the point.
 
-\textbf{The task.} Assign each quasi-sentence to a policy domain: the economy, welfare, the fabric of society, \dots
-
-\vspace{0.3cm}
-
-\textbf{Three coders, and you}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item The Manifesto Project's human coders: our benchmark, not the truth
-    \item Claude, through an API: a large commercial model, paid per token
-    \item A model on your own machine: open weights, free per call, nothing leaves your laptop
-    \item You: 15 sentences, coded before you see any model output
-\end{itemize}
-
-\vspace{0.3cm}
-
-\textbf{The question for your project.} When can you put a model's labels in a paper, and what do you have to show?
-
+\vspace{0.7cm}
+\centering
+\alert{An API returns 10,000 documents and the agent reports\\ that the collection is complete. How would you know?}
 \end{frame}
 
 % ============================================================================
-% PART 1: APIs
-% ============================================================================
-
-\sectionslide{Part 1. APIs}{What they are, and how to collect from one}
+\sectionslide{Part 1. APIs}{Three kinds, one logic}
 
 \begin{frame}{What an API Is}
-
 \centering
-\begin{tikzpicture}[font=\small,node distance=1cm]
+\begin{tikzpicture}[font=\small]
   \node[draw,rounded corners,fill=gray!15,minimum height=1.2cm,minimum width=2.6cm,align=center] (you) {Your script};
-  \node[draw,rounded corners,fill=titleblue!70,text=white,minimum height=1.2cm,minimum width=2.6cm,align=center,right=5.6cm of you] (srv) {The provider's\\server};
+  \node[draw,rounded corners,fill=titleblue!70,text=white,minimum height=1.2cm,minimum width=2.6cm,align=center,right=5.6cm of you] (srv) {A server};
   \draw[-{Latex},thick] ([yshift=0.25cm]you.east) -- node[above,font=\scriptsize]{request: URL + parameters + key} ([yshift=0.25cm]srv.west);
   \draw[-{Latex},thick] ([yshift=-0.25cm]srv.west) -- node[below,font=\scriptsize]{response: status code + JSON} ([yshift=-0.25cm]you.east);
 \end{tikzpicture}
 
+\vspace{0.6cm}
+\raggedright
+A door the provider built for programs. Documented format, versioned data, written rules (key, limits, licence).
+
+\vspace{0.4cm}
+Scraping a website is the opposite: no door, no contract, no version.
+\end{frame}
+
+\begin{frame}{Three Kinds of API You Will Meet}
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\toprule
+& \textbf{You send} & \textbf{You get back} \\
+\midrule
+\textbf{A data API} \newline {\footnotesize INSEE, Manifesto, OpenAlex, a parliament} & a query: units, period, fields & \textbf{data}: a table or documents, the same for everyone \\
+\textbf{A model API} \newline {\footnotesize Claude, OpenAI, Mistral, your own Ollama} & your text and your instructions & \textbf{a judgement}: a label, a summary; billed per token \\
+\textbf{An MCP server} \newline {\footnotesize a connector of your agent} & nothing: the agent calls it & \textbf{a tool the agent can use}: read your Drive, query a database, call a data API \\
+\bottomrule
+\end{tabular}
+
 \vspace{0.5cm}
-\raggedright
-\begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{An application programming interface} is a door the provider built on purpose, for programs rather than for people.
-    \item \textbf{Compared to scraping a website}: the format is documented and stable, the data are versioned, and the rules are written down (key, limits, licence).
-    \item \textbf{Everything today is an API}: the Manifesto Project at 9:30, Claude at 10:15, the model on your laptop at 11:00 (it answers on \texttt{localhost}).
-\end{itemize}
-
+Today: the first two, in code. The third is how your agent reaches them without you writing the code.
 \end{frame}
 
-\begin{frame}[fragile]{Anatomy of a Request}
-
-\centering
-\begin{tikzpicture}[font=\footnotesize\ttfamily]
-  \node[anchor=base west,inner sep=0] (a) at (0,0) {https://manifesto-project.wzb.eu/api/v1/};
-  \node[anchor=base west,inner sep=0] (b) at (a.base east) {metadata};
-  \node[anchor=base west,inner sep=0] (c) at (1.2,-1.1) {?keys[]=31320\_202206\&version=2026-1\&api\_key=...};
-  \draw[decorate,decoration={brace,mirror,amplitude=4pt}] ([yshift=-2pt]a.south west) -- node[below=5pt,font=\scriptsize\rmfamily]{base URL} ([yshift=-2pt]a.south east);
-  \draw[decorate,decoration={brace,mirror,amplitude=4pt}] ([yshift=-2pt]b.south west) -- node[below=5pt,font=\scriptsize\rmfamily]{endpoint} ([yshift=-2pt]b.south east);
-  \draw[decorate,decoration={brace,mirror,amplitude=4pt}] ([yshift=-2pt]c.south west) -- node[below=5pt,font=\scriptsize\rmfamily]{parameters, including your key} ([yshift=-2pt]c.south east);
-\end{tikzpicture}
-
-\vspace{0.15cm}
-\raggedright
-\begin{columns}[T]
-\column{0.44\textwidth}
+\begin{frame}{The Data API: Downloading}
 \small
-\textbf{Status codes}
+\textbf{INSEE, this week's example of a data API}: census, population, unemployment, by municipality. One request, one table.
 
-{\footnotesize
-\begin{tabular}{@{}ll@{}}
-\texttt{200} & fine: read the content \\
-\texttt{401}, \texttt{403} & bad or missing key \\
-\texttt{404} & wrong endpoint or identifier \\
-\texttt{429} & too many requests: wait \\
-\texttt{5xx} & server error: wait, retry \\
-\end{tabular}}
+\vspace{0.3cm}
+\textbf{Today, the Manifesto Project}: party manifestos split into quasi-sentences, each coded by a trained coder into 56 categories, 7 domains. France: 2012, 2017, 2022.
 
-\column{0.52\textwidth}
-\small
-\textbf{In Python}
-
-{\scriptsize
-\begin{verbatim}
-r = requests.get(
-    BASE + "metadata",
-    params={"keys[]": keys,
-            "version": "2026-1",
-            "api_key": KEY},
-    timeout=60)
-r.status_code    # 200?
-r.json()         # the content
-\end{verbatim}}
-\end{columns}
-
-\vspace{0.25cm}
-{\footnotesize Read four things in every response: the status, the content, what is missing, and the version of the data you got.}
-
-\end{frame}
-
-\begin{frame}{APIs Researchers Use}
-
-\footnotesize
+\vspace{0.5cm}
+\textbf{What you need to read before any code}
 \begin{itemize}
     \setlength{\itemsep}{3pt}
-    \item \textbf{Party politics}: the Manifesto Project (texts and codes); ParlGov; parliaments' open-data services
-    \item \textbf{Official statistics}: INSEE (France), the Swiss Federal Statistical Office, Eurostat, the World Bank
-    \item \textbf{Literature}: OpenAlex, Crossref, Semantic Scholar (metadata, citations, abstracts)
-    \item \textbf{Media and platforms}: news archives, YouTube, Bluesky; X and Reddit restricted or paid since 2023
-    \item \textbf{Models}: every LLM provider, and the model on your laptop
+    \item The terms: may you redistribute? What to cite? (Manifesto: no redistribution, cite the version.)
+    \item The limits: requests per day, results per page.
+    \item The versions: \texttt{MPDS2026a}, corpus \texttt{2026-1}. Pin them, as in a paper.
 \end{itemize}
 
-\vspace{0.25cm}
-
-\textbf{Before you write a line of code, read three pages of the documentation}
-\begin{enumerate}
-    \setlength{\itemsep}{2pt}
-    \item The terms of use: may you redistribute the data? What must you cite?
-    \item The limits: requests per minute, per day; pages of results
-    \item The versions: which release, and what changed between releases
-\end{enumerate}
-
-\vspace{0.15cm}
-{\footnotesize Prompt 10: the agent reads them first, and tells you, before it writes the collector.}
-
+\vspace{0.3cm}
+Prompt 10 makes the agent read these first and report, before it writes the collector.
 \end{frame}
 
-\begin{frame}{Keys: Five Rules}
-
-\begin{enumerate}
-    \setlength{\itemsep}{7pt}
-    \item \textbf{Never in the code.} In \texttt{.env} on your laptop, in Colab Secrets in a notebook.
-    \item \textbf{Never in git.} \texttt{.env} is in your \texttt{.gitignore} since Session 1. Check: \texttt{git check-ignore .env}.
-    \item \textbf{Never on a shared screen}, in a chat, in a prompt to an agent, or in an error message.
-    \item \textbf{Cap what a key can spend.} Paid APIs let you set a monthly limit. Today's workshop key has one.
-    \item \textbf{Leaked? Revoke it at once}, then make a new one. Bots scan public repositories for keys within minutes.
-\end{enumerate}
-
-\vspace{0.35cm}
-
-\centering
-{\small A key is a password that spends money or quota. Treat it like one.}
-
-\end{frame}
-
-\begin{frame}{Why a Collection Is Silently Incomplete}
-
+\begin{frame}{The Model API: Labelling}
 \small
+\textbf{Same door, a different answer.} You send a sentence and a codebook; the model sends back a label.
+
+\vspace{0.4cm}
 \begin{itemize}
-    \setlength{\itemsep}{6pt}
-    \item \textbf{Pagination}: the API returns 100 results per page; the script read the first page.
-    \item \textbf{Rate limits}: request 412 got a \texttt{429}; the script skipped it and went on.
-    \item \textbf{Missing items}: you asked for 12 documents; the answer lists 2 as missing. Nobody read that field.
-    \item \textbf{Versions}: the provider corrected the data last month; your colleague downloaded before.
-    \item \textbf{Filters you did not choose}: a default language, period or country in the endpoint.
+    \setlength{\itemsep}{5pt}
+    \item \textbf{Paid per token}: the codebook, the sentence, the answer. A few cents per thousand sentences with a small model.
+    \item \textbf{Not the same for everyone}: the answer can change between runs and between model versions.
+    \item \textbf{Your data leave your machine.} Confidential texts: a local model (Part 3) or the cluster (Part 4).
+    \item \textbf{Needs validation}: the label is a claim, not a fact. Part 2.
 \end{itemize}
 
 \vspace{0.4cm}
-
-\textbf{None of these raises an error.} The script ends; the agent reports success; the data are wrong.
-
+Claude today; OpenAI, Mistral, Gemini work the same way, with the same Python code.
 \end{frame}
 
-\begin{frame}{Last Week's Question, Answered}
-
+\begin{frame}{The MCP Server: Giving the Agent a Tool}
 \small
-\textbf{Four checks, written into the collector}
+\textbf{Model Context Protocol}: a standard for connecting tools to an agent. The agent sees a list of tools and calls them itself.
 
-\vspace{0.1cm}
-\begin{enumerate}
+\vspace{0.4cm}
+\begin{itemize}
     \setlength{\itemsep}{5pt}
-    \item \textbf{Accounting.} Requested = returned + listed as missing. Nothing silently dropped.
-    \item \textbf{Content.} No empty record, no duplicate, every field you need present.
-    \item \textbf{A published total.} The provider publishes the number of quasi-sentences of each manifesto in its core dataset. Our count must match it.
-    \item \textbf{A published statistic, recomputed.} The core dataset gives each party's share of welfare-expansion statements (\texttt{per504}). Recompute it from the texts.
-\end{enumerate}
-
-\vspace{0.2cm}
-
-\textbf{And archive the raw answers} before any processing, with the version and a log of every request. If a check fails in a month, you can find out why.
-
-\vspace{0.2cm}
-
-\centering
-\alert{Completeness is checked against a number the provider published independently of your request, not against the agent's report.}
-
-\end{frame}
-
-\begin{frame}{The Manifesto Project}
-
-\footnotesize
-\textbf{What it is.} The Manifesto Project (WZB Berlin) collects party manifestos across democracies since 1945. A trained coder splits each manifesto into \textbf{quasi-sentences} (one statement each) and assigns each to one of \textbf{56 categories}, grouped into \textbf{7 domains} (handbook version 5, 2026). Headings are marked \texttt{H}; statements with no policy content are \texttt{000}.
-
-\vspace{0.12cm}
-
-\textbf{Two products, one API}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item The \textbf{core dataset} (\texttt{MPDS2026a}, May 2026): one row per party and election, with the share of each category (\texttt{per504}: welfare state expansion), the number of quasi-sentences (\texttt{total}), the left-right index (RILE).
-    \item The \textbf{corpus} (\texttt{2026-1}): the texts, with each quasi-sentence's code. France (country 31): the 2012, 2017 and 2022 legislative elections, in French; an English translation is available.
+    \item Your agent with a Google Drive connector: ``find the survey codebook in my Drive''.
+    \item With a database connector: ``how many rows per wave?''.
+    \item With a data API wrapped as a server: ``download the 2022 municipal population''.
 \end{itemize}
 
-\vspace{0.12cm}
-
-\textbf{Its rules}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item Free registration, key at once on your profile page; a daily request quota.
-    \item \alert{Redistribution forbidden without written permission}: never push the texts to a public repository. Cite the version.
-\end{itemize}
-
-\vspace{0.1cm}
-{\scriptsize A fine-tuned classifier exists: ManifestoBERTa, 64\% accuracy on the 56 categories. It was trained on these very texts.}
-
+\vspace{0.4cm}
+\textbf{Not today in code.} Today you write the request yourself, so that you know what the agent does when it calls a tool for you.
 \end{frame}
 
-\begin{frame}{Block 1. Collect (9:35--10:00)}
-
-\small
-\textbf{I show (10 min).} The notebook, Parts 1 and 2: the first request, the French manifestos of one election, the raw answer archived, the four checks.
-
-\vspace{0.3cm}
-
-\textbf{You do (10 min)}
+\begin{frame}{Keys}
 \begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item Open the notebook (\texttt{sessions/03/}, button ``Open in Colab''). Your Manifesto key in Colab Secrets.
-    \item Run Parts 1 and 2. Read the four checks before going on.
-    \item No key yet? Register now: free, immediate, two minutes (link in the notebook).
-    \item Faster than the others: prompt 10 in your own project, on the API you brought.
+    \setlength{\itemsep}{8pt}
+    \item Never in the code: \texttt{.env} on your laptop, Secrets in Colab.
+    \item Never in git: \texttt{git check-ignore .env}.
+    \item Never on a shared screen, in a chat, in a prompt.
+    \item Cap what a key can spend. Today's key has a cap.
+    \item Leaked? Revoke it, make a new one.
 \end{enumerate}
 
-\vspace{0.3cm}
+\vspace{0.5cm}
+\centering
+A key is a password that spends money.
+\end{frame}
 
-\textbf{We check (5 min).} The shared document: requested, returned, missing, and the published number you checked against.
+\begin{frame}{Why a Collection Is Silently Incomplete}
+\begin{itemize}
+    \setlength{\itemsep}{7pt}
+    \item \textbf{Pagination}: 100 results per page; the script read page one.
+    \item \textbf{Rate limits}: request 412 got a 429; the script went on.
+    \item \textbf{Missing items}: the answer lists two documents as missing. Nobody read that field.
+    \item \textbf{Versions}: the provider corrected the data last month.
+    \item \textbf{Hidden defaults}: a language, a period, a country you did not choose.
+\end{itemize}
 
+\vspace{0.5cm}
+None of these raises an error.
+\end{frame}
+
+\begin{frame}{The Answer: a Number You Did Not Produce}
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{Accounting.} Requested $=$ returned $+$ listed as missing.
+    \item \textbf{Content.} No empty record, no duplicate.
+    \item \textbf{A published total.} The core dataset gives each manifesto's number of quasi-sentences. Count ours.
+    \item \textbf{A published statistic, recomputed.} The share of welfare statements (\texttt{per504}), from the texts.
+\end{enumerate}
+
+\vspace{0.4cm}
+And archive every raw answer before processing, with the version.
+
+\vspace{0.5cm}
+\centering
+\alert{Check against a number the provider published,\\ not against the agent's report.}
+\end{frame}
+
+\begin{frame}{Block 1. Collect}
+\small
+\textbf{I show.} Notebook, Parts 1 and 2: the first request, one election, the four checks.
+
+\vspace{0.4cm}
+\textbf{You do}
+\begin{enumerate}
+    \setlength{\itemsep}{4pt}
+    \item Open the notebook in Colab. Your Manifesto key in Secrets.
+    \item Run Parts 1 and 2. Read the four checks.
+    \item No key? Register: free, immediate.
+\end{enumerate}
+
+\vspace{0.4cm}
+\textbf{We check.} Shared document: requested, returned, missing, and the number you checked against.
+
+\vspace{0.4cm}
+\textbf{In parallel}: prompt 10 on the API you brought.
 \end{frame}
 
 % ============================================================================
-% PART 2: ANNOTATION THROUGH AN API
-% ============================================================================
-
-\sectionslide{Part 2. Annotating Through an LLM API}{The same door, a different provider}
+\sectionslide{Part 2. Annotating Through an API}{Cheap labels, expensive validation}
 
 \begin{frame}{Why Annotate with an LLM}
-
-\footnotesize
+\small
 \textbf{Why it caught on}
 \begin{itemize}
     \setlength{\itemsep}{2pt}
-    \item Zero-shot ChatGPT beat crowd workers on four of five tasks, for a fraction of the cost (Gilardi, Alizadeh and Kubli 2023, \textit{PNAS}, here at UZH).
-    \item GPT-4 beat expert coders and supervised classifiers on political tweets (T\"ornberg 2025); few-shot prompts matched supervised methods (Ornstein et al.\ 2025).
-    \item On manifestos, LLM positions correlate around 0.9 with expert surveys (Le Mens and Gallego 2025; Benoit et al.\ 2026, \textit{AJPS}).
+    \item ChatGPT beat crowd workers on four of five tasks, for a fraction of the cost (Gilardi, Alizadeh and Kubli 2023, UZH).
+    \item GPT-4 beat expert coders on political tweets (T\"ornberg 2025).
+    \item On manifestos, LLM positions correlate around 0.9 with expert surveys (Le Mens and Gallego 2025; Benoit et al.\ 2026).
 \end{itemize}
 
-\vspace{0.15cm}
-
+\vspace{0.3cm}
 \textbf{Why it needs validation}
 \begin{itemize}
     \setlength{\itemsep}{2pt}
-    \item Zero-shot models do not beat fine-tuned ones at classification (Ziems et al.\ 2024).
-    \item Small open models follow codebooks poorly, and worst of all on Manifesto data (Halterman and Keith 2026, \textit{Political Analysis}).
-    \item Answers change with the wording of the prompt, and on a simple rerun (Reiss 2023; Barrie, Palaiologou and T\"ornberg 2026).
-    \item Labels at 80--90\% accuracy still bias a regression that uses them, unless corrected with a gold sample (Egami et al.\ 2023).
+    \item Small open models follow codebooks poorly, worst of all on Manifesto data (Halterman and Keith 2026).
+    \item Answers change with the wording of the prompt, and on a rerun (Reiss 2023).
+    \item Labels at 85\% accuracy still bias a regression, unless corrected with a gold sample (Egami et al.\ 2023).
 \end{itemize}
-
-\vspace{0.1cm}
-\centering
-\alert{Cheap labels, expensive validation.}
-
 \end{frame}
 
 \begin{frame}{The Pipeline}
-
 \centering
 \begin{tikzpicture}[font=\scriptsize,node distance=0.35cm,scale=0.9,transform shape]
   \tikzset{box/.style={draw,rounded corners,minimum height=0.8cm,align=center,fill=gray!12},
@@ -461,24 +309,20 @@ r.json()         # the content
   \draw[-{Latex}] (m) -- (js);
   \draw[-{Latex}] (js) -- (log);
   \draw[-{Latex}] (log) -- (val);
-  \node[font=\scriptsize,text=gray,below=0.15cm of m,align=center] {once per item,\\200 times};
 \end{tikzpicture}
 
-\vspace{0.35cm}
+\vspace{0.5cm}
 \raggedright
-\small
 \begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item \textbf{The codebook is the method.} It lives in a file, versioned, and goes in your appendix.
-    \item \textbf{A schema, not free text.} The model must return valid JSON with one of eight labels: no parsing, no ``I think it is probably\dots''.
-    \item \textbf{A reason before the label.} One sentence. You read it when you disagree.
-    \item \textbf{Every answer is appended to a file as it arrives.} A crash or a rerun never pays twice.
+    \setlength{\itemsep}{4pt}
+    \item The codebook is the method: a file, versioned, in your appendix.
+    \item A schema, not free text: valid JSON, one of eight labels.
+    \item A reason before the label: you read it when you disagree.
+    \item Every answer appended to a file: a rerun never pays twice.
 \end{itemize}
-
 \end{frame}
 
-\begin{frame}[fragile]{One Call, in Code}
-
+\begin{frame}[fragile]{One Call}
 \scriptsize
 \begin{verbatim}
 class Annotation(BaseModel):
@@ -489,161 +333,141 @@ class Annotation(BaseModel):
                     "social_groups", "no_category"]
 
 r = claude.messages.parse(
-    model="claude-haiku-5-5",         # pinned snapshot: report it
+    model="claude-haiku-5-5",         # a pinned snapshot: report it
     max_tokens=300,
-    system=[{"type": "text", "text": CODEBOOK,       # cached:
-             "cache_control": {"type": "ephemeral"}}],  # same each call
-    messages=[{"role": "user",
-               "content": "PREVIOUS: ...\nTARGET: ..."}],
+    system=[{"type": "text", "text": CODEBOOK,
+             "cache_control": {"type": "ephemeral"}}],   # same each call: cached
+    messages=[{"role": "user", "content": "PREVIOUS: ...\nTARGET: ..."}],
     output_format=Annotation,         # the answer must fit the schema
     thinking={"type": "disabled"},    # a short task: no thinking
 )
-r.parsed_output.domain, r.parsed_output.reason, r.usage
+r.parsed_output.domain, r.usage
 \end{verbatim}
 
-\vspace{0.2cm}
+\vspace{0.3cm}
 \small
-Read the whole response once, before you run 200: \texttt{stop\_reason}, \texttt{usage}, the model that answered.
-
+Read one full response before you run 200.
 \end{frame}
 
 \begin{frame}{What It Costs}
-
-\small
-\textbf{Prices per million tokens, input / output} {\footnotesize (official pages, 3 November 2026)}
-
-\vspace{0.1cm}
 \centering
 {\footnotesize
-\renewcommand{\arraystretch}{1.1}
-\begin{tabular}{@{}llll@{}}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
 \toprule
-\textbf{Model} & \textbf{Provider} & \textbf{Price} & \textbf{Note} \\
+\textbf{Model} & \textbf{Input / output, per MTok} & \\
 \midrule
-Claude Haiku 5.5 & Anthropic & \$0.10 / \$0.50 & today; cache hits \$0.01 \\
-Claude Sonnet 5.5 & Anthropic & \$2 / \$10 & 20 times more \\
-GPT-6 Luna & OpenAI & \$0.10 / \$0.50 & reasoning model \\
-Gemini 3.5 Flash-Lite & Google & \$0.30 / \$2.50 & free tier exists \\
-Mistral Small 4 & Mistral (EU) & \$0.15 / \$0.60 & open weights, Apache 2.0 \\
-A model on your laptop & you & \$0 per call & your time, your hardware \\
+Claude Haiku 5.5 & \$0.10 / \$0.50 & today \\
+Claude Sonnet 5.5 & \$2 / \$10 & \\
+GPT-6 Luna (OpenAI) & \$0.10 / \$0.50 & \\
+Gemini 3.5 Flash-Lite (Google) & \$0.30 / \$2.50 & free tier \\
+Mistral Small 4 (Mistral, EU) & \$0.15 / \$0.60 & open weights \\
+A model on your laptop & \$0 per call & your time \\
 \bottomrule
 \end{tabular}}
 
-\vspace{0.2cm}
+\vspace{0.5cm}
 \raggedright
-\footnotesize
+\small
 \begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item \textbf{Our 200 sentences}: a few hundred tokens of codebook (cached after the first call), about 60 of text and 30 of answer each. \textbf{Under two cents.} The notebook prints the real figure.
-    \item \textbf{Batch APIs} halve the price, for answers within 24 hours: the way to code a whole corpus.
-    \item \textbf{Free tiers} (Google, Mistral) may use your data to train their models; in Switzerland and the EU, Google applies its paid terms. Read the terms before sending research data.
+    \setlength{\itemsep}{4pt}
+    \item Our 200 sentences: under two cents. The notebook prints the real figure.
+    \item Batch APIs: half price, answers within 24 hours. For a whole corpus.
+    \item Free tiers may train on your data. Read the terms before sending research data.
 \end{itemize}
 
+\vspace{0.1cm}
+{\scriptsize Official pricing pages, 3 November 2026.}
 \end{frame}
 
 \begin{frame}{Reproducibility with a Closed Model}
-
 \small
 \begin{itemize}
-    \setlength{\itemsep}{6pt}
-    \item \textbf{Pin the model.} \texttt{claude-haiku-5-5} names one snapshot; Anthropic does not change its weights. Report the ID, never ``Claude''.
-    \item \textbf{You cannot fix the randomness.} The current Claude models do not accept \texttt{temperature}; OpenAI's reasoning models neither, and its \texttt{seed} is deprecated. So: run twice, and report how many answers change.
-    \item \textbf{The serving can still change}, even with the same weights; and a model ID is retired one day. Your archived answers are the record, not the model.
-    \item \textbf{Archive everything}: the prompt file, the schema, the parameters, every raw answer, the date. That is the reproducibility bundle of Session 2, in Part 7 of the notebook.
-    \item \textbf{The model may have seen your data.} Manifestos are on the web; the model may have read them, and even their codes, in training. A held-out or new corpus is the honest test.
+    \setlength{\itemsep}{8pt}
+    \item \textbf{Pin the model}: \texttt{claude-haiku-5-5} names one snapshot. Never ``Claude''.
+    \item \textbf{You cannot fix the randomness}: no temperature, no seed on current models. Run twice, report what changed.
+    \item \textbf{Archive everything}: prompt, schema, parameters, every raw answer, the date. The model will be retired; your archive stays.
+    \item \textbf{The model may have seen your data}: manifestos are on the web. A new corpus is the honest test.
 \end{itemize}
-
 \end{frame}
 
-\begin{frame}{Validation: Four Numbers, Not One}
-
+\begin{frame}{Validation: Four Numbers}
 \small
 \begin{enumerate}
-    \setlength{\itemsep}{6pt}
-    \item \textbf{Agreement with careful human coding}: accuracy, macro-F1, Cohen's $\kappa$ (agreement corrected for chance). Read the confusion matrix, not only the number.
-    \item \textbf{Stability}: the same items, a second run. How many answers change?
-    \item \textbf{Your own agreement with the coders}, on 15 sentences. If you agree with them only 60\% of the time, a model at 70\% is not bad: the task is hard.
-    \item \textbf{The aggregate your paper reports}: each party's share of welfare statements, computed from the coders and from the model. Sentence-level errors can cancel out, or pile up in one direction.
+    \setlength{\itemsep}{7pt}
+    \item \textbf{Agreement with careful human coding}: accuracy, macro-F1, Cohen's $\kappa$. Read the confusion matrix.
+    \item \textbf{Stability}: the same items, a second run.
+    \item \textbf{Your own agreement with the coders}, on 15 sentences. If you reach 60\%, a model at 70\% is not bad.
+    \item \textbf{The aggregate your paper reports}: each party's share, from the coders and from the model.
 \end{enumerate}
 
-\vspace{0.3cm}
-
-{\footnotesize \textbf{The benchmark is a coder, not the truth.} Trained Manifesto coders recoding the same text agreed with the master coding at $\kappa$ of about 0.3 to 0.5 on the 56 categories (Mikhaylov, Laver and Benoit 2012). Seven domains are easier; and each French election was coded by one person.}
-
+\vspace{0.5cm}
+{\footnotesize \textbf{The benchmark is a coder, not the truth.} Manifesto coders recoding the same text agreed with the master coding at $\kappa$ of 0.3 to 0.5 on 56 categories (Mikhaylov, Laver and Benoit 2012). Each French election: one coder.}
 \end{frame}
 
-\begin{frame}{Block 2. Annotate (10:15--10:45)}
-
+\begin{frame}{Block 2. Annotate}
 \small
-\textbf{I show (5 min).} Part 3: the seven domains and the sample. Part 4: one call, read in full, then 200.
+\textbf{I show.} Part 3: the seven domains. Part 4: one call, then 200.
 
-\vspace{0.3cm}
-
-\textbf{You do (20 min)}
+\vspace{0.4cm}
+\textbf{You do}
 \begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item \textbf{Code your 15 sentences first} (Part 3), before any model output. Ten minutes.
-    \item Your Anthropic key (the workshop key, in the email) in Colab Secrets. Part 4: one call, then the 200.
-    \item Part 6, first three cells: the scores, your agreement, the confusion matrix.
-    \item Read five disagreements. Who is right, the coder or the model?
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Code your 15 sentences first}, before any model output.
+    \item Your Anthropic key in Secrets. Part 4: one call, then 200.
+    \item Part 6: scores, your agreement, the confusion matrix.
+    \item Five disagreements: who is right?
 \end{enumerate}
 
-\vspace{0.3cm}
+\vspace{0.4cm}
+\textbf{We check.} Your agreement with the coders, the model's $\kappa$, one sentence where the model is right.
 
-\textbf{We check (5 min).} The shared document: your agreement with the coders, the model's $\kappa$, and one sentence where you think the model is right.
-
+\vspace{0.4cm}
+\textbf{In parallel}: prompt 11 on your own corpus.
 \end{frame}
 
 \begin{frame}[plain]
   \centering
   \vfill
-  {\LARGE \textbf{\textcolor{titleblue}{Break}}}\\[0.4cm]
-  {\large 10:45 -- 10:55}\\[0.6cm]
-  {\small Laptop users: start \texttt{ollama pull ministral-3:8b} now if you did not last night.}
+  {\LARGE \textbf{\textcolor{titleblue}{Break}}}\\[0.6cm]
+  {\small Laptop users: \texttt{ollama pull ministral-3:8b} now, if not done last night.}
   \vfill
 \end{frame}
-% ============================================================================
-% PART 3: A MODEL ON YOUR OWN MACHINE
-% ============================================================================
 
-\sectionslide{Part 3. A Model on Your Own Machine}{Same task, same code, nothing leaves your laptop}
+% ============================================================================
+\sectionslide{Part 3. A Model on Your Own Machine}{Ollama}
 
 \begin{frame}{Why Run a Model Locally}
-
-\footnotesize
+\small
 \begin{columns}[T]
 \column{0.48\textwidth}
 \textbf{For}
 \begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item \textbf{Confidential data stays on your machine}: interviews, open survey answers, records. Often the only option a data agreement allows.
-    \item \textbf{Free per call}: a million sentences cost electricity and time, not money.
-    \item \textbf{Exact replication}: you can archive the weights themselves, and cite their digest.
-    \item \textbf{Temperature and seed work}: same input, same answer, on the same machine.
+    \setlength{\itemsep}{5pt}
+    \item Confidential data stay on your machine.
+    \item Free per call.
+    \item You can archive the exact weights.
+    \item Temperature and seed work.
 \end{itemize}
-
 \column{0.48\textwidth}
 \textbf{Against}
 \begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item \textbf{Smaller, so less accurate}, above all on hard codebooks (Halterman and Keith 2026).
-    \item \textbf{Slower}, without a good GPU: seconds per sentence, not milliseconds.
-    \item \textbf{Your hardware decides} which model you can run.
-    \item \textbf{You maintain it}: versions, disk space, memory.
+    \setlength{\itemsep}{5pt}
+    \item Smaller, so less accurate on hard codebooks.
+    \item Slower without a good GPU.
+    \item Your hardware decides the model.
 \end{itemize}
 \end{columns}
 
-\vspace{0.3cm}
+\vspace{0.7cm}
 \centering
-{\small The middle way: a large open model on the UZH cluster (Part 4).}
-
+The middle way: a large open model on the cluster (Part 4).
 \end{frame}
 
-\begin{frame}[fragile]{Ollama in Five Commands}
-
-\footnotesize
+\begin{frame}[fragile]{Ollama}
+\vspace{0.1cm}
 \begin{columns}[T]
-\column{0.6\textwidth}
+\column{0.58\textwidth}
 {\scriptsize
 \begin{verbatim}
 # macOS, Windows: ollama.com/download
@@ -655,147 +479,105 @@ ollama run ministral-3:8b "Bonjour"
 ollama ps     # loaded? GPU or CPU?
 ollama list   # ID = start of digest
 \end{verbatim}}
-
-\column{0.38\textwidth}
+\column{0.4\textwidth}
+\small
 \begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item \textbf{A server on your laptop}: \texttt{localhost:11434}, with its own API and the OpenAI format (\texttt{/v1}).
-    \item \textbf{Structured output}: \texttt{format=} a JSON schema, the same as for Claude.
-    \item \textbf{Free, open source} (MIT), on macOS, Windows, Linux.
+    \setlength{\itemsep}{5pt}
+    \item A server on your laptop: \texttt{localhost:11434}.
+    \item Same JSON schema as for Claude.
+    \item Free, open source.
 \end{itemize}
 \end{columns}
 
-\vspace{0.15cm}
-
+\vspace{0.5cm}
+\small
 \textbf{Two traps}
 \begin{itemize}
     \setlength{\itemsep}{3pt}
-    \item \textbf{Context}: on machines with less than 24 GB, the default is 4,096 tokens. Longer texts are cut silently: set \texttt{num\_ctx}.
-    \item \textbf{Cloud models} (tags ending in \texttt{cloud}) run on Ollama's servers, mostly in the US: your text leaves the machine. Switch them off: \texttt{OLLAMA\_NO\_CLOUD=1}.
+    \item Context: 4,096 tokens by default under 24 GB. Longer texts are cut silently.
+    \item Cloud models (tags ending in \texttt{cloud}) leave your machine. \texttt{OLLAMA\_NO\_CLOUD=1}.
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}{Which Model for Your Machine}
+\small
+At 4 bits, about 0.6 GB per billion parameters, plus 1 to 3 GB.
 
-\footnotesize
-\textbf{Rule of thumb}: at 4 bits (the usual \texttt{Q4\_K\_M}), about \textbf{0.6 GB per billion parameters}, plus 1 to 3 GB. On a Mac, the model shares memory with everything else.
-
-\vspace{0.2cm}
+\vspace{0.3cm}
 \centering
 {\footnotesize
 \renewcommand{\arraystretch}{1.15}
-\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{8.2cm}@{}}
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7.5cm}@{}}
 \toprule
-\textbf{Your machine} & \textbf{Ollama tags (download size)} \\
+\textbf{Your machine} & \textbf{Ollama tags} \\
 \midrule
-8 GB & \texttt{ministral-3:3b}, \texttt{qwen3.5:4b}, \texttt{gemma4:e2b} \\
-16 GB & \texttt{ministral-3:8b} (6.0 GB, today's default), \texttt{qwen3.5:9b} (6.6 GB), \texttt{gemma4:12b} (8.0 GB) \\
-32 GB & \texttt{mistral-small3.2:24b} (15 GB), \texttt{qwen3.5:27b} (17 GB), \texttt{gemma4:26b} (18 GB, fast: 4B active) \\
-Colab, T4 (16 GB) & up to about 12 GB: \texttt{gemma4:12b}, \texttt{ministral-3:14b} (9.1 GB) \\
-Cluster, L4 (24 GB) & 26--27B models; 70B on an A100 or H100 (80 GB) \\
+8 GB & \texttt{ministral-3:3b}, \texttt{qwen3.5:4b} \\
+16 GB & \texttt{ministral-3:8b} (today), \texttt{qwen3.5:9b}, \texttt{gemma4:12b} \\
+32 GB & \texttt{mistral-small3.2:24b}, \texttt{qwen3.5:27b}, \texttt{gemma4:26b} \\
+Colab, T4 & up to about 12 GB: \texttt{gemma4:12b} \\
+Cluster, L4 & 26--27B; 70B on an A100 or H100 \\
 \bottomrule
 \end{tabular}}
 
-\vspace{0.2cm}
+\vspace{0.4cm}
 \raggedright
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item \textbf{French texts}: Ministral (Mistral, Paris), Qwen 3.5 (201 languages) and Gemma 4 (140+) all list French.
-    \item \textbf{Start small, then go up}: if the 8B is far from Claude on your validation sample, try the 24--27B before you give up on local.
-\end{itemize}
+All three families list French. Start small; if the 8B is far from Claude on your validation sample, try a 24--27B.
 
-\vspace{0.05cm}
-{\scriptsize Sizes from the Ollama library, 3 November 2026. The fit by machine is a guide, not a guarantee.}
-
+\vspace{0.2cm}
+{\scriptsize Ollama library, 3 November 2026.}
 \end{frame}
 
-\begin{frame}{Other Ways to Run a Model Locally}
-
-\footnotesize
+\begin{frame}{Alternatives}
+\small
 \begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{LM Studio}: an app with a model browser and a chat; serves the OpenAI format on \texttt{localhost:1234}. Free, also for work. The easiest start if you dislike terminals.
-    \item \textbf{llama.cpp}: the engine under most of these tools (MIT). \texttt{llama-server} serves any GGUF file from Hugging Face, with schema-constrained output.
-    \item \textbf{MLX} (\texttt{mlx-lm}): Apple's framework, the fastest on Apple Silicon. Ollama and LM Studio can use it.
-    \item \textbf{vLLM}: for GPU servers and clusters, many requests in parallel, OpenAI format (Apache 2.0). The tool for a whole corpus on the ScienceCluster.
-    \item \textbf{Hugging Face \texttt{transformers}}: any model of the Hub, in Python. The most control, the most setup; also the way to fine-tune your own classifier.
-    \item \textbf{Jan}: an offline chat app, open source.
+    \setlength{\itemsep}{7pt}
+    \item \textbf{LM Studio}: an app, a model browser, a server on \texttt{localhost:1234}. No terminal.
+    \item \textbf{llama.cpp}: the engine under most of these; serves any GGUF file.
+    \item \textbf{MLX}: Apple's framework, the fastest on Apple Silicon.
+    \item \textbf{vLLM}: GPU servers, many requests in parallel. For a corpus on the cluster.
+    \item \textbf{Hugging Face \texttt{transformers}}: any model, in Python; also to fine-tune your own classifier.
 \end{itemize}
 
-\vspace{0.2cm}
+\vspace{0.6cm}
 \centering
-\small Start with Ollama or LM Studio. Move to vLLM when you have a GPU node and a corpus.
-
+Ollama or LM Studio to start. vLLM when you have a GPU node and a corpus.
 \end{frame}
 
 \begin{frame}{Open Weights Is Not Open}
-
 \small
-\textbf{Open weights}: you can download the model and run it; its licence says what you may do with it.
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item Apache 2.0: Gemma 4, Qwen 3.5, Ministral 3 and Mistral Small, gpt-oss
-    \item Llama: Meta's own community licence, with conditions; open weights, not open source
-\end{itemize}
+\textbf{Open weights}: you can download and run it. Apache 2.0: Gemma 4, Qwen 3.5, Ministral, gpt-oss. Llama: Meta's own licence.
 
-\vspace{0.25cm}
+\vspace{0.4cm}
+\textbf{Fully open}: weights, \emph{and} data, code, recipe. \textbf{Apertus} (EPFL, ETH, CSCS; 8B and 70B, Apache 2.0), OLMo.
 
-\textbf{Fully open}: the weights, \emph{and} the training data, the code and the recipe.
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item \textbf{Apertus}, the Swiss model (EPFL, ETH Zurich, CSCS): version 1.5 in July 2026, 8B and 70B, Apache 2.0. On Hugging Face; in Ollama only as community builds.
-    \item OLMo (Allen Institute for AI)
-\end{itemize}
-
-\vspace{0.25cm}
-
-\textbf{Why a researcher should care}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item With the training data public, you can check whether the model saw your corpus, and perhaps its codes. With any other model, you cannot.
-    \item A licence can forbid uses, or change with the next version (Gemma moved to Apache 2.0 with Gemma 4).
-\end{itemize}
-
+\vspace{0.6cm}
+Why it matters: with the training data public, you can check whether the model saw your corpus. Otherwise you cannot.
 \end{frame}
 
 \begin{frame}{Reporting a Local Model}
-
 \small
-\textbf{What goes in the paper's appendix}
 \begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item The tag (\texttt{ministral-3:8b}) \emph{and} the digest: a tag can point to new weights tomorrow, the digest cannot
-    \item The quantization (\texttt{Q4\_K\_M}, about 4.9 bits per weight): a different quantization is a different model
-    \item The runtime and its version (\texttt{ollama -v}), and the hardware
-    \item The options: temperature, seed, context length, thinking on or off
+    \setlength{\itemsep}{7pt}
+    \item The tag \emph{and} the digest: a tag can point to new weights tomorrow.
+    \item The quantization (\texttt{Q4\_K\_M}): a different quantization is a different model.
+    \item Runtime and version, hardware, temperature, seed, context, thinking on or off.
+    \item If the paper depends on it, archive the weights file.
 \end{itemize}
 
-\vspace{0.3cm}
-
-\textbf{If the paper depends on it, archive the weights file} (in \texttt{\textasciitilde/.ollama/models/blobs}), or use a file from Hugging Face pinned to one commit. Ollama cannot yet guarantee a download by digest.
-
-\vspace{0.3cm}
-
-\textbf{Part 7 of the notebook} writes the tag, the digest, the quantization and the options to \texttt{params.json}.
-
+\vspace{0.5cm}
+Part 7 of the notebook writes all of it to \texttt{params.json}.
 \end{frame}
 
 \begin{frame}[fragile]{Same Code, Any Backend}
-
 \small
-Ollama, LM Studio, llama.cpp, vLLM and most commercial providers speak the same format (OpenAI's chat completions). Only three lines change.
+Ollama, LM Studio, vLLM and most providers speak the OpenAI format. Two lines change.
 
-\vspace{0.15cm}
+\vspace{0.3cm}
 {\scriptsize
 \begin{verbatim}
-from openai import OpenAI
-
-# Ollama
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")
-# LM Studio:      "http://localhost:1234/v1"
-# vLLM, GPU node: "http://localhost:8000/v1"
-# Mistral (EU):   "https://api.mistral.ai/v1", with your key
+# LM Studio: localhost:1234/v1   vLLM: localhost:8000/v1
+# Mistral:   https://api.mistral.ai/v1, with your key
 
 r = client.chat.completions.create(
     model="ministral-3:8b",
@@ -805,147 +587,111 @@ r = client.chat.completions.create(
                      {"name": "annotation", "schema": SCHEMA, "strict": True}},
     temperature=0, seed=2026)
 \end{verbatim}}
-
-\vspace{0.1cm}
-{\footnotesize In the notebook: \texttt{make\_openai\_annotator(base\_url, model)}, Part 5.}
-
 \end{frame}
 
-\begin{frame}{Block 3. Locally (11:05--11:30)}
-
+\begin{frame}{Block 3. Locally}
 \small
-\textbf{I show (5 min).} Ollama on my laptop: \texttt{ollama ps}, the model in memory; Part 5 of the notebook; the digest in the bundle.
+\textbf{I show.} \texttt{ollama ps}; Part 5; the digest in the bundle.
 
-\vspace{0.3cm}
-
-\textbf{You do (15 min)}
+\vspace{0.4cm}
+\textbf{You do}
 \begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item \textbf{Laptop}: the notebook in VS Code, Cursor or Jupyter, with Ollama running. \textbf{Colab}: the ``Colab only'' cell (you chose the T4 GPU in Part 0).
-    \item Part 5: one call, then the 200 (40 on a slow machine). Note the seconds per sentence.
-    \item Part 6 again: two models now. Where do they disagree with each other?
-    \item Faster than the others: pull a larger model, and compare.
+    \setlength{\itemsep}{4pt}
+    \item Laptop: the notebook locally, Ollama running. Colab: the ``Colab only'' cell.
+    \item Part 5: one call, then 200 (40 on a slow machine).
+    \item Part 6 again: two models. Where do they disagree?
 \end{enumerate}
 
-\vspace{0.3cm}
-
-\textbf{We check (5 min).} The shared document: model and size, laptop or Colab, seconds per sentence, $\kappa$. Is the local model good enough for your project?
-
+\vspace{0.4cm}
+\textbf{We check.} Model, laptop or Colab, seconds per sentence, $\kappa$. Good enough for your project?
 \end{frame}
-% ============================================================================
-% PART 4: THE SCIENCECLUSTER
-% ============================================================================
 
-\sectionslide{Part 4. The UZH ScienceCluster}{Three doors to the same machines}
+% ============================================================================
+\sectionslide{Part 4. The UZH ScienceCluster}{Three doors}
 
 \begin{frame}{Why a Cluster}
-
 \small
 \begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{GPUs your laptop does not have}: L4 (24 GB), A100 (80 GB), H100, H200. A 27-billion-parameter model on an L4; a 70B on an A100 or H100.
-    \item \textbf{Long jobs}: a whole corpus annotated overnight, while your laptop is closed.
-    \item \textbf{Data that must stay at UZH}: confidential texts, licensed data. The model comes to the data.
+    \setlength{\itemsep}{6pt}
+    \item GPUs: L4 (24 GB), A100 (80 GB), H100, H200. A 27B model on an L4; a 70B on an A100.
+    \item Long jobs: a corpus annotated overnight.
+    \item Data that must stay at UZH: the model comes to the data.
 \end{itemize}
+
+\vspace{0.5cm}
+\textbf{Access}: your group's Science IT project; your PI adds you. VPN off campus.
 
 \vspace{0.3cm}
+\textbf{Two rules}: login nodes never compute; large files on \texttt{/scratch} (purged after 30 days unused, no backup).
 
-\textbf{Access}
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item Your group needs a Science IT project; your PI adds you. Use is billed to the project.
-    \item Off campus: the UZH VPN first.
-    \item \textbf{Two rules.} Login nodes are for editing and submitting, never for computing. Large files (model weights) go on \texttt{/scratch}, which is purged after 30 days unused. Nothing is backed up.
-\end{itemize}
-
-\vspace{0.2cm}
-{\footnotesize Every command of this part: \texttt{setup/cluster\_guide.md} in the course repository.}
-
+\vspace{0.4cm}
+{\footnotesize Every command: \texttt{setup/cluster\_guide.md}.}
 \end{frame}
 
 \begin{frame}[fragile]{Door 1. The Terminal}
-
-\small
-\textbf{Log in, look around}
+\vspace{0.1cm}
 {\scriptsize
 \begin{verbatim}
 ssh -l <shortname> cluster.s3it.uzh.ch   # UZH network or VPN
 quota                                    # your space
 module available                         # the software
-\end{verbatim}}
 
-\textbf{A GPU, for an hour, interactively}
-{\scriptsize
-\begin{verbatim}
+# a GPU, interactively
 module load l4
 srun --pty --time=1:0:0 --mem-per-cpu=7800 \
      --cpus-per-task=2 --gpus=1 bash -l
-nvidia-smi             # you are on a compute node now
+nvidia-smi             # on a compute node now
 exit                   # GPU released
-\end{verbatim}}
 
-\textbf{A job, while you do something else}
-{\scriptsize
-\begin{verbatim}
+# a job, while you do something else
 sbatch annotate.sh     # #SBATCH lines: time, memory, --gpus=1
 squeue --me            # PD = waiting, R = running
 \end{verbatim}}
-
 \end{frame}
 
 \begin{frame}[fragile]{Door 2. An Agent on the Cluster}
-
-\small
-\textbf{The same agent, in a folder on the cluster}
+\vspace{0.1cm}
 {\scriptsize
 \begin{verbatim}
 curl -fsSL https://claude.ai/install.sh | bash   # once, login node
 claude    # press c, open the URL on your laptop
 \end{verbatim}}
 
-\vspace{0.1cm}
+\vspace{0.3cm}
+\small
+Good at: job scripts, submitting, reading logs, relaunching what failed. The well-defined task that can run unattended.
 
-\textbf{What it is good at there}: writing job scripts, submitting them, reading the logs, relaunching what failed. The well-defined task that can run unattended (Session 2).
-
-\vspace{0.2cm}
-
+\vspace{0.4cm}
 \textbf{Three precautions}
 \begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item \textbf{One line in \texttt{CLAUDE.md}}: \textit{``Never run analysis code on the login node: write a job script and submit it with sbatch.''}
-    \item \textbf{Your home is shared by all nodes}: turn self-updates off (\texttt{DISABLE\_UPDATES}), or a session on another node can crash.
-    \item \textbf{VS Code or Cursor}: S3IT asks you not to connect them to the login nodes. Its documentation has an advanced recipe through a job.
+    \setlength{\itemsep}{4pt}
+    \item In \texttt{CLAUDE.md}: \textit{``Never run analysis code on the login node; write a job script, submit it with sbatch.''}
+    \item Home is shared by all nodes: turn self-updates off (\texttt{DISABLE\_UPDATES}).
+    \item VS Code or Cursor: not on the login nodes. S3IT has a recipe through a job.
 \end{itemize}
-
 \end{frame}
 
-\begin{frame}{Door 3. The Browser: ScienceApps}
-
-\small
+\begin{frame}{Door 3. The Browser}
 \centering
-{\large \href{https://apps.s3it.uzh.ch}{\texttt{apps.s3it.uzh.ch}}}\\[0.1cm]
-{\footnotesize UZH login, private window. Every cluster account has access.}
+{\large \href{https://apps.s3it.uzh.ch}{\texttt{apps.s3it.uzh.ch}}}
 
-\vspace{0.3cm}
+\vspace{0.5cm}
 \raggedright
+\small
 \begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item \textbf{Jupyter, RStudio}, on a compute node, with the GPU you choose in a form: type, hours (up to a week), cores, memory.
-    \item \textbf{A full desktop}, on GPU nodes too.
-    \item \textbf{VS Code in the browser} (beta), without its AI features.
-    \item \textbf{Files}: upload, download, and a shell, in the browser.
+    \setlength{\itemsep}{6pt}
+    \item Jupyter, RStudio, a desktop, on a compute node with the GPU you choose in a form.
+    \item VS Code in the browser (beta).
+    \item Files and a shell, in the browser.
 \end{itemize}
 
-\vspace{0.3cm}
-
-\textbf{The simplest door if you never used a terminal}: a Jupyter session with one L4, today's notebook, and Part 5 against a model served on that node.
-
+\vspace{0.6cm}
+The door for those who never used a terminal: a Jupyter session with one L4, today's notebook, Part 5.
 \end{frame}
 
 \begin{frame}[fragile]{A Local Model on a GPU Node}
-
 \small
-Inside a GPU session. Apptainer runs the official Ollama image; S3IT supports Apptainer but has no page on LLMs, so this is the course's recipe.
+Inside a GPU session. Apptainer runs the official Ollama image (course recipe; S3IT has no page on LLMs).
 
 {\scriptsize
 \begin{verbatim}
@@ -957,137 +703,66 @@ apptainer exec --nv ollama.sif ollama serve > ollama.log 2>&1 &
 apptainer exec --nv ollama.sif ollama pull gemma4:26b
 \end{verbatim}}
 
-\vspace{0.1cm}
-
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item The notebook's Part 5 then works unchanged, on that node: Ollama answers on \texttt{localhost:11434}.
-    \item \textbf{A whole corpus}: the same lines in a batch job. \textbf{Many requests in parallel}: vLLM, an OpenAI-compatible server, with \texttt{make\_openai\_annotator}.
-    \item Do not open the port to others (UZH IT's advice).
-\end{itemize}
-
-\vspace{0.15cm}
-{\footnotesize Outside UZH: the CSCS Inference API serves open models (Apertus, Qwen, Gemma) to groups with a CSCS project, through S3IT.}
-
+\vspace{0.3cm}
+Then Part 5 works unchanged on that node. A corpus: the same lines in a batch job. Many requests in parallel: vLLM.
 \end{frame}
-% ============================================================================
-% WRAP-UP
-% ============================================================================
 
+% ============================================================================
 \begin{frame}{Debrief}
+\textbf{Three screens.} A completeness check. A confusion matrix. One sentence where the model was right.
 
-\textbf{Three screens.} A completeness check that passed, or one that did not. A confusion matrix. One disagreement where the model was right and the coder wrong.
-
-\vspace{0.3cm}
-
-\textbf{From the shared document.} Your agreement with the coders against the models'. The range of $\kappa$ across the room: same data, same code, different runs.
-
-\vspace{0.3cm}
-
+\vspace{0.4cm}
 \textbf{One question.} Would you put today's labels in a paper? What would the referee ask first?
 
-\vspace{0.3cm}
-
-\textbf{Before you leave.} Download your bundle (Part 7). In your project: prompts 10 and 11, the section ``APIs, keys and LLM annotation'' of \texttt{template/CLAUDE.md}, then prompt 05 and the commit.
-
+\vspace{0.4cm}
+\textbf{Before you leave.} Download your bundle (Part 7). Prompts 10 and 11 and the new section of \texttt{template/CLAUDE.md} into your project. Prompt 05, commit.
 \end{frame}
 
 \begin{frame}{Next Session: 18 November 2026}
-
-\textbf{Session 4: Extracting Information, With and Without an LLM}
-
-\vspace{0.2cm}
-
-\begin{itemize}
-    \item The classic toolbox first: dictionaries, embeddings, a supervised classifier
-    \item Then LLM extraction: from a text to a table (who, what, when, how much)
-    \item Prompt 11 on your own corpus: bring 100 texts you have coded yourself
-    \item Keep working in your folder. End every session with prompt 05.
-\end{itemize}
+\textbf{Extracting Information, With and Without an LLM}
 
 \vspace{0.3cm}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item The classical toolbox: dictionaries, embeddings, a supervised classifier. When they beat an LLM.
+    \item LLM extraction: from a text to a table.
+    \item Bring 100 texts you coded yourself.
+\end{itemize}
 
+\vspace{0.4cm}
 \begin{alertblock}{Carry-over question}
 The model agrees with the human coders on 75\% of the sentences. Your regression uses its labels. What would you have to show for a referee to accept the coefficient?
 \end{alertblock}
 
+\vspace{0.2cm}
+{\footnotesize Reading: Grimmer, Roberts and Stewart (2022), \textit{Text as Data}, chapters on dictionaries and embeddings.}
 \end{frame}
 
-% ============================================================================
-% REFERENCES
-% ============================================================================
-
-\begin{frame}{References (1/2)}
-
+\begin{frame}{References}
 {\scriptsize
+Benoit, K.\ et al.\ (2026). Using Large Language Models to Analyze Political Texts through Natural Language Understanding. \textit{AJPS} 70(4).
 
-Barrie, C., Palaiologou, E.\ and T\"ornberg, P.\ (2026). Prompt Stability Scoring for Text Annotation with Large Language Models. arXiv:2407.02039.
+Egami, N., Hinck, M., Stewart, B.\ M.\ and Wei, H.\ (2023). Using Imperfect Surrogates for Downstream Inference. \textit{NeurIPS} 36.
 
-\vspace{0.08cm}
+Gilardi, F., Alizadeh, M.\ and Kubli, M.\ (2023). ChatGPT Outperforms Crowd Workers for Text-Annotation Tasks. \textit{PNAS} 120(30).
 
-Benoit, K., De Marchi, S., Laver, C., Laver, M.\ and Ma, J.\ (2026). Using Large Language Models to Analyze Political Texts through Natural Language Understanding. \textit{American Journal of Political Science} 70(4), 1589--1605.
+Grimmer, J., Roberts, M.\ E.\ and Stewart, B.\ M.\ (2022). \textit{Text as Data}. Princeton University Press.
 
-\vspace{0.08cm}
+Halterman, A.\ and Keith, K.\ A.\ (2026). Codebook LLMs. \textit{Political Analysis} 34(2), 188--204.
 
-Egami, N., Hinck, M., Stewart, B.\ M.\ and Wei, H.\ (2023). Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models. \textit{NeurIPS} 36.
+Lehmann, P.\ et al.\ (2026). The Manifesto Data Collection, version 2026a. WZB. doi:10.25522/manifesto.mpds.2026a.
 
-\vspace{0.08cm}
+Le Mens, G.\ and Gallego, A.\ (2025). Positioning Political Texts with Large Language Models by Asking and Averaging. \textit{Political Analysis} 33(3).
 
-Gilardi, F., Alizadeh, M.\ and Kubli, M.\ (2023). ChatGPT Outperforms Crowd Workers for Text-Annotation Tasks. \textit{PNAS} 120(30), e2305016120.
+Mikhaylov, S., Laver, M.\ and Benoit, K.\ (2012). Coder Reliability and Misclassification in the Human Coding of Party Manifestos. \textit{Political Analysis} 20(1).
 
-\vspace{0.08cm}
+Reiss, M.\ V.\ (2023). Testing the Reliability of ChatGPT for Text Annotation and Classification. arXiv:2304.11085.
 
-Halterman, A.\ and Keith, K.\ A.\ (2026). Codebook LLMs: Evaluating LLMs as Measurement Tools for Political Science Concepts. \textit{Political Analysis} 34(2), 188--204.
+T\"ornberg, P.\ (2025). Large Language Models Outperform Expert Coders and Supervised Classifiers at Annotating Political Social Media Messages. \textit{Social Science Computer Review} 43(6).
 
-\vspace{0.08cm}
-
-Lehmann, P.\ et al.\ (2026). The Manifesto Data Collection. Manifesto Project (MRG/CMP/MARPOR), version 2026a. Berlin: WZB. doi:10.25522/manifesto.mpds.2026a.
-
-\vspace{0.08cm}
-
-Le Mens, G.\ and Gallego, A.\ (2025). Positioning Political Texts with Large Language Models by Asking and Averaging. \textit{Political Analysis} 33(3), 274--282.
-
-\vspace{0.08cm}
-
-Mikhaylov, S., Laver, M.\ and Benoit, K.\ (2012). Coder Reliability and Misclassification in the Human Coding of Party Manifestos. \textit{Political Analysis} 20(1), 78--91.
-
-\vspace{0.08cm}
-
-Ornstein, J.\ T., Blasingame, E.\ N.\ and Truscott, J.\ S.\ (2025). How to Train Your Stochastic Parrot: Large Language Models for Political Texts. \textit{Political Science Research and Methods} 13(2), 264--281.
-
+\vspace{0.2cm}
+Documentation, 3 November 2026: Claude API; OpenAI, Google, Mistral pricing; Ollama; Science IT (docs.s3it.uzh.ch); Claude Code (code.claude.com/docs); Model Context Protocol (modelcontextprotocol.io).
 }
-
 \end{frame}
-
-\begin{frame}{References (2/2)}
-
-{\scriptsize
-
-Palmer, A., Smith, N.\ A.\ and Spirling, A.\ (2024). Using Proprietary Language Models in Academic Research Requires Explicit Justification. \textit{Nature Computational Science} 4(1), 2--3.
-
-\vspace{0.08cm}
-
-Reiss, M.\ V.\ (2023). Testing the Reliability of ChatGPT for Text Annotation and Classification: A Cautionary Remark. arXiv:2304.11085.
-
-\vspace{0.08cm}
-
-T\"ornberg, P.\ (2024). Best Practices for Text Annotation with Large Language Models. \textit{Sociologica} 18(2), 67--85.
-
-\vspace{0.08cm}
-
-T\"ornberg, P.\ (2025). Large Language Models Outperform Expert Coders and Supervised Classifiers at Annotating Political Social Media Messages. \textit{Social Science Computer Review} 43(6), 1181--1195.
-
-\vspace{0.08cm}
-
-Ziems, C., Held, W., Shaikh, O., Chen, J., Zhang, Z.\ and Yang, D.\ (2024). Can Large Language Models Transform Computational Social Science? \textit{Computational Linguistics} 50(1), 237--291.
-
-\vspace{0.15cm}
-
-\textbf{Documentation} (consulted 3 November 2026): Anthropic, Claude API (models, pricing, structured outputs, effort); OpenAI, Google AI, Mistral AI pricing pages; Ollama documentation; Science IT, ScienceCluster documentation (\href{https://docs.s3it.uzh.ch}{\textcolor{titleblue}{docs.s3it.uzh.ch}}); Claude Code setup and authentication (\href{https://code.claude.com/docs}{\textcolor{titleblue}{code.claude.com/docs}}).
-
-}
-
-\end{frame}
-
 
 \end{document}
