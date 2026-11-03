@@ -46,7 +46,7 @@
 \setbeamercolor{block body alerted}{bg=titleblue!8}
 \setbeamercolor{alerted text}{fg=titleblue}
 
-% --- Change marker, for the next versions: wrap changed text in \chg{...} (bold).
+% --- Change marker: what changed on 3 November, 23:00 (overview with times, block times, three slides in Part 3) is in \chg{...}.
 % --- Switched off; comment the second line to see the changes.
 \newcommand{\chg}[1]{{\bfseries #1}}
 \renewcommand{\chg}[1]{#1}
@@ -81,14 +81,37 @@
 {\small Download it again: \texttt{sessions/03/} and prompts 10 and 11.}
 \end{frame}
 
-\begin{frame}{Today}
-\setlength{\leftmargini}{1.6cm}
+\begin{frame}{\chg{Today's Session Overview (9:00--12:00)}}
+
+\setlength{\leftmargini}{2.3cm}
+\small
 \begin{enumerate}
-    \setlength{\itemsep}{10pt}
-    \item[\textbf{Part 1}] \textbf{APIs.} Three kinds of API; collecting the French manifestos; is the collection complete?
-    \item[\textbf{Part 2}] \textbf{Annotating through an API.} You code 15 sentences; Claude codes 200; who is right?
-    \item[\textbf{Part 3}] \textbf{A model on your own machine.} Ollama; the same task, the same code.
-    \item[\textbf{Part 4}] \textbf{The UZH ScienceCluster.} Terminal, agent, browser. Demo.
+    \setlength{\itemsep}{1pt}
+    \item[\textbf{9:00--9:15}] Last Week, and the Question We Left Open
+
+    \item[\textbf{9:15--10:00}] Part 1. APIs
+    \begin{itemize}
+        \item Three kinds: data, model, MCP
+        \item Block 1. Collect the French manifestos, and check the collection (10)
+    \end{itemize}
+
+    \item[\textbf{10:00--10:45}] Part 2. Annotating Through an API, then a break
+    \begin{itemize}
+        \item Block 2. You code 15 sentences, Claude codes 200: who is right? (11)
+    \end{itemize}
+
+    \item[\textbf{10:55--11:30}] Part 3. A Model on Your Own Machine
+    \begin{itemize}
+        \item Ollama, its API, local agents
+        \item Block 3. The same task, locally
+    \end{itemize}
+
+    \item[\textbf{11:30--11:50}] Part 4. The UZH ScienceCluster
+    \begin{itemize}
+        \item Terminal, agent, browser (demo)
+    \end{itemize}
+
+    \item[\textbf{11:50--12:00}] Debrief and Next Session
 \end{enumerate}
 
 \end{frame}
@@ -242,7 +265,7 @@ And archive every raw answer before processing, with the version.
 \alert{Check against a number the provider published,\\ not against the agent's report.}
 \end{frame}
 
-\begin{frame}{Block 1. Collect}
+\begin{frame}{Block 1. Collect \chg{(9:40--10:00)}}
 \small
 \textbf{I show.} Notebook, Parts 1 and 2: the first request, one election, the four checks.
 
@@ -399,7 +422,7 @@ A model on your laptop & \$0 per call & your time \\
 {\footnotesize \textbf{The benchmark is a coder, not the truth.} Manifesto coders recoding the same text agreed with the master coding at $\kappa$ of 0.3 to 0.5 on 56 categories (Mikhaylov, Laver and Benoit 2012). Each French election: one coder.}
 \end{frame}
 
-\begin{frame}{Block 2. Annotate}
+\begin{frame}{Block 2. Annotate \chg{(10:20--10:45)}}
 \small
 \textbf{I show.} Part 3: the seven domains. Part 4: one call, then 200.
 
@@ -429,7 +452,7 @@ A model on your laptop & \$0 per call & your time \\
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 3. A Model on Your Own Machine}{Ollama}
+\sectionslide{Part 3. A Model on Your Own Machine}{\chg{Ollama, its API, local agents}}
 
 \begin{frame}{Why Run a Model Locally}
 \small
@@ -469,7 +492,8 @@ The middle way: a large open model on the cluster (Part 4).
 curl -fsSL https://ollama.com/install.sh | sh
 
 ollama pull ministral-3:8b    # once: 6 GB
-ollama run ministral-3:8b "Bonjour"
+ollama pull qwen3.5:9b        # 6.6 GB
+ollama run qwen3.5:9b "Bonjour"
 ollama ps     # loaded? GPU or CPU?
 ollama list   # ID = start of digest
 \end{verbatim}}
@@ -583,7 +607,68 @@ r = client.chat.completions.create(
 \end{verbatim}}
 \end{frame}
 
-\begin{frame}{Block 3. Locally}
+\begin{frame}[fragile]{\chg{Your Laptop Is an API Server}}
+\small
+Ollama is a server on \texttt{localhost:11434}. Anything that speaks HTTP can use it: \texttt{curl}, Python, R, Stata.
+
+\vspace{0.2cm}
+{\scriptsize
+\begin{verbatim}
+curl localhost:11434/api/tags          # which models are here
+
+curl localhost:11434/api/chat -d '{
+  "model": "qwen3.5:9b", "stream": false, "think": false,
+  "messages": [{"role": "user",
+    "content": "Policy domain of: Le SMIC sera porte a 1600 euros."}],
+  "format": {"type": "object", "required": ["label"],
+    "properties": {"label": {"type": "string",
+      "enum": ["economy", "welfare", "society"]}}},
+  "options": {"temperature": 0, "seed": 42}}'
+\end{verbatim}}
+
+\vspace{0.1cm}
+The answer is JSON: the label, and the tokens and seconds it took. Same request as to Claude; the address changes.
+\end{frame}
+
+\begin{frame}{\chg{Can a Local Model Be an Agent?}}
+\small
+Yes. Qwen 3.5, Ministral 3, Gemma 4 and gpt-oss can \textbf{call tools}: the model answers with a function name and arguments, your code runs it, sends back the result.
+
+\vspace{0.3cm}
+\begin{enumerate}
+    \setlength{\itemsep}{5pt}
+    \item \textbf{A script calls the model.} Annotation, today: no tools.
+    \item \textbf{The model calls tools.} \texttt{local\_agent.py}: OpenAlex, the French municipalities API, a calculator, files.
+    \item \textbf{A full agent on a local model.} Claude Code through Ollama: \texttt{ollama launch claude}. Context of 64,000 tokens or more.
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{The catch}: errors compound. 95\% correct tool calls per step, over 8 steps: $0.95^8 \approx 66\%$ of runs without an error. Small models fall below that.
+\end{frame}
+
+\begin{frame}[fragile]{\chg{Two Small Apps}}
+\small
+In \texttt{sessions/03/apps/}. Both call Ollama's API; nothing leaves your machine.
+
+\vspace{0.3cm}
+{\scriptsize
+\begin{verbatim}
+pip install -r requirements.txt
+python check_local.py            # does everything work here?
+
+streamlit run label_app.py       # label a CSV with one or two models
+python local_agent.py            # an agent: a model, a loop, six tools
+\end{verbatim}}
+
+\vspace{0.2cm}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Labeller}: agreement with your codes and between two models, the disagreements, \texttt{params.json}, and the exact API call.
+    \item \textbf{Agent}: every step printed and logged. Same agent with Claude: \texttt{--backend openai}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Block 3. Locally \chg{(11:15--11:30)}}
 \small
 \textbf{I show.} \texttt{ollama ps}; Part 5; the digest in the bundle.
 
@@ -594,6 +679,7 @@ r = client.chat.completions.create(
     \item Laptop: the notebook locally, Ollama running. Colab: the ``Colab only'' cell.
     \item Part 5: one call, then 200 (40 on a slow machine).
     \item Part 6 again: two models. Where do they disagree?
+    \item \chg{Faster? \texttt{label\_app.py} with two models, then \texttt{local\_agent.py}.}
 \end{enumerate}
 
 \vspace{0.4cm}
