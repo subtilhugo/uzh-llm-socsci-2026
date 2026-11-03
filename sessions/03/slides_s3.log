@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  3 NOV 2026 23:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  3 NOV 2026 23:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1204,129 +1204,129 @@ LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rmtt.enc}]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 100.
+(Font)              using `OT1/lmr/m/n' instead on input line 94.
 
 [3
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 112.
+(Font)              using `OT1/lmr/m/n' instead on input line 106.
 
 [4
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 115.
+(Font)              using `OT1/lmr/m/n' instead on input line 109.
 
 [5
 
 ]
-Overfull \hbox (0.80037pt too wide) in paragraph at lines 132--132
+Overfull \hbox (0.80037pt too wide) in paragraph at lines 126--126
  [][] 
  []
 
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 132.
+(Font)              using `OT1/lmr/m/n' instead on input line 126.
 
 [6
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 149.
+(Font)              <10> on input line 143.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 149.
+(Font)              <7> on input line 143.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 149.
+(Font)              <5> on input line 143.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 149.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 143.
 
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <7> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 149.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 143.
 
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <5> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 149.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 143.
 
 
-Overfull \hbox (35.38087pt too wide) in paragraph at lines 149--149
+Overfull \hbox (35.38087pt too wide) in paragraph at lines 143--143
 [][]  
  []
 
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 149.
+(Font)              using `OT1/lmr/m/n' instead on input line 143.
 
 [7
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 169.
+(Font)              using `OT1/lmr/m/n' instead on input line 163.
 
 [8
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 186.
+(Font)              using `OT1/lmr/m/n' instead on input line 180.
 
 [9
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 202.
+(Font)              using `OT1/lmr/m/n' instead on input line 196.
 
 [10
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 217.
+(Font)              using `OT1/lmr/m/n' instead on input line 211.
 
 [11
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 231.
+(Font)              using `OT1/lmr/m/n' instead on input line 225.
 
 [12
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 249.
+(Font)              using `OT1/lmr/m/n' instead on input line 243.
 
 [13
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 269.
+(Font)              using `OT1/lmr/m/n' instead on input line 263.
 
 [14
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 272.
+(Font)              using `OT1/lmr/m/n' instead on input line 266.
 
 [15
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 292.
+(Font)              using `OT1/lmr/m/n' instead on input line 286.
 
 [16
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 323.
+(Font)              using `OT1/lmr/m/n' instead on input line 317.
 
 [17
 
@@ -1348,66 +1348,66 @@ GET: ..."}],[]
 )
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 350.
+(Font)              using `OT1/lmr/m/n' instead on input line 344.
 
 [18
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 381.
+(Font)              <9> on input line 375.
 LaTeX Font Info:    Font shape `OT1/lmss/m/it' in size <9> not available
-(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 381.
+(Font)              Font shape `OT1/lmss/m/sl' tried instead on input line 375.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
-381.
+375.
  (/usr/share/texmf/tex/latex/lm/ts1lmss.fd
 File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 381.
+(Font)              using `OT1/lmr/m/n' instead on input line 375.
 
 [19
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 392.
+(Font)              using `OT1/lmr/m/n' instead on input line 386.
 
 [20
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 406.
+(Font)              using `OT1/lmr/m/n' instead on input line 400.
 
 [21
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 427.
+(Font)              using `OT1/lmr/m/n' instead on input line 421.
 
 [22
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 435.
+(Font)              using `OT1/lmr/m/n' instead on input line 429.
 
 [23
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 438.
+(Font)              using `OT1/lmr/m/n' instead on input line 432.
 
 [24
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 465.
+(Font)              using `OT1/lmr/m/n' instead on input line 459.
 
 [25
 
@@ -1422,38 +1422,38 @@ Overfull \hbox (13.02132pt too wide) in paragraph at lines 15--15
 )
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 500.
+(Font)              using `OT1/lmr/m/n' instead on input line 494.
 
 [26
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 528.
+(Font)              using `OT1/lmr/m/n' instead on input line 522.
 
 [27
 
 ]
 LaTeX Font Info:    Font shape `OT1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 544.
+(Font)              Font shape `OT1/lmtt/b/n' tried instead on input line 538.
 
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 544.
+(Font)              using `OT1/lmr/m/n' instead on input line 538.
 
 [28
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 555.
+(Font)              using `OT1/lmr/m/n' instead on input line 549.
 
 [29
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 569.
+(Font)              using `OT1/lmr/m/n' instead on input line 563.
 
 [30
 
@@ -1469,28 +1469,28 @@ Overfull \hbox (28.46013pt too wide) in paragraph at lines 19--19
 )
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 590.
+(Font)              using `OT1/lmr/m/n' instead on input line 584.
 
 [31
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 607.
+(Font)              using `OT1/lmr/m/n' instead on input line 601.
 
 [32
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 610.
+(Font)              using `OT1/lmr/m/n' instead on input line 604.
 
 [33
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 629.
+(Font)              using `OT1/lmr/m/n' instead on input line 623.
 
 [34
 
@@ -1500,7 +1500,7 @@ LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
  (./slides_s3.vrb)
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 650.
+(Font)              using `OT1/lmr/m/n' instead on input line 644.
 
 [35
 
@@ -1510,14 +1510,14 @@ LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
  (./slides_s3.vrb)
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 672.
+(Font)              using `OT1/lmr/m/n' instead on input line 666.
 
 [36
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 690.
+(Font)              using `OT1/lmr/m/n' instead on input line 684.
 
 [37
 
@@ -1527,28 +1527,28 @@ LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
  (./slides_s3.vrb)
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 708.
+(Font)              using `OT1/lmr/m/n' instead on input line 702.
 
 [38
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 719.
+(Font)              using `OT1/lmr/m/n' instead on input line 713.
 
 [39
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 739.
+(Font)              using `OT1/lmr/m/n' instead on input line 733.
 
 [40
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/lmr/l/n' undefined
-(Font)              using `OT1/lmr/m/n' instead on input line 766.
+(Font)              using `OT1/lmr/m/n' instead on input line 760.
 
 [41
 
@@ -1593,7 +1593,7 @@ onts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf/fonts/
 type1/public/lm/lmtt8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on slides_s3.pdf (41 pages, 427688 bytes).
+Output written on slides_s3.pdf (41 pages, 427024 bytes).
 PDF statistics:
  351 PDF objects out of 1000 (max. 8388607)
  262 compressed objects within 3 object streams
