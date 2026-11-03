@@ -14,6 +14,8 @@ They are versioned with the project: when you change one, the change is in git.
 | `07_implement.md` | A first agent lists what the plan leaves open, then cleans, merges and describes in numbered scripts, with row counts, assertions and cross-tabulations, summary statistics, figures, preliminary insights and `code/run_all.py`. | After the plan, in a cleared session |
 | `08_review.md` | A fresh session reviews plan, codebook, code and outputs like a referee, and lists the problems. You decide. | After every implementation |
 | `09_audit_by_hand.md` | You audit one step yourself: the agent explains the code line by line and points you to three units in the raw data; you read and compute their values by hand. | After the review |
+| `10_collect_api.md` | The agent reads the API documentation and its terms, asks you what to collect, proposes checks against numbers the provider publishes, then writes a collector that archives every raw response and a parser that reports the checks. | When you collect from an API |
+| `11_annotate_llm.md` | Codebook with you, your own coding of 100 texts first, then a pipeline (prompt in a file, JSON schema, every raw answer kept), a pilot on 20, a validation against your codes, and the full run only after your decision. | Before you put model labels in a paper |
 
 Why written prompts rather than typing? Because a prompt is part of the method. In a year, you will want to know
 exactly what you asked the agent to do, and so will a referee.

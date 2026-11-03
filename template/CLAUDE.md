@@ -43,6 +43,13 @@ every session. Follow it. If something here conflicts with a request, say so bef
 - Identifiers are text, never numbers.
 - Document the data: you may edit `data/raw/README.md` (provenance) and `notes/codebook.md`. Never a data file in `data/raw/`.
 
+## APIs, keys and LLM annotation
+
+- Keys live in `.env` (ignored by git), are read by the scripts, and are never printed, logged, pasted in the chat or written to a file.
+- Every raw API response is saved as received in `data/raw/<source>/<version>/` before any processing, with a log of the requests. A collection is complete when it matches a number the provider publishes, not when the script ends without error.
+- Sending texts to a commercial LLM API is sending data outside the folder: only when the user said this data may leave. Otherwise, a local model (Ollama, LM Studio, vLLM on the cluster).
+- LLM labels are not human coding. Record the model ID (for a local model, its digest and quantization), the prompt file and the parameters of every run, keep every raw answer, and validate against the user's own coding before any full run.
+
 ## Conventions of this project
 
 <!-- The agent fills this section with the user during Session 1 (prompt 01). Examples:

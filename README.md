@@ -32,6 +32,15 @@ Every participant starts their own research project in Session 1 and advances it
 - `sessions/02/example_pack/`: the 2022 presidential results and the INSEE historical series by municipality, for those without data, and INSEE's history of municipalities for the bonus
 - New in `template/`: prompts 06 (document and plan), 07 (clean, merge, describe), 08 (independent review) and 09 (audit one step by hand); an updated prompt 05; `notes/templates/analysis_plan.md` and `codebook.md`; and a new section of `CLAUDE.md`, "Row counts and silent decisions"
 
+## Session 3: from an API to annotated data (remote)
+
+- `sessions/03/slides_s3.pdf`
+- `sessions/03/worksheet_s3.md`: what to install the evening before, and the steps of each block
+- `sessions/03/s3_manifesto_annotation.ipynb`: the notebook of the session ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/03/s3_manifesto_annotation.ipynb)). French party manifestos collected through the Manifesto Project API, annotated by Claude through the API and by a local model through Ollama, and compared with the Manifesto Project's human coders
+- `sessions/03/data/`: the same French manifesto table, for those without a Manifesto Project key yet
+- `setup/cluster_guide.md`: the UZH ScienceCluster by SSH, with an agent, and in the browser
+- New in `template/`: prompt 10 (collect from an API, and prove the collection is complete) and prompt 11 (annotate with an LLM, and validate against your own coding); a new section of `CLAUDE.md`, "APIs, keys and LLM annotation"
+
 ## Rules of the workshop
 
 1. You delegate execution, never understanding.

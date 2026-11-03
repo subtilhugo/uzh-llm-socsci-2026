@@ -1,0 +1,74 @@
+\documentclass[svgnames,x11names,dvipsnames]{beamer}
+% --- Self-contained preamble (same conventions as the course decks).
+% --- If you prefer, replace this block with \input{preamble}.
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,decorations.pathreplacing}
+\usepackage[font=footnotesize]{caption}
+\usepackage{qrcode}
+
+\definecolor{color1bg}{HTML}{005e9e}
+\setbeamercolor*{palette primary}{fg=white,bg=color1bg}
+\setbeamercolor*{block title}{bg=color1bg,fg=white}
+\setbeamercolor*{frametitle}{fg=color1bg}
+\setbeamertemplate{caption}[numbered]
+\definecolor{color2bg}{HTML}{003a63}
+\setbeamercolor{block title alerted}{bg=color2bg,fg=white}
+\setbeamercolor{block body alerted}{bg=color2bg!8}
+\setbeamercolor{alerted text}{fg=color2bg}
+\beamertemplatenavigationsymbolsempty
+
+% --- Slide numbers on every slide except the title page.
+\setbeamertemplate{background}{%
+  \ifnum\value{page}>1
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south east,font=\fontsize{7}{8}\fontfamily{lmr}\fontseries{l}\selectfont,text=gray!80] at ([xshift=-0.3cm,yshift=0.2cm]current page.south east) {\insertpagenumber};
+    \end{tikzpicture}%
+  \fi}
+
+% --- This deck: one blue everywhere, the blue of the title page (Beamer's default, #3333B2).
+% --- Delete this block to go back to color1bg / color2bg.
+\definecolor{titleblue}{HTML}{3333B2}
+\definecolor{accentred}{HTML}{B22222}
+\colorlet{color1bg}{titleblue}
+\colorlet{color2bg}{titleblue!75!black}
+\setbeamercolor*{frametitle}{fg=titleblue}
+\setbeamercolor*{block title}{bg=titleblue,fg=white}
+\setbeamercolor{block title alerted}{bg=titleblue,fg=white}
+\setbeamercolor{block body alerted}{bg=titleblue!8}
+\setbeamercolor{alerted text}{fg=titleblue}
+
+% --- Change marker, for the next versions: wrap changed text in \chg{...} (bold).
+% --- Switched off; comment the second line to see the changes.
+\newcommand{\chg}[1]{{\bfseries #1}}
+\renewcommand{\chg}[1]{#1}
+
+\newcommand{\sectionslide}[2]{%
+\begin{frame}[plain]
+  \centering
+  \vfill
+  {\LARGE \textbf{\textcolor{titleblue}{#1}}}\\[0.4cm]
+  {#2}
+  \vfill
+\end{frame}}
+
+\title[LLMs for Social Science Research]{\large \textbf{Large Language Models for Social Science Research} \\
+    \textit{Session 3. From an API to Annotated Data}}
+\author[H. Subtil]{\textbf{Hugo Subtil}}
+\institute{PhD Workshop, University of Zurich}
+\date{November 4, 2026}
+
+\begin{document}
+\frame{\titlepage}
+
+%%PART0%%
+
+\end{document}

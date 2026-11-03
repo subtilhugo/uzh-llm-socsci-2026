@@ -1,0 +1,136 @@
+% ============================================================================
+% PART 4: THE SCIENCECLUSTER
+% ============================================================================
+
+\sectionslide{Part 4. The UZH ScienceCluster}{Three doors to the same machines}
+
+\begin{frame}{Why a Cluster}
+
+\small
+\begin{itemize}
+    \setlength{\itemsep}{5pt}
+    \item \textbf{GPUs your laptop does not have}: L4 (24 GB), A100 (80 GB), H100, H200. A 27-billion-parameter model on an L4; a 70B on an A100 or H100.
+    \item \textbf{Long jobs}: a whole corpus annotated overnight, while your laptop is closed.
+    \item \textbf{Data that must stay at UZH}: confidential texts, licensed data. The model comes to the data.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Access}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Your group needs a Science IT project; your PI adds you. Use is billed to the project.
+    \item Off campus: the UZH VPN first.
+    \item \textbf{Two rules.} Login nodes are for editing and submitting, never for computing. Large files (model weights) go on \texttt{/scratch}, which is purged after 30 days unused. Nothing is backed up.
+\end{itemize}
+
+\vspace{0.2cm}
+{\footnotesize Every command of this part: \texttt{setup/cluster\_guide.md} in the course repository.}
+
+\end{frame}
+
+\begin{frame}[fragile]{Door 1. The Terminal}
+
+\small
+\textbf{Log in, look around}
+{\scriptsize
+\begin{verbatim}
+ssh -l <shortname> cluster.s3it.uzh.ch     # UZH network or VPN
+quota                                       # your space
+module available                            # the software
+\end{verbatim}}
+
+\textbf{A GPU, for an hour, interactively}
+{\scriptsize
+\begin{verbatim}
+module load l4
+srun --pty --time=1:0:0 --mem-per-cpu=7800 --cpus-per-task=2 --gpus=1 bash -l
+nvidia-smi                                  # you are on a compute node now
+exit                                        # GPU released
+\end{verbatim}}
+
+\textbf{A job, while you do something else}
+{\scriptsize
+\begin{verbatim}
+sbatch annotate.sh       # a script with #SBATCH lines: time, memory, --gpus=1
+squeue --me              # PD = waiting, R = running
+\end{verbatim}}
+
+\end{frame}
+
+\begin{frame}[fragile]{Door 2. An Agent on the Cluster}
+
+\small
+\textbf{The same agent, in a folder on the cluster}
+{\scriptsize
+\begin{verbatim}
+curl -fsSL https://claude.ai/install.sh | bash   # once, on the login node
+claude                          # press c, open the URL on your laptop, paste the code
+\end{verbatim}}
+
+\vspace{0.1cm}
+
+\textbf{What it is good at there}: writing job scripts, submitting them, reading the logs, relaunching what failed. The well-defined task that can run unattended (Session 2).
+
+\vspace{0.2cm}
+
+\textbf{Three precautions}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item \textbf{One line in \texttt{CLAUDE.md}}: \textit{``Never run analysis code on the login node: write a job script and submit it with sbatch.''}
+    \item \textbf{Your home is shared by all nodes}: turn self-updates off (\texttt{DISABLE\_UPDATES}), or a session on another node can crash.
+    \item \textbf{VS Code or Cursor}: S3IT asks you not to connect them to the login nodes. Its documentation has an advanced recipe through a job.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Door 3. The Browser: ScienceApps}
+
+\small
+\centering
+{\large \href{https://apps.s3it.uzh.ch}{\texttt{apps.s3it.uzh.ch}}}\\[0.1cm]
+{\footnotesize UZH login, private window. Every cluster account has access.}
+
+\vspace{0.3cm}
+\raggedright
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Jupyter, RStudio}, on a compute node, with the GPU you choose in a form: type, hours (up to a week), cores, memory.
+    \item \textbf{A full desktop}, on GPU nodes too.
+    \item \textbf{VS Code in the browser} (beta), without its AI features.
+    \item \textbf{Files}: upload, download, and a shell, in the browser.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{The simplest door if you never used a terminal}: a Jupyter session with one L4, today's notebook, and Part 5 against a model served on that node.
+
+\end{frame}
+
+\begin{frame}[fragile]{A Local Model on a GPU Node}
+
+\small
+Inside a GPU session. Apptainer runs the official Ollama image; S3IT supports Apptainer but has no page on LLMs, so this is the course's recipe.
+
+{\scriptsize
+\begin{verbatim}
+module load apptainer
+export OLLAMA_MODELS=/scratch/$USER/ollama-models     # weights on scratch
+apptainer pull /scratch/$USER/ollama.sif docker://ollama/ollama
+apptainer exec --nv /scratch/$USER/ollama.sif ollama serve > ollama.log 2>&1 &
+apptainer exec --nv /scratch/$USER/ollama.sif ollama pull gemma3:27b
+\end{verbatim}}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item The notebook's Part 5 then works unchanged, on that node: Ollama answers on \texttt{localhost:11434}.
+    \item \textbf{A whole corpus}: the same lines in a batch job. \textbf{Many requests in parallel}: vLLM, an OpenAI-compatible server, with \texttt{make\_openai\_annotator}.
+    \item Do not open the port to others (UZH IT's advice).
+\end{itemize}
+
+\vspace{0.15cm}
+{\footnotesize Outside UZH: the CSCS Inference API serves open models (Apertus, Qwen, Gemma) to groups with a CSCS project, through S3IT.}
+
+\end{frame}
