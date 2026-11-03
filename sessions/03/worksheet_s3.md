@@ -25,12 +25,12 @@
 
 Downloads on a shared Zoom connection are slow. Do these at home.
 
-1. **Manifesto Project key.** Register at https://manifesto-project.wzb.eu (free). Once logged in, your API key is on your profile page. %%MANIFESTOKEY%%
+1. **Manifesto Project key.** Register at https://manifesto-project.wzb.eu (free). Registration is immediate, with no approval to wait for. On your profile page, generate an API key. The Manifesto Project forbids redistributing its data: never push the texts to a public repository.
 2. **Anthropic key.** Hugo's email has a workshop key, capped. Keep it out of any file you share.
 3. **Ollama**, if you will run the local part on your laptop (16 GB of memory or more recommended):
    - macOS and Windows: download from https://ollama.com/download and install.
    - Linux: `curl -fsSL https://ollama.com/install.sh | sh`
-   - Then, in a terminal: `%%PULLCMD%%` (%%PULLSIZE%%). Check with `ollama run %%PULLMODEL%% "Bonjour"`: it answers.
+   - Then, in a terminal: `ollama pull ministral-3:8b` (6 GB; with only 8 GB of memory, ministral-3:3b instead). Check with `ollama run ministral-3:8b "Bonjour"`: it answers.
    - Less than 16 GB, or no admin rights? Use Colab for Part 5 (the notebook installs Ollama inside Colab, on a free GPU).
 4. **Test the notebook**: open it in Colab, run Part 0. Put both keys in Colab Secrets (key icon in the left sidebar; names `MANIFESTO_API_KEY` and `ANTHROPIC_API_KEY`; switch on "Notebook access").
 
@@ -55,7 +55,7 @@ Notebook Part 2. Change `ELECTION_YEAR` if the table of elections shows that ano
 
 Done when: you have pasted in the shared document *name, election, requested / returned / missing, check 3: match or not*.
 
-**No Manifesto key?** Option B in Part 2 loads the same table from the repository. You lose the checks, not the rest.
+**No Manifesto key?** Register now (https://manifesto-project.wzb.eu/signup): free, immediate, two minutes.
 
 **Your own project.** Prompt 10 (`template/prompts/10_collect_api.md`) on the API you brought. Copy it into `prompts/` first, and put your key in `.env`.
 

@@ -112,8 +112,8 @@ mkdir -p $APPTAINER_CACHEDIR $OLLAMA_MODELS
 apptainer pull /scratch/$USER/ollama.sif docker://ollama/ollama
 apptainer exec --nv /scratch/$USER/ollama.sif ollama serve > ollama.log 2>&1 &
 sleep 5
-apptainer exec --nv /scratch/$USER/ollama.sif ollama pull gemma3:27b   # fits an L4 at 4 bits
-apptainer exec --nv /scratch/$USER/ollama.sif ollama run gemma3:27b "Bonjour"
+apptainer exec --nv /scratch/$USER/ollama.sif ollama pull gemma4:26b   # 18 GB: fits an L4 (24 GB)
+apptainer exec --nv /scratch/$USER/ollama.sif ollama run gemma4:26b "Bonjour"
 ```
 
 Then, on the same node, the notebook's Part 5 works unchanged (Ollama answers on `localhost:11434`). For a whole corpus, put the same lines in a batch job. For many requests in parallel, vLLM serves an OpenAI-compatible API (image `vllm/vllm-openai`, port 8000), and Part 5's `make_openai_annotator` talks to it.
