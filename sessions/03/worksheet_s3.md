@@ -32,7 +32,7 @@ Downloads on a shared Zoom connection are slow. Do these at home.
    - Linux: `curl -fsSL https://ollama.com/install.sh | sh`
    - Then, in a terminal: `ollama pull ministral-3:8b` (6 GB; with only 8 GB of memory, ministral-3:3b instead). Check with `ollama run ministral-3:8b "Bonjour"`: it answers.
    - Less than 16 GB, or no admin rights? Use Colab for Part 5 (the notebook installs Ollama inside Colab, on a free GPU).
-4. **Test the notebook**: open it in Colab, run Part 0. Put both keys in Colab Secrets (key icon in the left sidebar; names `MANIFESTO_API_KEY` and `ANTHROPIC_API_KEY`; switch on "Notebook access").
+4. **Test the notebook**: open it in Colab, choose the GPU first (Runtime, Change runtime type, T4 GPU: changing it later erases everything you ran), then run Part 0. Put both keys in Colab Secrets (key icon in the left sidebar; names `MANIFESTO_API_KEY` and `ANTHROPIC_API_KEY`; switch on "Notebook access").
 
 If something fails, write to Hugo before 8:30 with the error message.
 
@@ -86,7 +86,8 @@ Done when: you have pasted *your agreement with the coders on your 15, the model
 Notebook Part 5.
 
 - **Laptop**: run the notebook locally (VS Code, Cursor or Jupyter) with Ollama running. `LOCAL_MODEL` is the model you pulled.
-- **Colab**: Runtime, Change runtime type, T4 GPU; run the "Colab only" cell. It installs Ollama inside Colab and pulls the model (3 to 5 minutes).
+- **Colab**: you chose the T4 GPU in Part 0; run the "Colab only" cell. It installs Ollama inside Colab and pulls the model (3 to 5 minutes).
+- **Slow machine** (no GPU, old laptop): annotate `sample.head(40)` instead of the 200, as the cell says.
 - Then Part 6 again: the table now has two models, and their agreement with each other.
 
 Done when: you have pasted *model and size, laptop or Colab, seconds per sentence, kappa*.
