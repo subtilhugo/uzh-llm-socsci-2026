@@ -394,12 +394,43 @@ A model on your laptop & \$0 per call & your time \\
 \begin{itemize}
     \setlength{\itemsep}{4pt}
     \item Our 200 sentences: under two cents. The notebook prints the real figure.
-    \item Batch APIs: half price, answers within 24 hours. For a whole corpus.
+    \item \chg{Batch APIs: half price, one list of requests, answers within the hour (24 h at most). Next slide.}
     \item Free tiers may train on your data. Read the terms before sending research data.
 \end{itemize}
 
 \vspace{0.1cm}
 {\scriptsize Official pricing pages, 3 November 2026.}
+\end{frame}
+
+\begin{frame}[fragile]{\chg{A Batch: One List of Requests, Half Price}}
+\small
+\textbf{One request per line (JSON Lines).} Each has an identifier you choose.
+
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+{"custom_id": "r0", "params": {"model": "claude-haiku-5-5",
+   "system": "<codebook>", "messages": [{"role": "user",
+   "content": "TARGET: Nous sortirons de l'OTAN."}],
+   "output_config": {"format": {"type": "json_schema", ...}}}}
+{"custom_id": "r1", "params": {...}}
+\end{verbatim}}
+
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+batch = client.messages.batches.create(requests=requests)
+client.messages.batches.retrieve(batch.id).processing_status
+for r in client.messages.batches.results(batch.id): ...
+\end{verbatim}}
+
+\vspace{0.1cm}
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item Answers come back \textbf{in any order}: match on \texttt{custom\_id}.
+    \item Up to 100,000 requests. Failed ones are not billed.
+    \item Archive the \texttt{.jsonl}: it is your replication file.
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Reproducibility with a Closed Model}
@@ -429,7 +460,7 @@ A model on your laptop & \$0 per call & your time \\
 
 \begin{frame}{Block 2. Annotate \chg{(10:20--10:45)}}
 \small
-\textbf{I show.} Part 3: the seven domains. Part 4: one call, then 200.
+\textbf{I show.} \chg{A short Colab, one line per cell: an HTTP request, a JSON label, a loop, a batch.} Then the notebook: Part 3, the seven domains; Part 4, one call, then 200.
 
 \vspace{0.4cm}
 \textbf{You do}
@@ -644,7 +675,7 @@ Yes. Qwen 3.5, Ministral 3, Gemma 4 and gpt-oss can \textbf{call tools}: the mod
     \setlength{\itemsep}{5pt}
     \item \textbf{A script calls the model.} Annotation, today: no tools.
     \item \textbf{The model calls tools.} \texttt{local\_agent.py}: OpenAlex, the French municipalities API, a calculator, files.
-    \item \textbf{A full agent on a local model.} Claude Code through Ollama: \texttt{ollama launch claude}. Context of 64,000 tokens or more.
+    \item \textbf{A full agent on a local model.} Claude Code through Ollama: \texttt{ollama launch claude --model qwen3.5:9b}. \chg{Context of 64,000 tokens or more.}
 \end{enumerate}
 
 \vspace{0.3cm}
