@@ -148,21 +148,26 @@ A door the provider built for programs. Documented format, versioned data, writt
 Scraping a website is the opposite: no door, no contract, no version.
 \end{frame}
 
-\begin{frame}{Three Kinds of API You Will Meet}
-\small
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.4cm}@{}}
+\begin{frame}{\chg{Three Kinds of API You Will Meet}}
+\footnotesize
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
 \toprule
-& \textbf{You send} & \textbf{You get back} \\
+& \textbf{You send} & \textbf{You get back} & \textbf{You check} \\
 \midrule
-\textbf{A data API} \newline {\footnotesize INSEE, Manifesto, OpenAlex, a parliament} & a query: units, period, fields & \textbf{data}: a table or documents, the same for everyone \\
-\textbf{A model API} \newline {\footnotesize Claude, OpenAI, Mistral, your own Ollama} & your text and your instructions & \textbf{a judgement}: a label, a summary; billed per token \\
-\textbf{An MCP server} \newline {\footnotesize a connector of your agent} & nothing: the agent calls it & \textbf{a tool the agent can use}: read your Drive, query a database, call a data API \\
+\textbf{Data API} \newline {\scriptsize INSEE, Manifesto, OpenAlex} & a query: units, period, fields & \textbf{data}, the same for everyone & the count, against a total the provider published \\
+\textbf{Model API} \newline {\scriptsize Claude, OpenAI, Mistral, Ollama} & your text and your instructions & \textbf{a judgement}: a label, a summary; billed per token & the label, against a human coder \\
+\textbf{MCP server} \newline {\scriptsize a connector of your agent} & nothing: the agent calls it & \textbf{a tool} for the agent: your Drive, a database, a data API & the call it made, in its log \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.5cm}
-Today: the first two, in code. The third is how your agent reaches them without you writing the code.
+\small
+Today: the first two, in code. The third is how your agent reaches them for you.
+
+\vspace{0.2cm}
+\centering
+\alert{Whatever the kind: read the call before you trust the answer.}
 \end{frame}
 
 \begin{frame}{The Data API: Downloading}
