@@ -14,6 +14,7 @@
 \usetikzlibrary{positioning,arrows.meta,calc,fit,decorations.pathreplacing}
 \usepackage[font=footnotesize]{caption}
 \usepackage{qrcode}
+\usepackage{eurosym}
 
 \definecolor{color1bg}{HTML}{005e9e}
 \setbeamercolor*{palette primary}{fg=white,bg=color1bg}
@@ -97,7 +98,7 @@
 
     \item[\textbf{10:00--10:45}] Part 2. Annotating Through an API, then a break
     \begin{itemize}
-        \item \chg{By hand in a notebook, then by Claude Code}
+        \item \chg{34 real manifestos: by hand in a notebook, then by Claude Code}
         \item Block 2. You code 15 sentences, Claude codes 200: who is right? (11)
     \end{itemize}
 
@@ -115,6 +116,42 @@
     \item[\textbf{11:50--12:00}] Debrief and Next Session
 \end{enumerate}
 
+\end{frame}
+
+\begin{frame}{\chg{The Power of LLMs: One Study, Two Weeks}}
+\footnotesize
+\textbf{\href{https://tiktokpourlascience.fr}{TikTok pour la science}}: did TikTok fuel the violence of the autumn 2026 mobilisations in France? {\scriptsize (Guinaudeau, Guinaudeau and Subtil, CEPREMAP note 2026-21.)}
+
+\vspace{0.2cm}
+\begin{columns}[T]
+\column{0.42\textwidth}
+\textbf{Before}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item 4 to 6 people, about 6 months
+    \item two developers, a web designer, assistants coding videos by hand
+\end{itemize}
+\vspace{0.1cm}
+\textbf{This autumn}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item 2 people, 2 weeks
+    \item cost: our Claude Max subscriptions for two weeks, and \euro{}200 of video annotation
+\end{itemize}
+\column{0.55\textwidth}
+\textbf{What the two weeks produced}
+\begin{itemize}
+    \setlength{\itemsep}{1pt}
+    \item 81.5 million videos from France captured; 1.05 million downloaded and analysed
+    \item each video watched by an audio-visual model, then coded by an LLM: 141,648 videos, 145,525 comments, 7,186 accounts
+    \item checked against a second model: $\kappa$ 0.67 to 0.77
+    \item a 29-page report, a bilingual website, a data-donation platform at UZH
+\end{itemize}
+\end{columns}
+
+\vspace{0.25cm}
+\centering
+{\small \alert{The work moved from doing to checking. That is today.}}
 \end{frame}
 
 \begin{frame}{Last Week, and the Question We Left Open}
@@ -496,7 +533,7 @@ for r in client.messages.batches.results(batch.id): ...
 
 \begin{frame}{Block 2. Annotate \chg{(10:25--10:45)}}
 \small
-\textbf{I show.} \chg{Colab, one line per cell: an HTTP request, a JSON label, a loop, a batch. Then the same task in Claude Code: it writes the script, we read it.}
+\textbf{I show.} \chg{Colab, one line per cell, on 34 whole manifestos (1958--2024) and 12 themes: an HTTP request, JSON labels with quotes, a loop, GPT against the dictionaries, a batch. Then the same task in Claude Code: it writes the script, we read it.}
 
 \vspace{0.4cm}
 \textbf{You do}
