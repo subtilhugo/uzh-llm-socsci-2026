@@ -97,6 +97,7 @@
 
     \item[\textbf{10:00--10:45}] Part 2. Annotating Through an API, then a break
     \begin{itemize}
+        \item \chg{By hand in a notebook, then by Claude Code}
         \item Block 2. You code 15 sentences, Claude codes 200: who is right? (11)
     \end{itemize}
 
@@ -429,6 +430,7 @@ for r in client.messages.batches.results(batch.id): ...
     \setlength{\itemsep}{2pt}
     \item Answers come back \textbf{in any order}: match on \texttt{custom\_id}.
     \item Up to 100,000 requests. Failed ones are not billed.
+    \item \chg{OpenAI: upload the \texttt{.jsonl} first, then start the batch from it.}
     \item Archive the \texttt{.jsonl}: it is your replication file.
 \end{itemize}
 \end{frame}
@@ -458,9 +460,43 @@ for r in client.messages.batches.results(batch.id): ...
 {\footnotesize \textbf{The benchmark is a coder, not the truth.} Manifesto coders recoding the same text agreed with the master coding at $\kappa$ of 0.3 to 0.5 on 56 categories (Mikhaylov, Laver and Benoit 2012). Each French election: one coder.}
 \end{frame}
 
-\begin{frame}{Block 2. Annotate \chg{(10:20--10:45)}}
+\begin{frame}{\chg{Two Ways to the Same API Call}}
 \small
-\textbf{I show.} \chg{A short Colab, one line per cell: an HTTP request, a JSON label, a loop, a batch.} Then the notebook: Part 3, the seven domains; Part 4, one call, then 200.
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{By hand: a notebook}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item You write every line: the address, the key, the body, the loop.
+    \item Nothing hidden. Slow for a large corpus.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{By an agent: Claude Code}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item You state the rules; it writes the script and runs it.
+    \item Fast. You read the script.
+\end{itemize}
+\end{columns}
+
+\vspace{0.4cm}
+\textbf{In both, check the same three things}
+\begin{enumerate}
+    \setlength{\itemsep}{2pt}
+    \item The prompt is your codebook, word for word: same sha256.
+    \item The model is pinned; the key is never printed.
+    \item Every raw answer is saved before any processing.
+\end{enumerate}
+
+\vspace{0.3cm}
+\centering
+\alert{Not a third way: labels typed by a chatbot in a chat.}\\
+{\footnotesize No model ID, no prompt on file, no rerun.}
+\end{frame}
+
+\begin{frame}{Block 2. Annotate \chg{(10:25--10:45)}}
+\small
+\textbf{I show.} \chg{Colab, one line per cell: an HTTP request, a JSON label, a loop, a batch. Then the same task in Claude Code: it writes the script, we read it.}
 
 \vspace{0.4cm}
 \textbf{You do}
