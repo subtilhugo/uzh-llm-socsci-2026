@@ -189,7 +189,8 @@ Scraping a website is the opposite: no door, no contract, no version.
 \begin{frame}{\chg{Three Kinds of API You Will Meet}}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{2.5cm}@{}}
 \toprule
 & \textbf{You send} & \textbf{You get back} & \textbf{You check} \\
 \midrule
@@ -396,7 +397,7 @@ r = claude.messages.parse(
     model="claude-haiku-5-5",         # a pinned snapshot: report it
     max_tokens=300,
     system=[{"type": "text", "text": CODEBOOK,
-             "cache_control": {"type": "ephemeral"}}],   # same each call: cached
+             "cache_control": {"type": "ephemeral"}}],   # cached
     messages=[{"role": "user", "content": "PREVIOUS: ...\nTARGET: ..."}],
     output_format=Annotation,         # the answer must fit the schema
     thinking={"type": "disabled"},    # a short task: no thinking
@@ -710,8 +711,8 @@ r = client.chat.completions.create(
     model="ministral-3:8b",
     messages=[{"role": "system", "content": CODEBOOK},
               {"role": "user", "content": "TARGET: ..."}],
-    response_format={"type": "json_schema", "json_schema":
-                     {"name": "annotation", "schema": SCHEMA, "strict": True}},
+    response_format={"type": "json_schema", "json_schema": {
+        "name": "annotation", "schema": SCHEMA, "strict": True}},
     temperature=0, seed=2026)
 \end{verbatim}}
 \end{frame}
