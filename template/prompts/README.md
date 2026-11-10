@@ -16,6 +16,9 @@ They are versioned with the project: when you change one, the change is in git.
 | `09_audit_by_hand.md` | You audit one step yourself: the agent explains the code line by line and points you to three units in the raw data; you read and compute their values by hand. | After the review |
 | `10_collect_api.md` | The agent reads the API documentation and its terms, asks you what to collect, proposes checks against numbers the provider publishes, then writes a collector that archives every raw response and a parser that reports the checks. | When you collect from an API |
 | `11_annotate_llm.md` | Codebook with you, your own coding of 100 texts first, then a pipeline (prompt in a file, JSON schema, every raw answer kept), a pilot on 20, a validation against your codes, and the full run only after your decision. | Before you put model labels in a paper |
+| `12_classical_measure.md` | A dictionary you edit, embeddings, a search, a classifier scored by cross-validation, all validated against your random hand codes. | Before you reach for an LLM, or to check one |
+| `13_extract_llm.md` | A form with you, a reference for each field (or your own extraction of 30 documents), a pipeline with a JSON schema, a pilot, a check field by field, then the merge. | When you turn documents into a table |
+| `14_estimate_with_labels.md` | The hand-coded sample checked for randomness, agreement by group, and three estimates (hand codes only, naive, corrected), then the measurement section of the paper. | Before a coefficient built on model labels goes in a paper |
 
 Why written prompts rather than typing? Because a prompt is part of the method. In a year, you will want to know
 exactly what you asked the agent to do, and so will a referee.

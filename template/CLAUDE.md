@@ -50,6 +50,14 @@ every session. Follow it. If something here conflicts with a request, say so bef
 - Sending texts to a commercial LLM API is sending data outside the folder: only when the user said this data may leave. Otherwise, a local model (Ollama, LM Studio, vLLM on the cluster).
 - LLM labels are not human coding. Record the model ID (for a local model, its digest and quantization), the prompt file and the parameters of every run, keep every raw answer, and validate against the user's own coding before any full run.
 
+## Measures, extraction and estimates
+
+- The user's hand codes are the reference for every measure (dictionary, embeddings, classifier, LLM). They are drawn at random, with a recorded seed and a known probability of being coded: never chosen by hand, never by you.
+- A classifier trained on the hand codes is scored by cross-validation only. A threshold is never tuned on the texts it then scores.
+- Extraction: copy as printed, empty rather than guessed, the evidence before any judgement. Every field is checked against a reference, and the disagreements are listed for the user to read.
+- An estimate that uses model labels is reported corrected with the hand codes (prompt 14), next to the naive one. Never the naive one alone.
+- Corpora too large for the laptop run as jobs on the cluster, written and submitted from the login node, never computed on it.
+
 ## Conventions of this project
 
 <!-- The agent fills this section with the user during Session 1 (prompt 01). Examples:

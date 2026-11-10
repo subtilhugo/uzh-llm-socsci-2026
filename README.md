@@ -40,6 +40,15 @@ Every participant starts their own research project in Session 1 and advances it
 - `setup/cluster_guide.md`: the UZH ScienceCluster by SSH, with an agent, and in the browser
 - New in `template/`: prompt 10 (collect from an API, and prove the collection is complete) and prompt 11 (annotate with an LLM, and validate against your own coding); a new section of `CLAUDE.md`, "APIs, keys and LLM annotation"
 
+## Session 4: from texts to variables, with and without an LLM
+
+- `sessions/04/slides_s4.pdf`
+- `sessions/04/worksheet_s4.md`: what to do before the session, and the steps of each part
+- `sessions/04/s4_extraction.ipynb`: the notebook of the session ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/04/s4_extraction.ipynb)). The professions de foi of the 1978 legislative election (Archelec, Sciences Po) through the Internet Archive API; a gold standard coded by the class; a dictionary, embeddings and a classifier; Claude and GPT filling in a form, checked against the Sciences Po catalogue; a coefficient, naive and corrected with the hand codes
+- `sessions/04/cluster/`: the ScienceCluster part. One environment (a container) for a GPU job through SSH and for Jupyter in ScienceApps; the job embeds the 4,010 documents of the election
+- New in `template/`: prompt 12 (a classical measure, validated), prompt 13 (extract variables with an LLM, checked field by field) and prompt 14 (an estimate from model labels, corrected with your hand codes); a new section of `CLAUDE.md`, "Measures, extraction and estimates"
+- The Archelec texts are under a restrictive licence (CC BY-NC-ND): the notebook downloads them, and they stay out of any public repository
+
 ## Rules of the workshop
 
 1. You delegate execution, never understanding.
