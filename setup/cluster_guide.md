@@ -100,6 +100,12 @@ https://apps.s3it.uzh.ch, with your UZH login, in a private window. Every cluste
 
 The simplest door when you do not want a terminal: start a Jupyter session with one L4 GPU, open the Session 3 notebook, and run Part 5 against a model served on that node.
 
+## One environment for both doors (Session 4)
+
+The S3IT way to install Python packages on the cluster is a container built from a conda `env.yml` (https://docs.s3it.uzh.ch/cluster/how_to_use_conda/). The same container runs your batch jobs (`apptainer exec --nv env.sif python script.py`) and, installed with S3IT's `apptainer_ipykernel.py`, appears as a kernel in ScienceApps Jupyter (https://docs.s3it.uzh.ch/cluster/apps/user_guide/). A container cannot be changed from a notebook: a new package means a new build.
+
+`sessions/04/cluster/` has the files and the full sequence: build the container, fetch the 1978 professions de foi from the Internet Archive API, embed them on a GPU with `sbatch`, then open the Session 4 notebook in ScienceApps with the same environment.
+
 ## A local model on a GPU node *(course recipe)*
 
 S3IT has no page on LLMs. This uses Apptainer, which S3IT supports for containers (https://docs.s3it.uzh.ch/cluster/containers/), and the official Ollama image. Inside an interactive GPU session:
