@@ -42,10 +42,11 @@ Every participant starts their own research project in Session 1 and advances it
 
 ## Session 4: from texts to variables, with and without an LLM
 
-- `sessions/04/slides_s4.pdf`
+- `sessions/04/slides_s4.pdf`: text as data, from word counts to black boxes; three ways into the ScienceCluster; Overleaf and Dropbox; OCR; extraction; classification and the corrected estimate
 - `sessions/04/worksheet_s4.md`: what to do before the session, and the steps of each part
-- `sessions/04/s4_extraction.ipynb`: the notebook of the session ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/04/s4_extraction.ipynb)). The professions de foi of the 1978 legislative election (Archelec, Sciences Po) through the Internet Archive API; a gold standard coded by the class; a dictionary, embeddings and a classifier; Claude and GPT filling in a form, checked against the Sciences Po catalogue; a coefficient, naive and corrected with the hand codes
-- `sessions/04/cluster/`: the ScienceCluster part. One environment (a container) for a GPU job through SSH and for Jupyter in ScienceApps; the job embeds the 4,010 documents of the election
+- `sessions/04/s4_extraction.ipynb`: the notebook of the session ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/04/s4_extraction.ipynb)). The professions de foi of the 1978 legislative election (Archelec, Sciences Po) through the Internet Archive API; twelve scans read again by a vision model; Claude and GPT filling in a form, checked against the Sciences Po catalogue; a gold standard coded by the class; a dictionary, embeddings, a classifier and the LLMs' label; a coefficient, naive and corrected with the hand codes
+- `sessions/04/cluster/`: the ScienceCluster by three routes (web interface, SSH, Claude Code) with a small job in `demo/`; then, going further, a GPU job that embeds the 4,010 documents of the election and the same environment as a Jupyter kernel
+- `setup/overleaf_dropbox_guide.md`: Overleaf through Git or Dropbox sync, and working with an agent in a Dropbox folder
 - New in `template/`: prompt 12 (a classical measure, validated), prompt 13 (extract variables with an LLM, checked field by field) and prompt 14 (an estimate from model labels, corrected with your hand codes); a new section of `CLAUDE.md`, "Measures, extraction and estimates"
 - The Archelec texts are under a restrictive licence (CC BY-NC-ND): the notebook downloads them, and they stay out of any public repository
 

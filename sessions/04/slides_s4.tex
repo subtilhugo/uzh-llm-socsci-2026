@@ -48,10 +48,10 @@
 \setbeamercolor{block body alerted}{bg=titleblue!8}
 \setbeamercolor{alerted text}{fg=titleblue}
 
-% --- Change marker, as in the other decks: wrap a change in \chg{...} to see it in bold.
-% --- Switched off; comment the second line to see the changes.
+% --- Change marker: the titles of the frames that are new or rewritten since 10 November are in \chg{...}, in bold.
+% --- Switched ON for your review. Uncomment the second line to switch it off before the session.
 \newcommand{\chg}[1]{{\bfseries #1}}
-\renewcommand{\chg}[1]{#1}
+% \renewcommand{\chg}[1]{#1}
 
 \newcommand{\sectionslide}[2]{%
 \begin{frame}[plain]
@@ -83,34 +83,37 @@
 {\small Download it again: \texttt{sessions/04/} and prompts 12 to 14.}
 \end{frame}
 
-\begin{frame}{Today's Session Overview (9:00--12:00)}
+\begin{frame}{\chg{Today's Session Overview (9:00--12:00)}}
 
 \setlength{\leftmargini}{2.3cm}
 \small
 \begin{enumerate}
     \setlength{\itemsep}{1pt}
-    \item[\textbf{9:00--9:10}] Last Week, and the Question We Left Open
+    \item[\textbf{9:00--9:25}] Part 1. Text as Data: From Word Counts to Black Boxes
 
-    \item[\textbf{9:10--9:45}] Part 1. The ScienceCluster, for Real
+    \item[\textbf{9:25--10:00}] Part 2. Three Ways into the ScienceCluster
     \begin{itemize}
-        \item SSH: build, fetch, submit a GPU job
-        \item The browser: ScienceApps, the same environment
+        \item Block 1. The browser, the terminal, Claude Code
     \end{itemize}
 
-    \item[\textbf{9:45--10:40}] Part 2. Measuring Without an LLM, then a break
+    \item[\textbf{10:00--10:15}] Part 3. Your Paper and Your Data, Connected
     \begin{itemize}
-        \item Block 1. Collect, and code six documents by hand
-        \item Block 2. A dictionary, embeddings, a classifier (12)
+        \item Overleaf and Dropbox, as folders your agent can work in
     \end{itemize}
 
-    \item[\textbf{10:50--11:30}] Part 3. Extracting With an LLM
+    \item[\textbf{10:15--10:40}] Part 4. From a Scan to a Text: OCR, then a break
     \begin{itemize}
-        \item Block 3. Claude and GPT fill in a form, checked against the catalogue (13)
+        \item Block 2. Collect, and read a scan twice
     \end{itemize}
 
-    \item[\textbf{11:30--11:50}] Part 4. From Labels to an Estimate
+    \item[\textbf{10:50--11:20}] Part 5. Extracting With an LLM
     \begin{itemize}
-        \item Block 4. The coefficient, naive and corrected (14)
+        \item Block 3. Claude and GPT fill in a form (13)
+    \end{itemize}
+
+    \item[\textbf{11:20--11:50}] Part 6. Classifying Text, and the Coefficient
+    \begin{itemize}
+        \item Block 4. Six codes, four measures, one estimate (12, 14)
     \end{itemize}
 
     \item[\textbf{11:50--12:00}] Debrief and Next Session
@@ -129,211 +132,623 @@
 \alert{The model agrees with the human coders on 75\% of the documents.\\ Your regression uses its labels. What would you have to show\\ for a referee to accept the coefficient?}
 \end{frame}
 
-\begin{frame}{Today's Question}
-\small
-\textbf{Do candidates who already hold a local office talk more about local issues?}
+% ============================================================================
+\sectionslide{Part 1. Text as Data}{From word counts to black boxes}
 
-\vspace{0.3cm}
-The professions de foi of the first round of the 1978 legislative election: 4,010 documents in Archelec (Sciences Po, CEVIPOF). We draw 300.
+\begin{frame}{\chg{Text as Data: the Problem}}
+\small
+A text is not a variable. Every method turns documents into numbers, and loses something on the way.
 
 \vspace{0.4cm}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\textbf{Four principles} (Grimmer and Stewart 2013)
+\begin{enumerate}
+    \setlength{\itemsep}{4pt}
+    \item All quantitative models of language are wrong, but some are useful.
+    \item Methods augment humans. They do not replace them.
+    \item There is no globally best method.
+    \item Validate, validate, validate.
+\end{enumerate}
+
+\vspace{0.5cm}
+\centering
+\alert{Written for word counts. They hold for LLMs.}
+\end{frame}
+
+\begin{frame}{\chg{Three Generations}}
+\footnotesize
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}@{}}
 \toprule
-\textbf{Y} \newline {\scriptsize a local offer} & by hand (Part 2), a dictionary, embeddings, a classifier (Part 2), Claude and GPT (Part 3) \\
-\textbf{X} \newline {\scriptsize a local office} & the catalogue of Sciences Po, and the same variable extracted by the LLMs (Part 3) \\
-\textbf{The estimate} & naive, and corrected with your hand codes (Part 4) \\
+& \textbf{A document becomes} & \textbf{You choose} & \textbf{You can inspect} \\
+\midrule
+\textbf{Counting words} \newline {\scriptsize dictionaries, scaling, topic models} & a row of word frequencies & the vocabulary, the word list & everything \\
+\textbf{Embeddings} \newline {\scriptsize word2vec, BERT, sentence models} & a point in a space & the model, your examples & the neighbours, not the dimensions \\
+\textbf{LLMs} \newline {\scriptsize Claude, GPT, open-weight models} & an answer to your instruction & the prompt, the model & the answer only \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\small
+Each generation reads more of the meaning, and shows less of how.
+\end{frame}
+
+\begin{frame}{\chg{Counting Words}}
+\small
+\textit{``La commune a besoin d'une route.''} \quad \textit{``La route de la commune est dangereuse.''}
+
+\vspace{0.2cm}
+\centering
+\footnotesize
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+& commune & route & besoin & dangereuse & \dots \\
+\midrule
+Document 1 & 1 & 1 & 1 & 0 & \\
+Document 2 & 1 & 1 & 0 & 1 & \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.4cm}
+\raggedright
+\small
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Bag of words}: the order is lost, the counts stay.
+    \item \textbf{Weights}: a rare word says more than a frequent one (tf-idf).
+    \item \textbf{On top of the table}: dictionaries, scaling (Wordscores, Wordfish), topic models.
+\end{itemize}
+
+\vspace{0.3cm}
+Every number can be traced back to a word on a page.
+\end{frame}
+
+\begin{frame}{Dictionaries}
+\small
+\textbf{A list of words, and a rule.} Policy positions from word lists (Laver and Garry 2000); populism, as a dictionary and by hand (Rooduijn and Pauwels 2011).
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\textbf{For}
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item Visible: it fits in an appendix
+    \item The same answer every time
+    \item Free, on millions of documents
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{Against}
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item Words, not meaning
+    \item OCR: ``ma\-ter\-nit\'e'' cut by a line break
+    \item Headings: ``la circonscription''
+\end{itemize}
+\end{columns}
+
+\vspace{0.4cm}
+Today's list: 27 words (``notre ville'', ``d\'eviation'', ``h\^opital'', ``usine'', ...) and a rule: two different words or more.
+\end{frame}
+
+\begin{frame}{Embeddings: Meaning as Coordinates}
 \centering
-\alert{Six ways to measure Y. One coefficient. Which one do you print?}
+\begin{tikzpicture}[font=\scriptsize,scale=0.9]
+  \draw[->,gray] (0,0) -- (6.2,0);
+  \draw[->,gray] (0,0) -- (0,3.4);
+  \fill[titleblue] (4.6,2.7) circle (2.5pt) node[right,text=black,align=left] {``sauver la maternit\'e\\de notre h\^opital''};
+  \fill[titleblue] (3.6,1.9) circle (2.5pt) node[left,text=black,align=right] {``les urgences de la ville\\ne fermeront pas''};
+  \fill[gray] (1.2,0.6) circle (2.5pt) node[right,text=black,align=left] {``la politique \'etrang\`ere\\de la France''};
+  \draw[dashed,titleblue] (4.6,2.7) -- (3.6,1.9);
+\end{tikzpicture}
+
+\vspace{0.3cm}
+\raggedright
+\small
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Each passage of 80 words becomes 384 numbers. Close passages say similar things, with other words, or with OCR errors.
+    \item \texttt{multilingual-e5-small}: MIT licence, French included, 470 MB, runs on a CPU. On the cluster: the 4,010 documents in one job.
+    \item Not a judgement: a geometry. You still decide what ``close'' means.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\chg{From Words to Sentences in Context}}
+\small
+\begin{itemize}
+    \setlength{\itemsep}{7pt}
+    \item \textbf{Word embeddings} (word2vec, 2013): one point per word, learned from the words around it. ``Mandat'' is one point, whatever the sentence.
+    \item \textbf{Contextual models} (BERT, 2018): one point per word \textit{in its sentence}. Fine-tuned on a few hundred codes, a strong classifier.
+    \item \textbf{Sentence embeddings}: one point per passage. Today's model.
+\end{itemize}
+
+\vspace{0.4cm}
+Trained on billions of words you did not choose: what works, and how to tell, in Rodriguez and Spirling (2022).
+
+\vspace{0.4cm}
+\centering
+\alert{The space is learned, not designed. You read it through its neighbours.}
+\end{frame}
+
+\begin{frame}{Three Uses}
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{8pt}
+    \item \textbf{Search by meaning.} ``Il faut sauver la maternit\'e de l'h\^opital de notre ville'': the five closest passages in the corpus. Finds what the dictionary misses.
+    \item \textbf{A score.} Each document: its passage closest to four examples of local offers. Read as a ranking: the AUC is the probability that a document with a local offer ranks above one without.
+    \item \textbf{Features for a classifier.} The document's vector as input, your codes as labels.
+\end{enumerate}
+
+\vspace{0.5cm}
+\centering
+\alert{The examples you choose are a codebook in disguise.}
+\end{frame}
+
+\begin{frame}{\chg{LLMs: the Black Box}}
+\small
+\textbf{The gain.} It reads instructions. No word list, no training set: a codebook in plain words, and an answer.
+
+\vspace{0.4cm}
+\textbf{What you do not see}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{The training data.} Was your corpus in it? The catalogue you validate against?
+    \item \textbf{The reasons.} The explanation it gives is another output, not a trace.
+    \item \textbf{The version.} Models change and are retired. Your replication file may not rerun.
+    \item \textbf{The draw.} The same prompt, twice, two answers.
+\end{itemize}
+
+\vspace{0.4cm}
+With a closed model you do not have the weights either (Palmer, Smith and Spirling 2024).
+\end{frame}
+
+\begin{frame}{When the Classical Tools Win}
+\footnotesize
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\toprule
+& \textbf{Dictionary} & \textbf{Embeddings + classifier} & \textbf{LLM} \\
+\midrule
+Reads & words & meaning & meaning and instructions \\
+You need & a word list & a few hundred codes & a codebook, and validation \\
+4,010 documents & free, seconds & minutes of GPU & about a dollar, minutes \\
+Same answer tomorrow & yes & yes & not guaranteed \\
+The text leaves UZH & no & no & yes, unless local \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\small
+On a narrow, lexical concept with millions of texts, start classical. On a fuzzy concept with a few thousand texts, an LLM, validated. In both cases: the same hand codes decide.
+\end{frame}
+
+\begin{frame}{\chg{Working With a Black Box}}
+\small
+You cannot open it. You can test it from the outside.
+
+\vspace{0.3cm}
+\begin{enumerate}
+    \setlength{\itemsep}{5pt}
+    \item \textbf{Hand codes, drawn at random}: the reference for any method. Part 6.
+    \item \textbf{Evidence before the answer}: a quote from the text, then the label.
+    \item \textbf{Two readers}: two models, or a model and a dictionary. A disagreement is a passage to read.
+    \item \textbf{A fixed record}: model ID, date, prompt, schema, every raw answer.
+    \item \textbf{Open weights} when the data or the replication require it. Session 3.
+\end{enumerate}
+
+\vspace{0.4cm}
+\centering
+\alert{The fourth principle did not change: validate, validate, validate.}
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 1. The ScienceCluster, for Real}{One task, two doors}
+\sectionslide{Part 2. Three Ways into the ScienceCluster}{The same machines, reached three ways}
 
-\begin{frame}{Why Now}
+\begin{frame}{\chg{Why a Cluster}}
 \small
-Last time, the doors. Today, a task that needs them: \textbf{embed the 4,010 professions de foi of 1978}, then work on them in a notebook.
+Fine-tuning a model, embedding a million speeches, running a local LLM on a whole corpus: GPUs, memory, and hours of uninterrupted compute.
+
+\vspace{0.5cm}
+\begin{itemize}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{84} compute nodes in the main partition of the UZH ScienceCluster.
+    \item \textbf{H200}, H100, A100 and L4 GPUs: the cards LLMs are trained and run on.
+    \item \textbf{24/7}: jobs keep running after you close your laptop.
+    \item Data that must stay at UZH: the model comes to the data.
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Access}: your group's Science IT project; your PI adds you.
+\end{frame}
+
+\begin{frame}{\chg{Every Route Goes Through the Same Five Stops}}
+\centering
+\begin{tikzpicture}[font=\scriptsize]
+  \tikzset{box/.style={draw,rounded corners,minimum height=1.5cm,text width=1.55cm,align=center,fill=gray!12},
+           key/.style={draw,rounded corners,minimum height=1.5cm,text width=1.55cm,align=center,fill=titleblue!70,text=white}}
+  \node[box] (a) at (0,0) {\textbf{Your laptop}\\browser, terminal or Claude Code};
+  \node[box] (b) at (2.3,0) {\textbf{VPN}\\inside the UZH network};
+  \node[key] (c) at (4.6,0) {\textbf{Login node}\\files, editing, submitting};
+  \node[box] (d) at (6.9,0) {\textbf{Slurm}\\the scheduler queues your job};
+  \node[box] (e) at (9.2,0) {\textbf{Compute nodes}\\CPUs and GPUs do the work};
+  \foreach \x/\y in {a/b,b/c,c/d,d/e} \draw[-{Latex},thick] (\x) -- (\y);
+\end{tikzpicture}
+
+\vspace{0.9cm}
+\small
+\alert{Rule 1. The login node is shared by everyone.\\ Never run heavy code there: send it to Slurm.}
+\end{frame}
+
+\begin{frame}{\chg{Step Zero: Off Campus, the UZH VPN}}
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{5pt}
+    \item Install \textbf{Ivanti Secure Access} from the UZH VPN download page.
+    \item Add a connection, server \texttt{remoteaccess.uzh.ch/vpn}.
+    \item Connect, log in with your UZH account, approve the MFA prompt.
+    \item ``Connected'': the cluster is reachable.
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Without the VPN} the cluster does not answer:
+
+\vspace{0.1cm}
+{\footnotesize \texttt{Network is unreachable}}
 
 \vspace{0.4cm}
-\renewcommand{\arraystretch}{1.4}
+On campus Wi-Fi (eduroam) you are already inside.
+\end{frame}
+
+\begin{frame}{\chg{Route 1. The Web Interface}}
+\begin{columns}[T]
+\column{0.37\textwidth}
+\small
+\href{https://apps.s3it.uzh.ch}{\texttt{apps.s3it.uzh.ch}}, your UZH login. Nothing to install.
+
+\vspace{0.3cm}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Files}: browse, upload, download
+    \item \textbf{Jobs}: what is running
+    \item \textbf{Interactive Apps}: Jupyter, RStudio, VS Code on a compute node
+\end{itemize}
+
+\vspace{0.3cm}
+Hours, cores, memory, GPU in a form, then Launch: Slurm does the booking for you.
+\column{0.62\textwidth}
+\includegraphics[width=\textwidth]{figures/scienceapps_jupyter.jpg}
+\end{columns}
+\end{frame}
+
+\begin{frame}{\chg{Same Files, Whichever Route}}
+\begin{columns}[T]
+\column{0.56\textwidth}
+\includegraphics[width=\textwidth]{figures/scienceapps_files.jpg}
+\column{0.42\textwidth}
+\small
+This folder was created by Claude Code over SSH. The web interface sees it straight away.
+
+\vspace{0.4cm}
+\textbf{Three storage areas}
+\begin{itemize}
+    \setlength{\itemsep}{2pt}
+    \item \texttt{home}: code, small files
+    \item \texttt{scratch}: big temporary data
+    \item \texttt{shares}: your group's data
+\end{itemize}
+
+\vspace{0.3cm}
+``Open in Terminal'': a shell in the browser too.
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{\chg{Route 2. SSH: One Command}}
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+# on your laptop, VPN connected
+$ ssh <you>@cluster.s3it.uzh.ch
+(<you>@cluster.s3it.uzh.ch) Password:
+# the prompt changes: you are now on the login node
+$ hostname
+u24-login-2
+$ ls
+data  demo_cours_llm  scratch  ...
+\end{verbatim}}
+
+\vspace{0.3cm}
+\small
+Terminal on Mac and Linux, PowerShell on Windows: SSH is built in.
+
+\vspace{0.3cm}
+\texttt{ssh} = secure shell. Everything you type now runs on the cluster, not on your laptop.
+\end{frame}
+
+\begin{frame}[fragile]{\chg{A Nickname and a Key}}
+\begin{columns}[T]
+\column{0.47\textwidth}
+\small
+\textbf{1. A nickname}, in \texttt{\textasciitilde/.ssh/config}
+{\scriptsize
+\begin{verbatim}
+Host scicluster
+  HostName cluster.s3it.uzh.ch
+  User <you>
+  ServerAliveInterval 60
+\end{verbatim}}
+Now \texttt{ssh scicluster} is enough, and the connection survives coffee breaks.
+\column{0.47\textwidth}
+\small
+\textbf{2. A key}, instead of a password
+{\scriptsize
+\begin{verbatim}
+# once, on your laptop
+$ ssh-keygen -t ed25519
+$ ssh-copy-id scicluster
+Number of key(s) added: 1
+\end{verbatim}}
+The last password you type. Claude Code needs this too: it cannot type passwords.
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{\chg{A Job Script: a Booking Form and a Recipe}}
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+# job.sh
+#!/bin/bash -l
+#SBATCH --job-name=demo_cours
+#SBATCH --time=00:05:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=1G
+#SBATCH --output=demo_%j.out
+
+module load miniforge3
+python hello_cluster.py
+\end{verbatim}}
+
+\vspace{0.2cm}
+\small
+\textbf{The booking form}: the \texttt{\#SBATCH} lines. How long, how many cores, how much memory. \texttt{--gpus=1} for a GPU.
+
+\vspace{0.2cm}
+\textbf{The recipe}: ordinary commands. Load Python, run your script.
+\end{frame}
+
+\begin{frame}[fragile]{\chg{Submit, Check, Read}}
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+$ sbatch job.sh
+Submitted batch job 8399251
+$ squeue -u $USER          # while it runs: R (running) or PD (pending)
+$ sacct -j 8399251 -X      # once it is done
+8399251  COMPLETED  00:00:06  u24-cva0000-002
+$ cat demo_8399251.out
+Machine : u24-cva0000-002 | Python 3.13.13
+Job Slurm : 8399251 | CPUs : 1
+  8 mots -> Le parlement a adopté la réforme des retraites.
+Terminé.
+\end{verbatim}}
+
+\vspace{0.3cm}
+\small
+The job ran on \texttt{u24-cva0000-002}, a compute node, not on the login node.
+\end{frame}
+
+\begin{frame}{\chg{Route 3. Claude Code}}
+\small
+What I typed, in plain words:
+
+\vspace{0.2cm}
+\begin{quote}
+\textit{``Connect to scicluster, create a folder demo\_cours\_llm, write a small Python script that counts the words in three sentences, run it as a Slurm job with 1 CPU and 1 GB for 5 minutes, and show me the output.''}
+\end{quote}
+
+\vspace{0.2cm}
+\textbf{What it needs}
+\begin{enumerate}
+    \setlength{\itemsep}{2pt}
+    \item The VPN connected.
+    \item The \texttt{scicluster} nickname.
+    \item An SSH key: it cannot type your password.
+    \item You, approving each command it wants to run.
+\end{enumerate}
+
+\vspace{0.2cm}
+Claude Code runs on \textbf{your laptop}. It reaches the cluster through the same \texttt{ssh scicluster}.
+\end{frame}
+
+\begin{frame}[fragile]{\chg{It Failed First, Read the Error, and Fixed It}}
+\begin{columns}[T]
+\column{0.43\textwidth}
+\small
+\textbf{Attempt 1}: job 8399250, failed in 1 s
+{\scriptsize
+\begin{verbatim}
+module: command not found
+SyntaxError: unexpected character
+  after line continuation
+\end{verbatim}}
+A shell without the cluster's setup, and quotes mangled while writing the file remotely.
+\column{0.53\textwidth}
+\small
+\textbf{Attempt 2}: job 8399251, completed in 6 s
+{\scriptsize
+\begin{verbatim}
+# fix 1: the first line becomes
+#!/bin/bash -l
+# fix 2: write locally, then copy
+$ scp job.sh scicluster:demo_cours_llm/
+\end{verbatim}}
+About two minutes from prompt to result, with my approval at each step.
+\end{columns}
+
+\vspace{0.5cm}
+\centering
+\alert{It makes your mistakes, faster. Read what it runs before you approve.}
+\end{frame}
+
+\begin{frame}{\chg{Three Routes, Three Jobs}}
 \footnotesize
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.8cm}@{}}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
 \toprule
-& \textbf{Your laptop} & \textbf{Colab} & \textbf{ScienceCluster} \\
+& \textbf{Web interface} & \textbf{SSH terminal} & \textbf{Claude Code} \\
 \midrule
-GPU & yours, if any & a free T4, for a while & L4, A100, H100, H200 \\
-How long & while it is on & a few hours & up to 7 days \\
-Where the data go & nowhere & Google's machines & nowhere: UZH \\
-Who pays & you & free tier, or a plan & your group's project \\
+Set-up & none: a browser & VPN, then a key & VPN, key and nickname \\
+Best for & notebooks, RStudio, looking at files & long batch jobs, many runs & writing and debugging job scripts \\
+Learning curve & minutes & a few weeks & minutes, but you must check it \\
+Reproducible & clicks are not saved & scripts are & scripts are, plus the chat \\
+Main risk & idle sessions burn your hours & heavy work on the login node & approving commands you do not understand \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{\chg{When It Breaks}}
+\footnotesize
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{5.2cm}@{}}
+\toprule
+\textbf{The message} & \textbf{The cause, the fix} \\
+\midrule
+\texttt{Network is unreachable} & The VPN is off. Connect Ivanti, try again. \\
+\texttt{Permission denied (publickey,password)} & No key installed, so a tool cannot log in. \texttt{ssh-copy-id}, once. \\
+\texttt{REMOTE HOST IDENTIFICATION HAS CHANGED} & The server's key was renewed. Check with IT, then \texttt{ssh-keygen -R cluster.s3it.uzh.ch}. \\
+\texttt{module: command not found} & A job script without a login shell. First line: \texttt{\#!/bin/bash -l}. \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.4cm}
 \small
-\textbf{Access}: your group's Science IT project; your PI adds you. VPN off campus.
+Four errors I hit while preparing this class.
 \end{frame}
 
-\begin{frame}{Today's Task}
-\centering
-\begin{tikzpicture}[font=\scriptsize]
-  \tikzset{box/.style={draw,rounded corners,minimum height=0.85cm,text width=2.1cm,align=center,fill=gray!12},
-           key/.style={draw,rounded corners,minimum height=0.85cm,text width=2.1cm,align=center,fill=titleblue!70,text=white}}
-  \node[box] (lap) at (0,0) {Your laptop};
-  \node[box] (login) at (4,0) {Login node\\edit, submit};
-  \node[key] (gpu) at (8,0) {Compute node\\one GPU};
-  \node[box] (apps) at (0,-1.9) {ScienceApps\\in your browser};
-  \node[box] (scratch) at (4,-1.9) {\texttt{/scratch}\\texts, vectors};
-  \node[key] (jup) at (8,-1.9) {Jupyter\\kernel \texttt{s4}};
-  \draw[-{Latex}] (lap) -- node[above,font=\tiny]{\texttt{ssh}, \texttt{scp}} (login);
-  \draw[-{Latex}] (login) -- node[above,font=\tiny]{\texttt{srun}, \texttt{sbatch}} (gpu);
-  \draw[-{Latex}] (gpu) -- node[above left,font=\tiny]{writes} (scratch);
-  \draw[-{Latex}] (apps) -- node[above,font=\tiny]{starts} (scratch.west);
-  \draw[-{Latex}] (scratch) -- node[above,font=\tiny]{reads} (jup);
-\end{tikzpicture}
-
-\vspace{0.6cm}
-\raggedright
+\begin{frame}{\chg{Four Habits on a Shared Cluster}}
 \small
 \begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item Once: build one environment (a container) on a compute node.
-    \item Fetch the corpus from the Internet Archive API, and check it.
-    \item Submit the job: 4,010 documents embedded on one GPU.
-    \item Open the notebook in ScienceApps, with the same environment, next to the vectors.
+    \setlength{\itemsep}{8pt}
+    \item \textbf{Heavy work goes to Slurm.} The login node is for editing and submitting. Everything else is a job.
+    \item \textbf{Ask for what you need.} Small requests of time, cores and memory start sooner. Close idle Jupyter sessions.
+    \item \textbf{Know where your data goes.} Claude Code sends what it reads to Anthropic. Keep interview transcripts and personal data out of its view.
+    \item \textbf{Read before you approve.} An agent with SSH access can delete files as fast as it writes them.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Door 1. Once: One Environment}
+\begin{frame}{\chg{Block 1. Your Route}}
 \small
-The S3IT way: no \texttt{pip install} on the cluster, a container built from a conda file.
-
-\vspace{0.2cm}
-{\scriptsize
-\begin{verbatim}
-# on your laptop
-scp -r sessions/04/cluster <you>@cluster.s3it.uzh.ch:~/s4
-
-ssh -l <you> cluster.s3it.uzh.ch
-cd ~/s4
-# building is work: on a compute node, not the login node
-srun --pty -n 1 -c 2 --time=01:00:00 --mem=16G bash -l
-module load apptainer
-APPTAINER_BINDPATH="" apptainer build /scratch/$USER/s4.sif s4.def
-\end{verbatim}}
-
-\vspace{0.2cm}
-\begin{columns}[T]
-\column{0.45\textwidth}
-\footnotesize
-\texttt{env.yml}: pandas, scikit-learn, sentence-transformers, the Anthropic and OpenAI libraries, ipykernel.
-\column{0.5\textwidth}
-\footnotesize
-\texttt{s4.def}: start from \texttt{miniforge3}, create the environment, put it on the \texttt{PATH}. Ten to twenty minutes, once.
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Door 1. Fetch the Corpus, and Check It}
-\small
-Still on the compute node. A data API again, with the same accounting as in Session 3.
-
-\vspace{0.2cm}
-{\scriptsize
-\begin{verbatim}
-curl -sI https://archive.org | head -1    # does this node reach out?
-apptainer exec /scratch/$USER/s4.sif python fetch_corpus.py \
-    --date 1978-03-12 --out /scratch/$USER/archelec
-# 4010 documents found, 4010 to fetch
-# requested 4010 = returned ... + missing ...
-
-export HF_HOME=/scratch/$USER/hf           # the model, once, on scratch
-apptainer exec /scratch/$USER/s4.sif python embed_corpus.py \
-    --download-only
-exit
-\end{verbatim}}
-
-\vspace{0.2cm}
-Texts, model, vectors: on \texttt{/scratch}. Purged after 30 days unused, no backup. The texts are under a restrictive licence: never in a public repository.
-\end{frame}
-
-\begin{frame}[fragile]{Door 1. The Job}
-\scriptsize
-\begin{verbatim}
-#!/usr/bin/bash -l
-#SBATCH --job-name=embed-1978
-#SBATCH --time=00:30:00
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gpus=1
-#SBATCH --output=logs/%x_%j.out
-
-module load apptainer
-export HF_HOME=/scratch/$USER/hf
-apptainer exec --nv /scratch/$USER/s4.sif python embed_corpus.py \
-    --corpus /scratch/$USER/archelec/1978-03-12
-\end{verbatim}
-
-\vspace{0.2cm}
-\begin{verbatim}
-module load l4 && mkdir -p logs
-sbatch embed.sbatch             # Submitted batch job 1234567
-squeue --me                     # PD = waiting for a GPU, R = running
-tail -f logs/embed-1978_1234567.out
-\end{verbatim}
-
-\vspace{0.1cm}
-\small
-\texttt{--nv} gives the container the GPU. The log ends with \texttt{run.json}: model, GPU, passages, seconds.
-\end{frame}
-
-\begin{frame}[fragile]{Door 3. The Same Environment in the Browser}
-\small
-\textbf{Once}: the container becomes a Jupyter kernel (S3IT's script).
-
-{\tiny
-\begin{verbatim}
-curl -O https://gitlab.uzh.ch/s3it/docs/-/snippets/271/raw/main/apptainer_ipykernel.py
-python apptainer_ipykernel.py install /scratch/$USER/s4.sif --name s4
-\end{verbatim}}
-
-\vspace{0.2cm}
-\textbf{Every time}: \href{https://apps.s3it.uzh.ch}{\texttt{apps.s3it.uzh.ch}}
-\begin{enumerate}
-    \setlength{\itemsep}{2pt}
-    \item Interactive Apps, Jupyter. Hours 3, cores 4, RAM 16 GB, GPU L4.
-    \item My Interactive Sessions: Connect. Today's notebook, kernel \texttt{s4}.
-    \item Keys in \texttt{\textasciitilde/.env} (\texttt{chmod 600}); \texttt{CLUSTER\_EMBEDDINGS} set to the job's folder.
-    \item Delete the session when you are done: it is billed while it runs.
-\end{enumerate}
-
-\vspace{0.2cm}
-No \texttt{pip install} in a cell: the container is fixed. A new package, a new build.
-\end{frame}
-
-\begin{frame}{Part 1. Follow Along}
-\small
-\textbf{I show.} The four steps, live. The job goes in at the start, and is done before the end of Part 1.
+\textbf{I show.} The same small job, three times: in the browser, in the terminal, with Claude Code.
 
 \vspace{0.4cm}
 \textbf{You do}
 \begin{itemize}
     \setlength{\itemsep}{4pt}
-    \item \textbf{With an account}: \texttt{sessions/04/cluster/README.md}, step by step. Building takes time: start it now, come back to it at the break.
-    \item \textbf{Without}: open today's notebook in Colab and run Part 0. Keep the README for the day you have an account.
+    \item \textbf{With an account}: the nickname and the key, then \texttt{sessions/04/cluster/demo/}: copy the two files, \texttt{sbatch job.sh}. Then ask your agent to do the same.
+    \item \textbf{Without}: open today's notebook in Colab and run Parts 0 and 1. Keep the README for the day you have an account.
 \end{itemize}
 
 \vspace{0.4cm}
-\textbf{We check.} Shared document: the job ID, the GPU in the log, the seconds.
+\textbf{We check.} Shared document: your job ID, and the name of the node it ran on.
 
 \vspace{0.4cm}
-\textbf{An agent on the cluster} (Door 2) writes and resubmits job scripts well: \texttt{setup/cluster\_guide.md}.
+\textbf{Going further}: a GPU job that embeds 4,010 documents, and the same environment as a Jupyter kernel. \texttt{sessions/04/cluster/README.md}.
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 2. Measuring Without an LLM}{Words, geometry, a classifier}
+\sectionslide{Part 3. Your Paper and Your Data, Connected}{Overleaf and Dropbox, as folders your agent can work in}
+
+\begin{frame}{\chg{A Project Lives in Several Places}}
+\small
+The agent works in one folder. Bring the rest to that folder.
+
+\vspace{0.4cm}
+\footnotesize
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{5.3cm}@{}}
+\toprule
+\textbf{What} & \textbf{Where it lives} & \textbf{How the agent reaches it} \\
+\midrule
+The paper & Overleaf & Git, or Dropbox sync: the project becomes a local folder \\
+Data, coauthors' files & Dropbox & the synced folder on your laptop \\
+Compute & the cluster & \texttt{ssh scicluster} \\
+Drive, mail, calendar & the cloud & a connector (MCP server), Session 3 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\small
+\centering
+\alert{A table the agent computes should reach the paper without a copy-paste.}
+\end{frame}
+
+\begin{frame}[fragile]{\chg{Overleaf: Your Paper as a Folder}}
+\small
+UZH members have the premium features: \href{https://www.overleaf.com/edu/uzh}{\texttt{overleaf.com/edu/uzh}}, log in with SSO.
+
+\vspace{0.3cm}
+\textbf{Way 1. Git.} In the project: Integrations, Git. A token in Account Settings is your password.
+{\scriptsize
+\begin{verbatim}
+git clone https://git.overleaf.com/<project-id> paper
+cd paper && git pull         # before the agent works
+git add -A && git commit -m "Table 2" && git push     # after
+\end{verbatim}}
+
+\vspace{0.2cm}
+\textbf{Way 2. Dropbox sync.} Account Settings, link Dropbox. Every project appears in \texttt{Dropbox/Apps/Overleaf/<project>}, in both directions.
+
+\vspace{0.3cm}
+Then the script writes \texttt{tables/t2.tex}, and the paper says \verb|\input{tables/t2}|.
+\end{frame}
+
+\begin{frame}{\chg{Overleaf: What to Watch}}
+\small
+\begin{itemize}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{One route per project}: Git or Dropbox, not both.
+    \item \textbf{Git}: pull first, push last. No branches. A push can displace your coauthors' comments and tracked changes.
+    \item \textbf{Dropbox}: compiled files (\texttt{.aux}, \texttt{.log}, the PDF) cause conflicts. Compile on Overleaf, or keep local outputs elsewhere.
+    \item \textbf{Renaming a file} from your laptop is a delete and a create: its history is lost.
+    \item \textbf{``Overleaf connectors'' you find online} are community projects, not Overleaf's. Read what they ask for before you give them your session.
+    \item The agent reads the whole paper: unpublished results go to the provider.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\chg{Dropbox: the Synced Folder}}
+\small
+The agent reads and writes the local copy. Dropbox carries it to your coauthors.
+
+\vspace{0.3cm}
+\begin{itemize}
+    \setlength{\itemsep}{6pt}
+    \item \textbf{Online-only files are empty.} A placeholder of 0 bytes: the agent reads nothing, and may not say so. ``Make available offline'' first.
+    \item \textbf{No git repository inside Dropbox.} Two machines syncing \texttt{.git} corrupt it. Code in git, data in Dropbox, the path in one config file.
+    \item \textbf{Raw data read-only.} What the agent deletes is deleted for everyone. Know how long your plan keeps deleted files.
+    \item \textbf{Your coauthors see every file it writes.} One folder for its outputs.
+    \item \textbf{The Dropbox connector} searches and reads without syncing. It does not edit a file in place.
+\end{itemize}
+\end{frame}
+
+% ============================================================================
+\sectionslide{Part 4. From a Scan to a Text}{OCR, and how to know it worked}
+
+\begin{frame}{\chg{Today's Corpus and Question}}
+\small
+\textbf{Do candidates who already hold a local office talk more about local issues?}
+
+\vspace{0.3cm}
+The professions de foi of the first round of the 1978 legislative election: 4,010 scanned leaflets in Archelec (Sciences Po, CEVIPOF). We draw 300.
+
+\vspace{0.4cm}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\toprule
+\textbf{The text} & a scan, read by an OCR in 2021, and again today by a model (Part 4) \\
+\textbf{X} \newline {\scriptsize a local office} & the catalogue of Sciences Po, and the same variable extracted by Claude and GPT (Part 5) \\
+\textbf{Y} \newline {\scriptsize a local offer} & by hand, a dictionary, embeddings, a classifier, Claude and GPT (Part 6) \\
+\textbf{The estimate} & naive, and corrected with your hand codes (Part 6) \\
+\bottomrule
+\end{tabular}
+\end{frame}
 
 \begin{frame}{The Data: Archelec}
 \small
@@ -382,200 +797,116 @@ Someone read the leaflet and filled in this form. Today an LLM fills in the same
 \alert{The mayor is the substitute, not the candidate:\\ exactly the confusion a model must avoid.}
 \end{frame}
 
-\begin{frame}{Block 1. Collect, and Code by Hand}
+\begin{frame}{\chg{OCR: Two Ways to Read a Page}}
 \small
-\textbf{I show.} Notebook, Parts 1 and 2: the search, the draw of 300, the checks, the catalogue.
+\begin{columns}[T]
+\column{0.47\textwidth}
+\textbf{Classical OCR} (Tesseract, here in 2021)
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Shapes, then letters, then words
+    \item Free, local, the same answer every time
+    \item Fails on names, accents, columns, stamps, slogans in large type
+    \item Its errors look like errors: ``f\'eagtion''
+\end{itemize}
+\column{0.47\textwidth}
+\textbf{A vision model} (an LLM that reads images)
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Reads the page as a whole: layout, columns, context
+    \item A fraction of a cent per page
+    \item Can \textbf{correct} and \textbf{complete}: fluent text that is not on the page
+    \item Its errors look like French
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\centering
+\alert{A wrong word you can see is better than a right-looking word nobody printed.}
+\end{frame}
+
+\begin{frame}[fragile]{\chg{One Call: a PDF In, a Text Out}}
+\vspace{0.1cm}
+{\scriptsize
+\begin{verbatim}
+r = claude.messages.create(model="claude-haiku-5-5", max_tokens=8000,
+      system=OCR_INSTRUCTIONS,
+      messages=[{"role": "user", "content": [
+          {"type": "document",
+           "source": {"type": "base64", "media_type": "application/pdf",
+                      "data": base64_of_the_pdf}},
+          {"type": "text", "text": "Transcribe this document."}]}])
+text = r.content[0].text
+\end{verbatim}}
+
+\vspace{0.3cm}
+\small
+\textbf{The instructions do the work}
+\begin{itemize}
+    \setlength{\itemsep}{3pt}
+    \item Transcribe exactly what is printed. Do not correct, do not modernise.
+    \item Never complete a word or a sentence you cannot read: write \texttt{[illisible]}.
+    \item Columns one after the other. No commentary.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\chg{Which OCR Is Better? Three Checks}}
+\small
+Nobody typed these 4,010 leaflets by hand: there is no ground truth.
+
+\vspace{0.3cm}
+\begin{enumerate}
+    \setlength{\itemsep}{7pt}
+    \item \textbf{Read one page} against the scan, both versions side by side. Where do they differ, and who is right?
+    \item \textbf{A fact you did not produce.} The catalogue gives each candidate's surname. Is it in the text? Counted for both versions.
+    \item \textbf{Downstream.} Does your measure change when the text changes? If not, the old OCR was good enough.
+\end{enumerate}
+
+\vspace{0.5cm}
+\centering
+\alert{Better OCR is worth its price only if the measure moves.}
+\end{frame}
+
+\begin{frame}{\chg{The Same Logic for Sound and Video}}
+\footnotesize
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{4.9cm}@{}}
+\toprule
+\textbf{Source} & \textbf{Becomes a text by} & \textbf{What is lost or invented} \\
+\midrule
+A scanned page & OCR, or a vision model & names, layout; completed words \\
+A recording & transcription (speech-to-text) & who speaks, tone, pauses; sentences in the silences \\
+A video & frames and the audio track & what happens between the frames \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\small
+Each step has an error rate, measured on a sample you checked yourself. And newer models read images and sound directly, without the text in between.
+
+\vspace{0.3cm}
+\textbf{Session 5}: audio and video, on your own material.
+\end{frame}
+
+\begin{frame}{\chg{Block 2. Collect, and Read a Scan Twice}}
+\small
+\textbf{I show.} Notebook, Parts 1 and 2: the search, the draw of 300, the checks, the catalogue; then twelve scans read again by Claude.
 
 \vspace{0.3cm}
 \textbf{You do}
 \begin{enumerate}
     \setlength{\itemsep}{3pt}
     \item Notebook Part 1: read the checks: found, requested, returned, missing, empty.
-    \item \texttt{MY\_NUMBER}: the number next to your name in my email.
-    \item Code \textbf{six documents}: the common one, then your five. Read the PDF. One definition:
-\end{enumerate}
-
-{\footnotesize
-\textit{local\_offer: a geographically specific local issue, institution, project, service, firm, infrastructure, place, or population. A candidate name, constituency heading, or place name alone is insufficient.}}
-
-\vspace{0.2cm}
-\begin{enumerate}
-    \setcounter{enumi}{3}
-    \item Paste your six lines in the shared sheet.
-\end{enumerate}
-
-\vspace{0.2cm}
-\textbf{We check.} The common document: how many of you said yes?
-\end{frame}
-
-\begin{frame}{Why Your Six Codes Matter}
-\small
-The documents were handed out in an order drawn at random. So the documents you coded are \textbf{a random sample} of the 300, and each had \textbf{a known probability} of being coded:
-
-\[
-\pi = \frac{\text{documents coded by the class}}{300}
-\]
-
-\vspace{0.3cm}
-\begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item Part 2: the reference for every measure.
-    \item Part 4: what makes the coefficient correctable.
-\end{itemize}
-
-\vspace{0.4cm}
-\centering
-\alert{A gold standard you chose yourself is anecdotes.\\ A gold standard drawn at random is a sample.}
-\end{frame}
-
-\begin{frame}{Dictionaries}
-\small
-\textbf{A list of words, and a rule.} Policy positions from word lists (Laver and Garry 2000); populism, as a dictionary and by hand (Rooduijn and Pauwels 2011).
-
-\vspace{0.3cm}
-\begin{columns}[T]
-\column{0.47\textwidth}
-\textbf{For}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item Visible: it fits in an appendix
-    \item The same answer every time
-    \item Free, on millions of documents
-\end{itemize}
-\column{0.47\textwidth}
-\textbf{Against}
-\begin{itemize}
-    \setlength{\itemsep}{2pt}
-    \item Words, not meaning
-    \item OCR: ``ma\-ter\-nit\'e'' cut by a line break
-    \item Headings: ``la circonscription''
-\end{itemize}
-\end{columns}
-
-\vspace{0.4cm}
-Today's list: 27 words (``notre ville'', ``d\'eviation'', ``h\^opital'', ``usine'', ...) and a rule: two different words or more.
-\end{frame}
-
-\begin{frame}{Precision and Recall}
-\small
-\centering
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-& \textbf{You: a local offer} & \textbf{You: none} \\
-\midrule
-\textbf{Dictionary: yes} & true positive & \textcolor{accentred}{false positive} \\
-\textbf{Dictionary: no} & \textcolor{accentred}{false negative} & true negative \\
-\bottomrule
-\end{tabular}
-
-\vspace{0.5cm}
-\raggedright
-\begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{Precision}: of the documents it flags, how many are right?
-    \item \textbf{Recall}: of the documents with a local offer, how many does it find?
-    \item Add a word: recall up, precision down. The trade-off, in plain sight.
-\end{itemize}
-
-\vspace{0.3cm}
-Then \textbf{read}: the false positives show which words fire, and where.
-\end{frame}
-
-\begin{frame}{Embeddings: Meaning as Coordinates}
-\centering
-\begin{tikzpicture}[font=\scriptsize,scale=0.9]
-  \draw[->,gray] (0,0) -- (6.2,0);
-  \draw[->,gray] (0,0) -- (0,3.4);
-  \fill[titleblue] (4.6,2.7) circle (2.5pt) node[right,text=black,align=left] {``sauver la maternit\'e\\de notre h\^opital''};
-  \fill[titleblue] (3.6,1.9) circle (2.5pt) node[left,text=black,align=right] {``les urgences de la ville\\ne fermeront pas''};
-  \fill[gray] (1.2,0.6) circle (2.5pt) node[right,text=black,align=left] {``la politique \'etrang\`ere\\de la France''};
-  \draw[dashed,titleblue] (4.6,2.7) -- (3.6,1.9);
-\end{tikzpicture}
-
-\vspace{0.3cm}
-\raggedright
-\small
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item Each passage of 80 words becomes 384 numbers. Close passages say similar things, with other words, or with OCR errors.
-    \item \texttt{multilingual-e5-small}: MIT licence, French included, 470 MB, runs on a CPU. On the cluster: the 4,010 documents in one job.
-    \item Not a judgement: a geometry. You still decide what ``close'' means.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Three Uses}
-\small
-\begin{enumerate}
-    \setlength{\itemsep}{8pt}
-    \item \textbf{Search by meaning.} ``Il faut sauver la maternit\'e de l'h\^opital de notre ville'': the five closest passages in the corpus. Finds what the dictionary misses.
-    \item \textbf{A score.} Each document: its passage closest to four examples of local offers. Read as a ranking: the AUC is the probability that a document with a local offer ranks above one without.
-    \item \textbf{Features for a classifier.} The document's vector as input, your codes as labels.
-\end{enumerate}
-
-\vspace{0.5cm}
-\centering
-\alert{The examples you choose are a codebook in disguise.}
-\end{frame}
-
-\begin{frame}{A Classifier Trained on Your Codes}
-\small
-A logistic regression: 384 numbers in, the probability of a local offer out, learned from the class's codes.
-
-\vspace{0.4cm}
-\textbf{Cross-validation}: five folds; each gold document is predicted by a model that never saw it. The only honest score with so few codes.
-
-\vspace{0.4cm}
-\begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item Today, about 60 codes: weak, and it shows.
-    \item With a few hundred: often as good as an LLM on a narrow concept, for nothing per document.
-    \item Your 100 coded texts: notebook Part 7, prompt 12.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{When the Classical Tools Win}
-\footnotesize
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
-\toprule
-& \textbf{Dictionary} & \textbf{Embeddings + classifier} & \textbf{LLM} \\
-\midrule
-Reads & words & meaning & meaning and instructions \\
-You need & a word list & a few hundred codes & a codebook, and validation \\
-4,010 documents & free, seconds & minutes of GPU & about a dollar, minutes \\
-Same answer tomorrow & yes & yes & not guaranteed \\
-The text leaves UZH & no & no & yes, unless local \\
-\bottomrule
-\end{tabular}
-
-\vspace{0.5cm}
-\small
-On a narrow, lexical concept with millions of texts, start classical. On a fuzzy concept with a few thousand texts, an LLM, validated. In both cases: the same hand codes decide.
-\end{frame}
-
-\begin{frame}{Block 2. A Dictionary, Embeddings, a Classifier}
-\small
-\textbf{I show.} Notebook, Part 3: the list and its score; two false positives; a search; the AUC; the classifier.
-
-\vspace{0.3cm}
-\textbf{You do}
-\begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item Run Part 3a. Then the exercise: remove a word, add two, rerun.
-    \item Part 3b: one search of your own.
-    \item Part 3c, once the sheet is filled: \texttt{GOLD\_SHEET\_CSV} in Part 0.
+    \item Notebook Part 2: run it. Open one PDF, and read the two versions next to it.
+    \item The surname check, for both versions.
 \end{enumerate}
 
 \vspace{0.3cm}
-\textbf{We check.} Shared document: your dictionary's precision and recall, before and after; the AUC; the classifier's $\kappa$.
-
-\vspace{0.3cm}
-\textbf{In parallel}: prompt 12 on your 100 texts.
+\textbf{We check.} Shared document: surnames found by the old OCR and by the model, out of twelve; one word the model got right; one word it should not have written.
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 3. Extracting With an LLM}{From a text to a table}
+\sectionslide{Part 5. Extracting With an LLM}{From a text to a table}
 
 \begin{frame}{Extraction Is Not Classification}
 \small
@@ -629,7 +960,7 @@ Twelve boxes copied from the text, one judged. The model cannot answer outside t
 
 \begin{frame}{The Rules That Matter}
 \small
-From the instructions (notebook, Part 4):
+From the instructions (notebook, Part 3):
 \begin{itemize}
     \setlength{\itemsep}{5pt}
     \item \textbf{Copy, as printed.} Without titles; the French text is authoritative.
@@ -714,13 +1045,13 @@ None of these raises an error. Only reading finds them.
 
 \begin{frame}{Block 3. Claude and GPT Against the Catalogue}
 \small
-\textbf{I show.} Notebook, Part 4: one form, read against its record; then 300 with each model; the table of outcomes.
+\textbf{I show.} Notebook, Part 3: one form, read against its record; then 300 with each model; the table of outcomes.
 
 \vspace{0.3cm}
 \textbf{You do}
 \begin{enumerate}
     \setlength{\itemsep}{3pt}
-    \item Run Part 4. Watch the cost line.
+    \item Run Part 3. Watch the cost line.
     \item Read five disagreements, with the PDF open.
     \item The offices: the model's 0/1 against the catalogue's.
 \end{enumerate}
@@ -733,7 +1064,90 @@ None of these raises an error. Only reading finds them.
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 4. From Labels to an Estimate}{The question we left open}
+\sectionslide{Part 6. Classifying Text, and the Coefficient}{Six codes, four measures, one estimate}
+
+\begin{frame}{Why Your Six Codes Matter}
+\small
+The documents were handed out in an order drawn at random. So the documents you coded are \textbf{a random sample} of the 300, and each had \textbf{a known probability} of being coded:
+
+\[
+\pi = \frac{\text{documents coded by the class}}{300}
+\]
+
+\vspace{0.3cm}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item The reference for every measure.
+    \item What makes the coefficient correctable.
+\end{itemize}
+
+\vspace{0.4cm}
+\centering
+\alert{A gold standard you chose yourself is anecdotes.\\ A gold standard drawn at random is a sample.}
+\end{frame}
+
+\begin{frame}{\chg{Four Ways to Say Yes or No}}
+\small
+One question per document: does it make a \textbf{local offer}?
+
+\vspace{0.3cm}
+{\footnotesize
+\textit{A geographically specific local issue, institution, project, service, firm, infrastructure, place, or population. A candidate name, constituency heading, or place name alone is insufficient.}}
+
+\vspace{0.4cm}
+\begin{enumerate}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{A dictionary}: 27 words, two different ones or more.
+    \item \textbf{Embeddings}: the passage closest to four examples.
+    \item \textbf{A classifier}: trained on the class's codes.
+    \item \textbf{Claude and GPT}: the definition as an instruction, a quote, then yes or no. Already done, in the form of Part 5.
+\end{enumerate}
+
+\vspace{0.4cm}
+All four against the same reference: your codes.
+\end{frame}
+
+\begin{frame}{Precision and Recall}
+\small
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+& \textbf{You: a local offer} & \textbf{You: none} \\
+\midrule
+\textbf{Measure: yes} & true positive & \textcolor{accentred}{false positive} \\
+\textbf{Measure: no} & \textcolor{accentred}{false negative} & true negative \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\raggedright
+\begin{itemize}
+    \setlength{\itemsep}{5pt}
+    \item \textbf{Precision}: of the documents it flags, how many are right?
+    \item \textbf{Recall}: of the documents with a local offer, how many does it find?
+    \item Add a word: recall up, precision down. The trade-off, in plain sight.
+\end{itemize}
+
+\vspace{0.3cm}
+Then \textbf{read}: the false positives show which words fire, and where.
+\end{frame}
+
+\begin{frame}{A Classifier Trained on Your Codes}
+\small
+A logistic regression: 384 numbers in, the probability of a local offer out, learned from the class's codes.
+
+\vspace{0.4cm}
+\textbf{Cross-validation}: five folds; each gold document is predicted by a model that never saw it. The only honest score with so few codes.
+
+\vspace{0.4cm}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item Today, about 60 codes: weak, and it shows.
+    \item With a few hundred: often as good as an LLM on a narrow concept, for nothing per document.
+    \item Your 100 coded texts: notebook Part 8, prompt 12.
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Why Errors Do Not Wash Out}
 \small
@@ -776,23 +1190,21 @@ smf.ols("pseudo ~ local_mandate", data=d).fit(cov_type="HC1")
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Block 4. Naive and Corrected}
+\begin{frame}{\chg{Block 4. Six Codes, Four Measures, One Estimate}}
 \small
-\textbf{I show.} Notebook, Part 5: every measure against the class's codes, then the coefficient, naive and corrected, in one figure.
+\textbf{You do}
+\begin{enumerate}
+    \setlength{\itemsep}{4pt}
+    \item \textbf{Notebook Part 4.} \texttt{MY\_NUMBER}: the number next to your name in my email. Code \textbf{six documents}: the common one, then your five. Read the PDF. Paste your six lines in the shared sheet.
+    \item \textbf{Notebook Part 5.} The dictionary, then the exercise: remove a word, add two. One search of your own. The classifier, once the sheet is filled.
+    \item \textbf{Notebook Part 6.} Every measure against the class's codes; the coefficient, naive and corrected. Part 7: the bundle.
+\end{enumerate}
 
 \vspace{0.3cm}
-\textbf{You do}: run Part 5, then Part 6, and download the bundle.
+\textbf{We check.} The common document: how many of you said yes? Then, for Claude: the coefficient naive and corrected. Does the conclusion change?
 
 \vspace{0.3cm}
-\textbf{We check.} Shared document: for Claude, the coefficient naive and corrected, with the intervals. Does the conclusion change?
-
-\vspace{0.5cm}
-\textbf{How to read it}
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item They agree: say so. The referee has a reason to believe the labels.
-    \item They disagree: the corrected one is the estimate; the gap is the bias of the labels.
-\end{itemize}
+\textbf{In parallel}: prompt 12 on your 100 texts, prompt 14 on your own labels.
 \end{frame}
 
 \begin{frame}{What Goes in the Paper}
@@ -812,69 +1224,90 @@ Prompt 14 writes this section with your agent, from your bundle.
 \end{frame}
 
 % ============================================================================
+
 \begin{frame}{Debrief}
-\textbf{Three screens.} The job's log. Your dictionary, before and after. The figure of Part 5.
+\textbf{Three screens.} The job's log. A page read twice. The figure of Part 6.
 
 \vspace{0.4cm}
 \textbf{One question.} Which measure of Y would you print, and what would you put in the appendix to defend it?
 
 \vspace{0.4cm}
-\textbf{Before you leave.} Download your bundle (Part 6). Prompts 12 to 14 and the new section of \texttt{template/CLAUDE.md} into your project. Prompt 05, commit.
+\textbf{Before you leave.} Download your bundle (Part 7). Prompts 12 to 14 and the new section of \texttt{template/CLAUDE.md} into your project. Prompt 05, commit.
 \end{frame}
 
-\begin{frame}{Next Session: 2 December 2026}
-\textbf{Unstructured Data: Audio, Video, and Text}
+\begin{frame}{\chg{Next Session: 2 December 2026}}
+\textbf{Unstructured Data: Audio and Video}
 
 \vspace{0.3cm}
 \begin{itemize}
     \setlength{\itemsep}{4pt}
-    \item From a scan or a recording to a text: OCR, transcription, and their errors.
-    \item Models that read images and listen to sound.
+    \item From a recording to a text: transcription, speakers, and their errors.
+    \item Models that listen and watch.
     \item Your project, in five minutes.
 \end{itemize}
 
 \vspace{0.4cm}
 \begin{alertblock}{Carry-over question}
-Today's OCR got one word in twenty wrong. Which of today's measures suffers most: the dictionary, the embeddings, or the LLM?
+A transcript keeps the words and loses the tone, the pauses, who interrupts whom. What does your measure need that the text does not have?
 \end{alertblock}
 
 \vspace{0.2cm}
-{\footnotesize Bring: twenty scanned pages or ten minutes of audio from your project.}
+{\footnotesize Bring: ten minutes of audio or video from your project.}
 \end{frame}
 
-\begin{frame}{References}
+\begin{frame}{\chg{References}}
 \vspace{0.1cm}
 \raggedright
 {\scriptsize
 Angelopoulos, A.\ N., Bates, S., Fannjiang, C., Jordan, M.\ I.\ and Zrnic, T.\ (2023). Prediction-Powered Inference. \textit{Science} 382(6671).
 
-\vspace{0.12cm}
+\vspace{0.1cm}
 Archelec. Archives \'electorales du CEVIPOF, Sciences Po. Internet Archive, collection \texttt{archiveselectoralesducevipof}.
 
-\vspace{0.12cm}
+\vspace{0.1cm}
+Devlin, J., Chang, M.-W., Lee, K.\ and Toutanova, K.\ (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. \textit{NAACL}.
+
+\vspace{0.1cm}
 Egami, N., Hinck, M., Stewart, B.\ M.\ and Wei, H.\ (2023). Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models. \textit{NeurIPS} 36.
 
-\vspace{0.12cm}
+\vspace{0.1cm}
 Gligori\'c, K., Zrnic, T., Lee, C., Cand\`es, E.\ and Jurafsky, D.\ (2025). Can Unconfident LLM Annotations Be Used for Confident Conclusions? \textit{NAACL}.
 
-\vspace{0.12cm}
-Grimmer, J., Roberts, M.\ E.\ and Stewart, B.\ M.\ (2022). \textit{Text as Data: A New Framework for Machine Learning and the Social Sciences}. Princeton University Press.
+\vspace{0.1cm}
+Grimmer, J.\ and Stewart, B.\ M.\ (2013). Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts. \textit{Political Analysis} 21(3).
 
-\vspace{0.12cm}
+\vspace{0.1cm}
+Grimmer, J., Roberts, M.\ E.\ and Stewart, B.\ M.\ (2022). \textit{Text as Data: A New Framework for Machine Learning and the Social Sciences}. Princeton University Press.
+}
+\end{frame}
+
+\begin{frame}{\chg{References (continued)}}
+\vspace{0.1cm}
+\raggedright
+{\scriptsize
 Laver, M.\ and Garry, J.\ (2000). Estimating Policy Positions from Political Texts. \textit{American Journal of Political Science} 44(3).
 
-\vspace{0.12cm}
+\vspace{0.1cm}
+Mikolov, T., Chen, K., Corrado, G.\ and Dean, J.\ (2013). Efficient Estimation of Word Representations in Vector Space. arXiv:1301.3781.
+
+\vspace{0.1cm}
+Palmer, A., Smith, N.\ A.\ and Spirling, A.\ (2024). Using Proprietary Language Models in Academic Research Requires Explicit Justification. \textit{Nature Computational Science} 4.
+
+\vspace{0.1cm}
+Rodriguez, P.\ L.\ and Spirling, A.\ (2022). Word Embeddings: What Works, What Doesn't, and How to Tell the Difference for Applied Research. \textit{Journal of Politics} 84(1).
+
+\vspace{0.1cm}
 Rooduijn, M.\ and Pauwels, T.\ (2011). Measuring Populism: Comparing Two Methods of Content Analysis. \textit{West European Politics} 34(6).
 
-\vspace{0.12cm}
+\vspace{0.1cm}
 Wang, L., Yang, N., Huang, X., Yang, L., Majumder, R.\ and Wei, F.\ (2024). Multilingual E5 Text Embeddings: A Technical Report. arXiv:2402.05672.
 
-\vspace{0.12cm}
-S3IT documentation: \href{https://docs.s3it.uzh.ch}{\texttt{docs.s3it.uzh.ch}}.
+\vspace{0.1cm}
+Documentation: \href{https://docs.s3it.uzh.ch}{\texttt{docs.s3it.uzh.ch}}; \href{https://docs.overleaf.com}{\texttt{docs.overleaf.com}} (Git integration, Dropbox).
 }
 
-\vspace{0.2cm}
-{\footnotesize Reading for today: Grimmer, Roberts and Stewart (2022), chapters on dictionaries and embeddings; Egami et al.\ (2023).}
+\vspace{0.3cm}
+{\footnotesize Reading for today: Grimmer and Stewart (2013); Egami et al.\ (2023).}
 \end{frame}
 
 \end{document}

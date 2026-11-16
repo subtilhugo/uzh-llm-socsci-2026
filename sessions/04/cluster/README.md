@@ -1,10 +1,76 @@
-# Session 4, Part 1: the ScienceCluster, for real
+# Session 4, Part 2: three ways into the ScienceCluster
 
-Session 3 showed the doors. Today one task goes through two of them: **download the 4,010 professions de foi of the first round of the 1978 legislative election, and embed them on a GPU.** The same environment then serves the notebook in the browser.
+The same machines, reached three ways: the web interface, the terminal, and Claude Code. Start with the small job in `demo/`. The second half of this page ("Going further") is a real task: a GPU job that embeds 4,010 documents, and the same environment as a Jupyter kernel.
 
-You need a cluster account (your group's Science IT project; your PI adds you) and, off campus, the UZH VPN. No account: watch, and keep this page for the day you have one. Every general command is in `setup/cluster_guide.md`.
+You need a cluster account (your group's Science IT project; your PI adds you). Every general command is also in `setup/cluster_guide.md`.
 
-Commands marked *(course recipe)* are not from the S3IT documentation. Hugo runs them the day before the session.
+## Step zero: off campus, the UZH VPN
+
+Install Ivanti Secure Access from the UZH VPN download page, add a connection with the server `remoteaccess.uzh.ch/vpn`, connect with your UZH account and approve the MFA prompt. Without it the cluster does not answer (`Network is unreachable`). On campus Wi-Fi (eduroam) you are already inside.
+
+## Route 1. The web interface
+
+https://apps.s3it.uzh.ch, with your UZH login. Nothing to install. **Files** (browse, upload, download; "Open in Terminal" gives a shell in the browser), **Jobs** (what is running), **Interactive Apps** (Jupyter, RStudio, VS Code on a compute node: choose hours, cores, memory and a GPU in a form, then Launch). Delete idle sessions: they are billed while they run.
+
+## Route 2. The terminal (SSH)
+
+```bash
+ssh <you>@cluster.s3it.uzh.ch      # your UZH shortname and password
+hostname                            # u24-login-...: you are on the login node
+```
+
+Two time-savers, once. A nickname, in `~/.ssh/config` on your laptop:
+
+```
+Host scicluster
+  HostName cluster.s3it.uzh.ch
+  User <you>
+  ServerAliveInterval 60
+```
+
+And a key instead of a password (an agent cannot type passwords):
+
+```bash
+ssh-keygen -t ed25519
+ssh-copy-id scicluster
+```
+
+The small job. `demo/job.sh` is a booking form (the `#SBATCH` lines: time, cores, memory) and a recipe (load Python, run the script):
+
+```bash
+scp -r sessions/04/cluster/demo scicluster:demo_cours_llm     # from the repository, on your laptop
+ssh scicluster
+cd demo_cours_llm
+sbatch job.sh                 # Submitted batch job 1234567
+squeue -u $USER               # R = running, PD = pending
+sacct -j 1234567 -X           # once it is done: COMPLETED, and the node it ran on
+cat demo_1234567.out
+```
+
+The output names the machine: a compute node, not the login node.
+
+## Route 3. Claude Code
+
+Claude Code runs on your laptop and reaches the cluster through the same `ssh scicluster`. It needs the VPN, the nickname, the key, and you approving each command. What Hugo typed:
+
+> Connect to scicluster, create a folder demo_cours_llm, write a small Python script that counts the words in three sentences, run it as a Slurm job with 1 CPU and 1 GB for 5 minutes, and show me the output.
+
+It failed first (`module: command not found`: the job script needs `#!/bin/bash -l`; and quotes mangled while writing the file remotely: write locally, then `scp`), read the error, and fixed it. Read what it runs before you approve: it sends what it reads to Anthropic, and it can delete files as fast as it writes them.
+
+## When it breaks
+
+| Message | Cause, fix |
+| --- | --- |
+| `Network is unreachable` | The VPN is off. |
+| `Permission denied (publickey,password)` | No key installed: `ssh-copy-id scicluster`. |
+| `REMOTE HOST IDENTIFICATION HAS CHANGED` | The server's key was renewed. Check with IT, then `ssh-keygen -R cluster.s3it.uzh.ch`. |
+| `module: command not found` | Job script without a login shell. First line: `#!/bin/bash -l`. |
+
+---
+
+# Going further: a GPU job, and the same environment in Jupyter
+
+One task through two routes: **download the 4,010 professions de foi of the first round of the 1978 legislative election, and embed them on a GPU.** The same environment then serves the notebook in the browser. Commands marked *(course recipe)* are not from the S3IT documentation: test them before you rely on them.
 
 ## The files
 
@@ -16,7 +82,7 @@ Commands marked *(course recipe)* are not from the S3IT documentation. Hugo runs
 | `embed_corpus.py` | Cuts each text into passages of 80 words and embeds them (multilingual-e5-small) |
 | `embed.sbatch` | The batch job that runs `embed_corpus.py` on one GPU |
 
-## Door 1. The terminal (SSH)
+## By SSH
 
 ### Once: copy the files and build the environment
 
@@ -65,9 +131,9 @@ squeue --me                  # PD = waiting for a GPU, R = running
 tail -f logs/embed-1978_1234567.out
 ```
 
-The log ends with `run.json` (model, GPU, number of passages, seconds) and the five passages closest to a local promise. The results are in `/scratch/$USER/archelec/1978-03-12/embeddings/`. Bring them home with `scp`, or open them in Door 3.
+The log ends with `run.json` (model, GPU, number of passages, seconds) and the five passages closest to a local promise. The results are in `/scratch/$USER/archelec/1978-03-12/embeddings/`. Bring them home with `scp`, or open them in ScienceApps.
 
-## Door 3. The browser (ScienceApps)
+## In the browser (ScienceApps)
 
 https://apps.s3it.uzh.ch, with your UZH login.
 
@@ -98,7 +164,7 @@ The container cannot be changed from the notebook: no `pip install` in a cell. A
 ### What it buys you
 
 - The notebook runs next to the data, on a GPU, without Colab's time limits.
-- The 4,010 embeddings of the job are already on `/scratch`: in the notebook, set `CLUSTER_EMBEDDINGS` to their folder and Part 4 works on the whole election.
+- The 4,010 embeddings of the job are already on `/scratch`: in the notebook, set `CLUSTER_EMBEDDINGS` to their folder and Part 5 works on the whole election.
 - Confidential data never leave UZH: with a local model on the same node (`setup/cluster_guide.md`, "A local model on a GPU node"), nothing goes to a provider.
 
 ## Before the session (Hugo)
@@ -106,4 +172,4 @@ The container cannot be changed from the notebook: no `pip install` in a cell. A
 - [ ] Build `s4.sif`, fetch the 1978 corpus, download the model (above).
 - [ ] Run `embed.sbatch` once; note the GPU and the seconds from `run.json` for the slide.
 - [ ] Install the kernel; open a Jupyter session; run Part 0 of the notebook with the kernel **s4**.
-- [ ] On the day: submit the job at the start of Part 1, so that it has finished by the end of it.
+- [ ] Run the small job of `demo/` by the three routes, once.

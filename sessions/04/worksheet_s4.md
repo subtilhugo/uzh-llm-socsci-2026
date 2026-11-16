@@ -8,16 +8,18 @@
 
 **Your number**: the one next to your name in Hugo's email. It decides which documents you code by hand.
 
-**Today's question.** In the first round of the 1978 legislative election, do candidates who already hold a local office talk more about local issues? 300 professions de foi from Archelec (Sciences Po), measured six ways, then one coefficient.
+**Today's question.** In the first round of the 1978 legislative election, do candidates who already hold a local office talk more about local issues? 300 professions de foi from Archelec (Sciences Po).
 
-| Part | You do | We check: paste in the shared document |
+| Part of the session | You do | We check: paste in the shared document |
 | --- | --- | --- |
-| 1. The ScienceCluster | with an account: `sessions/04/cluster/README.md`; without: notebook Part 0 | the job ID, the GPU, the seconds |
-| 2. Measuring without an LLM | notebook Parts 1 to 3 | found / requested / returned / missing; your dictionary's precision and recall, before and after; the AUC; the classifier's kappa |
-| 3. Extracting with an LLM | Part 4 | accuracy per field for Claude and GPT; one disagreement where the catalogue is wrong |
-| 4. From labels to an estimate | Parts 5 and 6 | for Claude: the coefficient naive and corrected, with the intervals |
+| 1. Text as data: from word counts to black boxes | listen | |
+| 2. Three ways into the ScienceCluster | with an account: the small job of `sessions/04/cluster/demo/`; without: notebook Parts 0 and 1 | your job ID, and the node it ran on |
+| 3. Your paper and your data, connected | listen; `setup/overleaf_dropbox_guide.md` for later | |
+| 4. From a scan to a text: OCR | notebook Parts 1 and 2 | surnames found by the old OCR and by the model; one word each got wrong |
+| 5. Extracting with an LLM | notebook Part 3 | accuracy per field for Claude and GPT; one disagreement where the catalogue is wrong |
+| 6. Classifying text, and the coefficient | notebook Parts 4 to 7 | your dictionary before and after; for Claude, the coefficient naive and corrected |
 
-**Goal for 12:00.** In your copy of the notebook (or in your project folder): 300 documents collected with their checks; your six hand codes in the class's sheet; a dictionary, an embedding score and a classifier scored against the class's codes; a table extracted by two models and checked field by field; the coefficient, naive and corrected; the bundle downloaded.
+**Goal for 12:00.** In your copy of the notebook: 300 documents collected with their checks; twelve scans read twice; a table extracted by two models and checked field by field; your six hand codes in the class's sheet; four measures scored against the class's codes; the coefficient, naive and corrected; the bundle downloaded.
 
 ---
 
@@ -25,64 +27,42 @@
 
 1. **Keys.** Hugo's email has two workshop keys, capped: Anthropic and OpenAI. Put them in Colab Secrets (key icon in the left sidebar; names `ANTHROPIC_API_KEY` and `OPENAI_API_KEY`; switch on "Notebook access"). Never in a cell, never in a file you share.
 2. **Test the notebook**: open it in Colab, run Part 0 and Part 1. Part 0 installs the packages; Part 1 downloads 300 documents from the Internet Archive (one or two minutes). If something fails, write to Hugo before 8:30 with the error message.
-3. **Your 100 texts.** The texts you coded yourself, as a CSV with a column `text` and a column `label` (0 or 1). Part 7 of the notebook and prompt 12 use them.
-4. **With a ScienceCluster account** (optional): copy `sessions/04/cluster/` to the cluster and start building the container (README, "Once"). It takes 10 to 20 minutes; better done the day before.
+3. **Your 100 texts.** The texts you coded yourself, as a CSV with a column `text` and a column `label` (0 or 1). Part 8 of the notebook and prompt 12 use them.
+4. **With a ScienceCluster account** (optional): the VPN if you are off campus, then the nickname and the key (`sessions/04/cluster/README.md`, Route 2). Five minutes.
 
 ---
 
-## Part 1. The ScienceCluster
+## Part 2 of the session. Three ways into the ScienceCluster
 
-### Step 1. Follow, or prepare
+### Step 1. Your route
 
-- **With an account**: `sessions/04/cluster/README.md`, step by step: the container, the corpus (and its check), the model, then `sbatch embed.sbatch`. The job runs while we move on.
-- **Without**: notebook Part 0. Keep the README for the day you have an account (your PI adds you to the group's Science IT project).
+- **With an account**: `sessions/04/cluster/README.md`. The nickname and the key, then the small job: copy `demo/` to the cluster, `sbatch job.sh`, `squeue`, `sacct`, `cat` the output. Then ask your agent to do the same, and read every command before you approve it.
+- **Without**: notebook Parts 0 and 1. Keep the README for the day you have an account (your PI adds you to the group's Science IT project).
 
-Done when: you have pasted *the job ID, the GPU named in the log, the seconds in `run.json`* (with an account), or Part 0 printed `ready`.
+Done when: you have pasted *your job ID, and the name of the node it ran on* (with an account), or Part 1 printed its checks.
 
-## Part 2. Measuring without an LLM
+## Part 4 of the session. From a scan to a text
 
 ### Step 2. Collect, and check
 
 Notebook Part 1. Read each check before going on: the number found, requested = returned + missing, short texts, duplicates. Open the PDF of the first document next to its OCR.
 
-Done when: you have pasted *found, requested, returned, missing*.
+### Step 3. Read a scan twice
 
-### Step 3. Code six documents by hand
+Notebook Part 2. One page first: read the model's version, then the 2021 version, with the PDF open. Then the other eleven.
 
-Notebook Part 2. Set `MY_NUMBER` in Part 0 and rerun that cell. Then:
+- Check 1: how much do the versions differ, and what did only the model write?
+- Check 2: is the candidate's surname (from the catalogue) in each version?
 
-- Read the definition of `local_offer` (printed in the notebook, and on slide 17).
-- Read each of your six documents: the common one, then your five. The PDF is easier than the OCR.
-- Write your six codes in `MY_CODES`, in the order printed (1 = a local offer, 0 = none).
-- Paste the six lines printed by the next cell into the class's sheet.
+Done when: you have pasted *surnames found by the old OCR and by the model, out of twelve; one word the model got right; one word it should not have written*.
 
-Do this **before** anything else in the notebook: your codes must not be influenced by a measure.
+## Part 5 of the session. Extracting with an LLM
 
-Done when: your six rows are in the sheet. Then put the sheet's CSV link (in the shared document) in `GOLD_SHEET_CSV`, Part 0, and run "The class's codes".
+### Step 4. One form, then 300
 
-### Step 4. A dictionary
+Notebook Part 3. Run the single call first and read the whole answer next to the catalogue record printed below it. Then the 300 with Claude, then with GPT. Watch the cost lines.
 
-Notebook Part 3a. Run the three cells, read the precision and recall, then read the contexts of a false positive.
-
-**Exercise**: remove one word, add two, rerun the three cells.
-
-Done when: you have pasted *precision and recall, before and after, and the words you changed*.
-
-### Step 5. Embeddings and a classifier
-
-Notebook Parts 3b and 3c. Run the search with a sentence of your own. Read the AUC of the score. Run the classifier once the sheet has enough codes.
-
-Done when: you have pasted *the AUC, the classifier's kappa, and your search sentence with the best passage it found*.
-
-**Your own project.** Part 7 with your 100 texts, or prompt 12 in your folder.
-
-## Part 3. Extracting with an LLM
-
-### Step 6. One form, then 300
-
-Notebook Part 4. Run the single call first and read the whole answer next to the catalogue record printed below it. Then the 300 with Claude, then with GPT. Watch the cost lines.
-
-### Step 7. Check against the catalogue
+### Step 5. Check against the catalogue
 
 - The table of outcomes per field, and the accuracy where both have a value.
 - `disagreements("claude")`, then `disagreements("gpt")`: open the PDF of each. Who is right?
@@ -92,21 +72,42 @@ Done when: you have pasted *accuracy per field for both models, and one disagree
 
 **Your own project.** Prompt 13 on documents of your project.
 
-## Part 4. From labels to an estimate
+## Part 6 of the session. Classifying text, and the coefficient
+
+### Step 6. Code six documents by hand
+
+Notebook Part 4. Set `MY_NUMBER` in Part 0 and rerun that cell. Then:
+
+- Read the definition of `local_offer` (printed in the notebook, and on the slide "Four Ways to Say Yes or No").
+- Read each of your six documents: the common one, then your five. The PDF is easier than the OCR.
+- Write your six codes in `MY_CODES`, in the order printed (1 = a local offer, 0 = none).
+- Paste the six lines printed by the next cell into the class's sheet.
+
+Do this **before** you look at any measure of Part 5: your codes must not be influenced by one.
+
+Done when: your six rows are in the sheet. Then put the sheet's CSV link (in the shared document) in `GOLD_SHEET_CSV`, Part 0, and run "The class's codes".
+
+### Step 7. Four measures
+
+Notebook Part 5. The dictionary and its precision and recall; the contexts of a false positive; then the **exercise**: remove one word, add two, rerun. The third OCR check: does the dictionary change with the model's text? One search of your own. The classifier, once the sheet has enough codes. Then the LLMs' label, and all measures against the class's codes.
+
+Done when: you have pasted *precision and recall before and after, the words you changed, the AUC, the classifier's kappa*.
 
 ### Step 8. Naive and corrected
 
-Notebook Part 5. Every measure against the class's codes, then the coefficient of `local_mandate`, naive and corrected, and the figure.
+Notebook Part 6. The coefficient of `local_mandate`, naive and corrected, and the figure.
 
 Done when: you have pasted *for Claude, the coefficient naive and corrected, with their intervals, and whether the conclusion changes*.
 
 ### Step 9. The bundle
 
-Notebook Part 6. Open `params.json`: could a referee rerun your analysis from it? Download the zip.
+Notebook Part 7. Open `params.json`: could a referee rerun your analysis from it? Download the zip.
+
+**Your own project.** Part 8 with your 100 texts; prompt 12 (a classical measure) and prompt 14 (an estimate from labels) in your folder.
 
 ## Before you leave
 
-1. The bundle downloaded (Part 6).
+1. The bundle downloaded (Part 7).
 2. In your project: copy prompts 12, 13 and 14 from `template/prompts/`, and the new section "Measures, extraction and estimates" of `template/CLAUDE.md` into yours.
 3. Prompt 05: the entry in `PROJECT_HISTORY.md`, and the commit.
 
