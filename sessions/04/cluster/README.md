@@ -57,6 +57,16 @@ Claude Code runs on your laptop and reaches the cluster through the same `ssh sc
 
 It failed first (`module: command not found`: the job script needs `#!/bin/bash -l`; and quotes mangled while writing the file remotely: write locally, then `scp`), read the error, and fixed it. Read what it runs before you approve: it sends what it reads to Anthropic, and it can delete files as fast as it writes them.
 
+## Do and don't
+
+| Do | Don't |
+| --- | --- |
+| Send heavy work to Slurm (`sbatch`, or a session in ScienceApps). | Run heavy code on the login node: it is shared by everyone. |
+| Ask for what the job needs (time, cores, memory, GPUs): small requests start sooner. | Ask for more GPUs than your code uses: you wait much longer in the queue, your group pays, and the job runs no faster. |
+| Copy what you want to keep from `scratch` to `home` or `shares`. | Leave the only copy on `scratch`: files untouched for 30 days are deleted, with no backup. |
+| Delete Jupyter sessions you no longer use. | Show an agent interview transcripts or personal data. |
+| Read what an agent runs before you approve. | Approve a command you do not understand. |
+
 ## When it breaks
 
 | Message | Cause, fix |

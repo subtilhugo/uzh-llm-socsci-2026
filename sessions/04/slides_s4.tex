@@ -230,24 +230,40 @@ Every number can be traced back to a word on a page.
 Today's list: 27 words (``notre ville'', ``d\'eviation'', ``h\^opital'', ``usine'', ...) and a rule: two different words or more.
 \end{frame}
 
-\begin{frame}{Embeddings: Meaning as Coordinates}
+\begin{frame}{\chg{Embeddings: Meaning as Coordinates}}
+\begin{columns}[c]
+\column{0.5\textwidth}
 \centering
-\begin{tikzpicture}[font=\scriptsize,scale=0.9]
-  \draw[->,gray] (0,0) -- (6.2,0);
-  \draw[->,gray] (0,0) -- (0,3.4);
-  \fill[titleblue] (4.6,2.7) circle (2.5pt) node[right,text=black,align=left] {``sauver la maternit\'e\\de notre h\^opital''};
-  \fill[titleblue] (3.6,1.9) circle (2.5pt) node[left,text=black,align=right] {``les urgences de la ville\\ne fermeront pas''};
-  \fill[gray] (1.2,0.6) circle (2.5pt) node[right,text=black,align=left] {``la politique \'etrang\`ere\\de la France''};
-  \draw[dashed,titleblue] (4.6,2.7) -- (3.6,1.9);
+\begin{tikzpicture}[font=\small,scale=0.95]
+  \draw[->,gray] (0,0) -- (6.0,0);
+  \draw[->,gray] (0,0) -- (0,3.9);
+  \fill[titleblue] (1.0,0.9) circle (2.5pt) node[below left,text=black] {man};
+  \fill[titleblue] (2.2,2.5) circle (2.5pt) node[above left,text=black] {woman};
+  \fill[titleblue] (3.3,1.3) circle (2.5pt) node[below right,text=black] {king};
+  \fill[titleblue] (4.5,2.9) circle (2.5pt) node[above right,text=black] {queen};
+  \draw[-{Latex},thick,accentred] (1.0,0.9) -- (2.2,2.5);
+  \draw[-{Latex},thick,accentred] (3.3,1.3) -- (4.5,2.9);
+  \draw[dashed,gray] (1.0,0.9) -- (3.3,1.3);
+  \draw[dashed,gray] (2.2,2.5) -- (4.5,2.9);
 \end{tikzpicture}
+\column{0.48\textwidth}
+\small
+Each word is a list of numbers, learned from the words around it.
 
 \vspace{0.3cm}
-\raggedright
+The same direction carries the same meaning:
+\[
+\text{king} - \text{man} + \text{woman} \approx \text{queen}
+\]
+{\footnotesize (Mikolov et al.\ 2013)}
+\end{columns}
+
+\vspace{0.3cm}
 \small
 \begin{itemize}
     \setlength{\itemsep}{3pt}
-    \item Each passage of 80 words becomes 384 numbers. Close passages say similar things, with other words, or with OCR errors.
-    \item \texttt{multilingual-e5-small}: MIT licence, French included, 470 MB, runs on a CPU. On the cluster: the 4,010 documents in one job.
+    \item \textbf{Ordinary algebra}: add, subtract, average; the angle between two vectors is their similarity.
+    \item \textbf{The same for passages}: today, 80 words become 384 numbers. Close passages say similar things, with other words, or with OCR errors.
     \item Not a judgement: a geometry. You still decide what ``close'' means.
 \end{itemize}
 \end{frame}
@@ -623,15 +639,30 @@ Main risk & idle sessions burn your hours & heavy work on the login node & appro
 Four errors I hit while preparing this class.
 \end{frame}
 
-\begin{frame}{\chg{Four Habits on a Shared Cluster}}
-\small
-\begin{enumerate}
-    \setlength{\itemsep}{8pt}
-    \item \textbf{Heavy work goes to Slurm.} The login node is for editing and submitting. Everything else is a job.
-    \item \textbf{Ask for what you need.} Small requests of time, cores and memory start sooner. Close idle Jupyter sessions.
-    \item \textbf{Know where your data goes.} Claude Code sends what it reads to Anthropic. Keep interview transcripts and personal data out of its view.
-    \item \textbf{Read before you approve.} An agent with SSH access can delete files as fast as it writes them.
-\end{enumerate}
+\begin{frame}{\chg{The Cluster: Do and Don't}}
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\textcolor{titleblue}{Do}}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item Send heavy work to Slurm: \texttt{sbatch}, or a session in ScienceApps.
+    \item Ask for what the job needs: time, cores, memory, GPUs. Small requests start sooner.
+    \item Copy what you want to keep from \texttt{scratch} to \texttt{home} or \texttt{shares}.
+    \item Delete Jupyter sessions you no longer use.
+    \item Read what an agent runs before you approve.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{\textcolor{accentred}{Don't}}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item Run heavy code on the login node: it is shared by everyone.
+    \item Ask for more GPUs than your code uses: you wait much longer in the queue, your group pays, and the job runs no faster.
+    \item Leave the only copy on \texttt{scratch}: files untouched for 30 days are deleted, with no backup.
+    \item Show an agent interview transcripts or personal data: it sends what it reads to its provider.
+    \item Approve a command you do not understand.
+\end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}{\chg{Block 1. Your Route}}
