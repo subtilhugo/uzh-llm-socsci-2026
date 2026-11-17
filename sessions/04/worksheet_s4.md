@@ -1,4 +1,4 @@
-# Worksheet, Session 4: from texts to variables, with and without an LLM
+# Worksheet, Session 4: from texts to variables
 
 **Course repository: https://github.com/subtilhugo/uzh-llm-socsci-2026**
 

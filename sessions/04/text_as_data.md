@@ -1,6 +1,6 @@
 # Text as data: to go further
 
-Part 1 of Session 4 (sixty years, from word lists to LLMs) draws on the course **Text as Data for the Social Sciences** by **Germain Gauthier** (Bocconi University) and **Philine Widmer** (Paris School of Economics), January 2026. Their slides and notebooks go much further than one hour: start here.
+To go further after Part 1 of Session 4 (sixty years, from word lists to LLMs): the course **Text as Data for the Social Sciences** by **Germain Gauthier** (Bocconi University) and **Philine Widmer** (Paris School of Economics), January 2026. Its slides and notebooks go much further than one hour.
 
 ## Lectures (PDF)
 

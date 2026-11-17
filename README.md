@@ -40,11 +40,11 @@ Every participant starts their own research project in Session 1 and advances it
 - `setup/cluster_guide.md`: the UZH ScienceCluster by SSH, with an agent, and in the browser
 - New in `template/`: prompt 10 (collect from an API, and prove the collection is complete) and prompt 11 (annotate with an LLM, and validate against your own coding); a new section of `CLAUDE.md`, "APIs, keys and LLM annotation"
 
-## Session 4: from texts to variables, with and without an LLM
+## Session 4: from texts to variables
 
 - `sessions/04/slides_s4.pdf`: text as data, sixty years from word lists to LLMs; three ways into the ScienceCluster; Overleaf and Dropbox; from a PDF to a table (OCR); extraction with an LLM
 - `sessions/04/worksheet_s4.md`: what to do before the session, and the steps of each part
-- `sessions/04/text_as_data.md`: to go further, the lectures and notebooks of Germain Gauthier and Philine Widmer's course *Text as Data for the Social Sciences*, on which Part 1 draws
+- `sessions/04/text_as_data.md`: to go further after Part 1, lectures and notebooks on text as data
 - `sessions/04/s4_ocr.ipynb`: from a PDF to a table ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/04/s4_ocr.ipynb)). Five historical PDFs (a 1760 manuscript, a 1793 decree, three election leaflets); Tesseract's table of words; an LLM's transcription and variables; the two readings compared; a loop over every page
 - `sessions/04/s4_extraction.ipynb`: from 300 leaflets to a table ([open it in Colab](https://colab.research.google.com/github/subtilhugo/uzh-llm-socsci-2026/blob/main/sessions/04/s4_extraction.ipynb)). The professions de foi of the 1978 legislative election (Archelec, Sciences Po) through the Internet Archive API; Claude and GPT filling in a form, checked against the Sciences Po catalogue
 - `sessions/04/cluster/`: the ScienceCluster by three routes (web interface, SSH, Claude Code) with a small job in `demo/`; then, going further, a GPU job that embeds the 4,010 documents of the election and the same environment as a Jupyter kernel

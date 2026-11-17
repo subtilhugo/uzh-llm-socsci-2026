@@ -65,9 +65,8 @@
   \vfill
 \end{frame}}
 
-\title[LLMs for Social Science Research]{\large \textbf{Large Language Models for Social Science Research} \\[0.35cm]
-    \textbf{Session 4} \\[0.1cm]
-    \textit{From Texts to Variables, With and Without an LLM}}
+\title[LLMs for Social Science Research]{\large \textbf{Large Language Models for Social Science Research} \\[0.2cm]
+    \new{\textit{Session 4. From Texts to Variables}}}
 \author[H. Subtil]{\textbf{Hugo Subtil}}
 \institute{PhD Workshop, University of Zurich}
 \date{November 18, 2026}
@@ -93,9 +92,9 @@
 \small
 \begin{enumerate}
     \setlength{\itemsep}{1pt}
-    \item[\textbf{9:00--10:00}] \new{Part 1. Text as Data: Sixty Years, From Word Lists to LLMs}
+    \item[\textbf{9:00--10:00}] Part 1. Text as Data: Sixty Years, From Word Lists to LLMs
     \begin{itemize}
-        \item \new{Counting words, embeddings, transformers and LLMs}
+        \item Counting words, embeddings, transformers and LLMs
     \end{itemize}
 
     \item[\textbf{10:00--10:30}] Part 2. Three Ways into the ScienceCluster
@@ -105,9 +104,9 @@
 
     \item[\textbf{10:30--10:40}] Part 3. Your Paper and Your Data, Connected, then a break
 
-    \item[\textbf{10:50--11:25}] \new{Part 4. From a PDF to a Table: OCR}
+    \item[\textbf{10:50--11:25}] Part 4. From a PDF to a Table: OCR
     \begin{itemize}
-        \item \new{Block 2. Five historical PDFs, Tesseract, an LLM, and a loop}
+        \item Block 2. Five historical PDFs, Tesseract, an LLM, and a loop
     \end{itemize}
 
     \item[\textbf{11:25--11:50}] Part 5. Extracting With an LLM
@@ -135,8 +134,7 @@
 \end{frame}
 
 % ============================================================================
-\sectionslide{Part 1. Text as Data}{Sixty years, from word lists to LLMs\\[0.5cm]
-{\footnotesize \new{Drawing on Germain Gauthier and Philine Widmer's course \textit{Text as Data for the Social Sciences}}}}
+\sectionslide{Part 1. Text as Data}{Sixty years, from word lists to LLMs}
 
 \begin{frame}{\chg{Text as Data: the Problem}}
 \small
@@ -200,22 +198,29 @@ A text is not a variable. Every method turns documents into numbers, and loses s
   \draw[-{Latex},thick] (c) -- node[below=14pt]{1. represent} (w);
   \draw[-{Latex},thick] (w) -- node[below=14pt]{2. measure} (y);
   \draw[-{Latex},thick] (y) -- node[below=14pt]{3. analyse} (r);
+  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (0,-1.55) {\new{US Congress speeches, 1873--2016}};
+  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (3.1,-1.55) {\new{counts of two-word phrases}};
+  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (6.2,-1.55) {\new{how partisan each speaker sounds}};
+  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (9.3,-1.55) {\new{partisanship rose sharply from the 1990s}};
 \end{tikzpicture}
 
-\vspace{0.5cm}
+\vspace{0.2cm}
+{\scriptsize \new{An example: Gentzkow, Shapiro and Taddy (2019).}}
+
+\vspace{0.25cm}
 \raggedright
 \small
 \begin{enumerate}
-    \setlength{\itemsep}{5pt}
+    \setlength{\itemsep}{3pt}
     \item \textbf{Represent}: word counts, vectors, or nothing at all (an LLM reads the text itself).
     \item \textbf{Measure}: a rule you write, weights learned from your codes, patterns found without codes, or an instruction.
     \item \textbf{Analyse}: $\hat Y$ goes into a regression, a figure, a description.
 \end{enumerate}
 
 \vspace{0.3cm}
+\vspace{0.1cm}
 Sixty years changed steps 1 and 2. Step 3 did not: $\hat Y$ is a variable measured with error. Session 5.
 
-\vspace{0.1cm}
 {\footnotesize (Gentzkow, Kelly and Taddy 2019)}
 \end{frame}
 
@@ -227,7 +232,7 @@ Sixty years changed steps 1 and 2. Step 3 did not: $\hat Y$ is a variable measur
 & \textbf{A document becomes} & \textbf{You choose} & \textbf{You can inspect} \\
 \midrule
 \textbf{Counting words} \newline {\scriptsize dictionaries, scaling, topic models} & a row of word frequencies & the vocabulary, the word list & everything \\
-\textbf{Embeddings} \newline {\scriptsize word2vec, BERT, sentence models} & a point in a space & the model, your examples & the neighbours, not the dimensions \\
+\textbf{Embeddings} \newline {\scriptsize word2vec, \new{doc2vec,} BERT, sentence models} & a point in a space & the model, your examples & the neighbours, not the dimensions \\
 \textbf{LLMs} \newline {\scriptsize Claude, GPT, open-weight models} & an answer to your instruction & the prompt, the model & the answer only \\
 \bottomrule
 \end{tabular}
@@ -464,7 +469,7 @@ Words used in the same contexts mean similar things. So learn each word from its
 \end{frame}
 
 \begin{frame}{\new{From Neighbours to Vectors}}
-\small
+\footnotesize
 \centering
 {\normalsize \dots\ la \colorbox{titleblue!15}{d\'eviation} de la route nationale \dots}\\[0.1cm]
 {\scriptsize a word, and its neighbours in a window of a few words}
@@ -476,9 +481,10 @@ Words used in the same contexts mean similar things. So learn each word from its
     \item \textbf{Count} which words appear near which: a table with one row and one column per word. Huge, mostly zeros.
     \item \textbf{Compress} each row into 100 to 300 numbers that keep the neighbourhoods.
     \item \textbf{word2vec} does it with a small network that predicts a word from its neighbours. The network is thrown away; its hidden layer is kept. Those numbers are the embedding (Mikolov et al.\ 2013; GloVe: Pennington et al.\ 2014).
+    \item \new{\textbf{doc2vec}: the same trick for whole documents. Each speech, manifesto or leaflet gets its own vector, learned with its words, in the same space (Le and Mikolov 2014).}
 \end{enumerate}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 No codes needed: the text supervises itself.
 \end{frame}
 
@@ -526,7 +532,7 @@ The same direction carries the same meaning:
     \setlength{\itemsep}{6pt}
     \item \textbf{A century of stereotypes}: how close ``woman'' sits to occupation words in each decade's texts tracks women's share of those occupations in the census (Garg et al.\ 2018).
     \item \textbf{Class as a direction}: rich minus poor, and which words lie along it, from 1900 to 2000 (Kozlowski, Taddy and Evans 2019).
-    \item \textbf{Ideology from speeches}: members of parliament placed by their words (Rheault and Cochrane 2020).
+    \item \textbf{Ideology from speeches}: \new{one vector per party, learned with its words, doc2vec-style}, places parties on a left-right line (Rheault and Cochrane 2020).
     \item \textbf{Narratives}: who does what to whom, in speeches and newspapers (Ash, Gauthier and Widmer 2024).
 \end{itemize}
 
@@ -1620,6 +1626,7 @@ Gentzkow, M., Shapiro, J.\ M.\ and Taddy, M.\ (2019). Measuring Group Difference
 Gon\c{c}alves, P.\ et al.\ (2013). Comparing and Combining Sentiment Analysis Methods. \textit{ACM Conference on Online Social Networks}.\\[0.06cm]
 Kozlowski, A.\ C., Taddy, M.\ and Evans, J.\ A.\ (2019). The Geometry of Culture. \textit{American Sociological Review} 84(5).\\[0.06cm]
 Laver, M., Benoit, K.\ and Garry, J.\ (2003). Extracting Policy Positions from Political Texts Using Words as Data. \textit{APSR} 97(2).\\[0.06cm]
+\new{Le, Q.\ and Mikolov, T.\ (2014). Distributed Representations of Sentences and Documents. \textit{ICML}.}\\[0.06cm]
 Loughran, T.\ and McDonald, B.\ (2011). When Is a Liability Not a Liability? \textit{Journal of Finance} 66(1).\\[0.06cm]
 Ouyang, L.\ et al.\ (2022). Training Language Models to Follow Instructions with Human Feedback. \textit{NeurIPS} 35.\\[0.06cm]
 Pennington, J., Socher, R.\ and Manning, C.\ D.\ (2014). GloVe: Global Vectors for Word Representation. \textit{EMNLP}.\\[0.06cm]
