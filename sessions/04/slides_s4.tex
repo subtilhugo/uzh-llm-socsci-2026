@@ -183,40 +183,29 @@ A text is not a variable. Every method turns documents into numbers, and loses s
 
 \begin{frame}{\new{One Pipeline, Three Steps}}
 \centering
+\vspace{0.3cm}
 \begin{tikzpicture}[font=\scriptsize]
-  \tikzset{box/.style={draw,rounded corners,minimum height=1.0cm,text width=1.9cm,align=center,fill=gray!12},
-           key/.style={draw,rounded corners,minimum height=1.0cm,text width=1.9cm,align=center,fill=titleblue!70,text=white}}
+  \tikzset{box/.style={draw,rounded corners,minimum height=1.0cm,text width=1.7cm,align=center,fill=gray!12},
+           key/.style={draw,rounded corners,minimum height=1.0cm,text width=1.7cm,align=center,fill=titleblue!70,text=white},
+           ex/.style={text width=2.2cm,align=center,font=\scriptsize\itshape,text=titleblue}}
   \node[box] (c) at (0,0) {Texts};
-  \node[box] (w) at (3.1,0) {Numbers $W$};
-  \node[key] (y) at (6.2,0) {A measure $\hat Y$};
-  \node[box] (r) at (9.3,0) {A result};
+  \node[box] (w) at (2.75,0) {Numbers};
+  \node[key] (y) at (5.5,0) {A measure};
+  \node[box] (r) at (8.25,0) {A result};
   \draw[-{Latex},thick] (c) -- node[below=14pt]{1. represent} (w);
   \draw[-{Latex},thick] (w) -- node[below=14pt]{2. measure} (y);
   \draw[-{Latex},thick] (y) -- node[below=14pt]{3. analyse} (r);
-  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (0,-1.55) {\new{US Congress speeches, 1873--2016}};
-  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (3.1,-1.55) {\new{counts of two-word phrases}};
-  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (6.2,-1.55) {\new{how partisan each speaker sounds}};
-  \node[text width=2.5cm,align=center,font=\scriptsize\itshape,text=titleblue] at (9.3,-1.55) {\new{partisanship rose sharply from the 1990s}};
+  \node[ex] at (0,-1.6) {US Congress\\speeches,\\1873--2016};
+  \node[ex] at (2.75,-1.6) {counts of\\two-word\\phrases};
+  \node[ex] at (5.5,-1.6) {how partisan\\each speaker\\sounds};
+  \node[ex] at (8.25,-1.6) {partisanship\\rose sharply\\from the 1990s};
 \end{tikzpicture}
 
-\vspace{0.2cm}
-{\scriptsize \new{An example: Gentzkow, Shapiro and Taddy (2019).}}
-
-\vspace{0.25cm}
-\raggedright
-\small
-\begin{enumerate}
-    \setlength{\itemsep}{3pt}
-    \item \textbf{Represent}: word counts, vectors, or nothing at all (an LLM reads the text itself).
-    \item \textbf{Measure}: a rule you write, weights learned from your codes, patterns found without codes, or an instruction.
-    \item \textbf{Analyse}: $\hat Y$ goes into a regression, a figure, a description.
-\end{enumerate}
-
 \vspace{0.3cm}
-\vspace{0.1cm}
-Sixty years changed steps 1 and 2. Step 3 did not: $\hat Y$ is a variable measured with error. Session 5.
+{\footnotesize Example: Gentzkow, Shapiro and Taddy (2019).}
 
-{\footnotesize (Gentzkow, Kelly and Taddy 2019)}
+\vspace{1.0cm}
+\alert{Sixty years changed steps 1 and 2.\\ Step 3 did not: the measure has errors.}
 \end{frame}
 
 \begin{frame}{\chg{Three Generations}}
