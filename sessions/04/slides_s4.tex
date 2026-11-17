@@ -55,6 +55,7 @@
 % --- \new{...}: what changed on 17 November (the one-hour Part 1), in bold. To switch off: \renewcommand{\new}[1]{#1}
 \newcommand{\new}[1]{{\bfseries #1}}
 \usepackage{ifthen}
+\usetikzlibrary{shapes.geometric}
 
 \newcommand{\sectionslide}[2]{%
 \begin{frame}[plain]
@@ -313,30 +314,29 @@ Before counting, you decide what counts as a word.
 \small
 \textbf{Economic Policy Uncertainty} (Baker, Bloom and Davis 2016)
 
-\vspace{0.3cm}
-An article counts if it contains a word from each of three short lists:
-
-\vspace{0.2cm}
-\footnotesize
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{7.2cm}@{}}
-\toprule
-\textbf{Uncertainty} & uncertain, uncertainty \\
-\textbf{Economy} & economic, economy \\
-\textbf{Policy} & Congress, deficit, Federal Reserve, legislation, regulation, White House \\
-\bottomrule
-\end{tabular}
-
-\vspace{0.3cm}
-\small
-Then: the share of such articles, per newspaper and month; standardised; averaged across newspapers.
-
-\vspace{0.3cm}
-Ten newspapers, three lists, a rule anyone can read: an index now computed for many countries, and checked against human readers.
-
-\vspace{0.3cm}
 \centering
-\alert{The strength of a dictionary: everyone can see the rule, and argue with it.}
+\begin{tikzpicture}[font=\scriptsize]
+  \fill[titleblue!18] (0,0) circle (1.45);
+  \fill[accentred!15] (2.1,0) circle (1.45);
+  \fill[gray!25] (1.05,-1.7) circle (1.45);
+  \draw[titleblue,thick] (0,0) circle (1.45);
+  \draw[accentred,thick] (2.1,0) circle (1.45);
+  \draw[gray,thick] (1.05,-1.7) circle (1.45);
+  \node[align=center] at (-0.55,0.45) {\textbf{Uncertainty}\\uncertain\\uncertainty};
+  \node[align=center] at (2.65,0.45) {\textbf{Economy}\\economic\\economy};
+  \node[align=center] at (1.05,-2.45) {\textbf{Policy}\\Congress, deficit,\\regulation \dots};
+  \node[star,star points=5,fill=titleblue,inner sep=1.8pt] at (1.05,-0.6) {};
+  \draw[-{Latex},thick,titleblue] (4.6,-0.6) node[right,text=black,align=left,font=\small] {an article\\in all three:\\it counts} -- (1.3,-0.6);
+\end{tikzpicture}
+
+\vspace{0.25cm}
+\raggedright
+\small
+Count such articles per newspaper and month, standardise, average: an index now computed for many countries.
+
+\vspace{0.25cm}
+\centering
+\alert{Everyone can read the rule, and argue with it.}
 \end{frame}
 
 \begin{frame}{\new{The Limits of a Word List}}
@@ -354,70 +354,52 @@ Ten newspapers, three lists, a rule anyone can read: an index now computed for m
 \alert{A dictionary is a theory of the concept.\\ Validate it like one.}
 \end{frame}
 
-\begin{frame}{\new{Learning the Weights From Your Codes}}
+\begin{frame}{\new{Without Codes: Topics and Positions}}
 \small
-A dictionary gives each word a weight you choose: 1 if it is on the list, 0 otherwise. A \textbf{text regression} learns the weights from documents you coded.
+No hand codes at all: the model finds the structure, you give it a meaning.
 
-\[
-\hat y_i = f\big(\beta_1\, \text{count}_{i,1} + \beta_2\, \text{count}_{i,2} + \dots + \beta_p\, \text{count}_{i,p}\big)
-\]
-
-\begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{More words than documents}: a penalty (lasso, ridge) keeps most weights near zero.
-    \item \textbf{Scored on documents it never saw}: a test set, or cross-validation.
-    \item \textbf{Accuracy as a finding}: if a model can tell parties apart from their speeches, they speak differently. Polarisation, measured (Peterson and Spirling 2018; Gentzkow, Shapiro and Taddy 2019).
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Precision and Recall}
-\small
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.49\textwidth}
 \centering
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-& \textbf{You: a local offer} & \textbf{You: none} \\
-\midrule
-\textbf{Measure: yes} & true positive & \textcolor{accentred}{false positive} \\
-\textbf{Measure: no} & \textcolor{accentred}{false negative} & true negative \\
-\bottomrule
-\end{tabular}
+\textbf{Topics}: what is each text about?
+
+\vspace{0.25cm}
+\begin{tikzpicture}[font=\scriptsize]
+  \fill[titleblue!70] (0,0) rectangle (2.25,0.45);
+  \fill[accentred!55] (2.25,0) rectangle (3.6,0.45);
+  \fill[gray!45] (3.6,0) rectangle (4.5,0.45);
+  \node[text=white,font=\tiny\bfseries] at (1.12,0.22) {50\%};
+  \node[text=white,font=\tiny\bfseries] at (2.92,0.22) {30\%};
+  \node[font=\tiny\bfseries] at (4.05,0.22) {20\%};
+  \node[above] at (1.12,0.45) {economy};
+  \node[above] at (2.92,0.45) {health};
+  \node[above] at (4.05,0.45) {local};
+  \node[below,align=center,font=\tiny\itshape] at (1.12,0) {jobs, prices,\\wages};
+  \node[below,align=center,font=\tiny\itshape] at (2.92,0) {hospital,\\doctors};
+  \node[below,align=center,font=\tiny\itshape] at (4.05,0) {road,\\station};
+\end{tikzpicture}
+
+\vspace{0.2cm}
+\raggedright
+\footnotesize
+The model finds groups of words that appear together. You read them, and name them (LDA; structural topic models for survey answers, Roberts et al.\ 2014).
+\column{0.49\textwidth}
+\centering
+\textbf{Positions}: where does each text stand?
+
+\vspace{0.25cm}
+\begin{tikzpicture}[font=\scriptsize]
+  \draw[thick,gray] (0,0) -- (4.5,0);
+  \foreach \x/\l in {0.3/A,1.2/B,1.9/C,3.2/D,4.2/E} {\fill[titleblue] (\x,0) circle (2.6pt); \node[above] at (\x,0.08) {\l};}
+  \node[below,font=\scriptsize] at (0,-0.12) {?};
+  \node[below,font=\scriptsize] at (4.5,-0.12) {?};
+\end{tikzpicture}
 
 \vspace{0.5cm}
 \raggedright
-\begin{itemize}
-    \setlength{\itemsep}{5pt}
-    \item \textbf{Precision}: of the documents it flags, how many are right?
-    \item \textbf{Recall}: of the documents with a local offer, how many does it find?
-    \item Add a word: recall up, precision down. The trade-off, in plain sight.
-\end{itemize}
-
-\vspace{0.3cm}
-Then \textbf{read}: the false positives show which words fire, and where.
-\end{frame}
-
-\begin{frame}{\new{Without Codes: Topics and Positions}}
-\small
-\begin{columns}[T]
-\column{0.48\textwidth}
-\textbf{Topics}
-
-\vspace{0.2cm}
-Each document is a mixture of topics; each topic, a list of words that appear together (LDA: Blei, Ng and Jordan 2003).
-
-\vspace{0.2cm}
-With party or year as covariates: the structural topic model, built for open-ended survey answers (Roberts et al.\ 2014).
-
-\vspace{0.2cm}
-\textit{You name the topics afterwards, by reading.}
-\column{0.48\textwidth}
-\textbf{Positions}
-
-\vspace{0.2cm}
-Where does a party stand? Score words with texts of known position (Wordscores: Laver, Benoit and Garry 2003), or let word frequencies place the texts on one line (Wordfish: Slapin and Proksch 2008).
-
-\vspace{0.2cm}
-\textit{You decide what the line means.}
+\footnotesize
+Five manifestos, placed on one line by their words alone (Wordfish, Slapin and Proksch 2008). You decide what the line means: left and right? old and new?
 \end{columns}
 
 \vspace{0.5cm}
@@ -434,10 +416,10 @@ Where does a party stand? Score words with texts of known position (Wordscores: 
 
 \begin{frame}{\new{What Counting Cannot See}}
 \small
-\textbf{Order.} ``Le maire a battu le d\'eput\'e.'' ``Le d\'eput\'e a battu le maire.'' The same bag of words.
+\textbf{Order.} \new{``The mayor beat the deputy.'' ``The deputy beat the mayor.''} The same bag of words.
 
 \vspace{0.4cm}
-\textbf{Similarity.} ``bonjour'' and ``salut'', ``usine'' and ``atelier'': unrelated columns of the table.
+\textbf{Similarity.} \new{``hello'' and ``hi'', ``factory'' and ``plant''}: unrelated columns of the table.
 
 \vspace{0.4cm}
 \textbf{The fix} comes from linguistics:
@@ -689,30 +671,6 @@ You cannot open it. You can test it from the outside.
 \alert{The fourth principle did not change: validate, validate, validate.}
 \end{frame}
 
-\begin{frame}{\new{To Go Further}}
-\small
-\textbf{Germain Gauthier and Philine Widmer}, \textit{Text as Data for the Social Sciences} (2026). Eight lectures and six notebooks:
-
-\vspace{0.2cm}
-\footnotesize
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.8cm}>{\raggedright\arraybackslash}p{5.0cm}@{}}
-\toprule
-\textbf{Lectures} & \textbf{Notebooks (Colab)} \\
-\midrule
-Introduction, Dictionaries, Text regressions, Topic models & Text cleaning, Dictionaries, Text regressions, Topic models \\
-Embeddings, Semantics, Transformers, LLMs & Embeddings, Transformers and LLMs \\
-\bottomrule
-\end{tabular}
-
-\vspace{0.2cm}
-\small
-Every link: \texttt{sessions/04/text\_as\_data.md} in the course repository.
-
-\vspace{0.4cm}
-\textbf{Books and surveys}: Grimmer, Roberts and Stewart (2022), \textit{Text as Data}; Gentzkow, Kelly and Taddy (2019), ``Text as Data'', \textit{Journal of Economic Literature}.
-\end{frame}
-
 % ============================================================================
 \sectionslide{Part 2. Three Ways into the ScienceCluster}{The same machines, reached three ways}
 
@@ -731,6 +689,87 @@ Fine-tuning a model, embedding a million speeches, running a local LLM on a whol
 
 \vspace{0.5cm}
 \textbf{Access}: your group's Science IT project; your PI adds you.
+\end{frame}
+
+\begin{frame}{\chg{Three Routes, Three Jobs}}
+\footnotesize
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
+\toprule
+& \textbf{Web interface} & \textbf{SSH terminal} & \textbf{Claude Code} \\
+\midrule
+Set-up & none: a browser & VPN, then a key & VPN, key and nickname \\
+Best for & notebooks, RStudio, looking at files & long batch jobs, many runs & writing and debugging job scripts \\
+Learning curve & minutes & a few weeks & minutes, but you must check it \\
+Reproducible & clicks are not saved & scripts are & scripts are, plus the chat \\
+Main risk & idle sessions burn your hours & heavy work on the login node & approving commands you do not understand \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{\chg{The Cluster: Do and Don't}}
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\textcolor{titleblue}{Do}}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item Send heavy work to Slurm: \texttt{sbatch}, or a session in ScienceApps.
+    \item Ask for what the job needs: time, cores, memory, GPUs. Small requests start sooner.
+    \item Copy what you want to keep from \texttt{scratch} to \texttt{home} or \texttt{shares}.
+    \item Delete Jupyter sessions you no longer use.
+    \item Read what an agent runs before you approve.
+\end{itemize}
+\column{0.48\textwidth}
+\textbf{\textcolor{accentred}{Don't}}
+\begin{itemize}
+    \setlength{\itemsep}{4pt}
+    \item Run heavy code on the login node: it is shared by everyone.
+    \item Ask for more GPUs than your code uses: you wait much longer in the queue, your group pays, and the job runs no faster.
+    \item Leave the only copy on \texttt{scratch}: files untouched for 30 days are deleted, with no backup.
+    \item Show an agent interview transcripts or personal data: it sends what it reads to its provider.
+    \item Approve a command you do not understand.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{\new{What It Costs}}
+\footnotesize
+Billed to your group's Science IT project, for what you \textbf{reserve}, not what you use.
+
+\vspace{0.2cm}
+\renewcommand{\arraystretch}{1.3}
+\begin{columns}[T]
+\column{0.44\textwidth}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Resource} & \textbf{CHF} \\
+\midrule
+1,000 CPU-core hours & 1.30 \\
+1,000 GB-hours of memory & 0.33 \\
+1 hour of an H100 GPU & 0.21 \\
+1 hour of an H200 GPU & 0.27 \\
+1 TB on \texttt{/shares}, one month & 1.20 \\
+\bottomrule
+\end{tabular}
+\column{0.54\textwidth}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.4cm}r@{}}
+\toprule
+\textbf{For example} & \textbf{CHF} \\
+\midrule
+Embed 4,010 leaflets: under an hour of one GPU & $<$ 0.30 \\
+An open model labels a corpus overnight: 10 H100-hours & about 2 \\
+A month of AI video for a research project: 140 H200-hours & about 40 \\
+Tesseract on 8,000 pages, on 32 cores & $<$ 0.10 \\
+\bottomrule
+\end{tabular}
+\end{columns}
+
+\vspace{0.3cm}
+Rented in the cloud, a GPU of this class costs several dollars an hour.
+
+\vspace{0.1cm}
+{\scriptsize Rates derived from a UZH group's monthly usage report, September 2026 (H100, H200, CPU, memory, storage). They change: Science IT terms and conditions, UZH login.}
 \end{frame}
 
 \begin{frame}{\chg{Every Route Goes Through the Same Five Stops}}
@@ -961,22 +1000,6 @@ About two minutes from prompt to result, with my approval at each step.
 \alert{It makes your mistakes, faster. Read what it runs before you approve.}
 \end{frame}
 
-\begin{frame}{\chg{Three Routes, Three Jobs}}
-\footnotesize
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}@{}}
-\toprule
-& \textbf{Web interface} & \textbf{SSH terminal} & \textbf{Claude Code} \\
-\midrule
-Set-up & none: a browser & VPN, then a key & VPN, key and nickname \\
-Best for & notebooks, RStudio, looking at files & long batch jobs, many runs & writing and debugging job scripts \\
-Learning curve & minutes & a few weeks & minutes, but you must check it \\
-Reproducible & clicks are not saved & scripts are & scripts are, plus the chat \\
-Main risk & idle sessions burn your hours & heavy work on the login node & approving commands you do not understand \\
-\bottomrule
-\end{tabular}
-\end{frame}
-
 \begin{frame}{\chg{When It Breaks}}
 \footnotesize
 \renewcommand{\arraystretch}{1.7}
@@ -994,32 +1017,6 @@ Main risk & idle sessions burn your hours & heavy work on the login node & appro
 \vspace{0.4cm}
 \small
 Four errors I hit while preparing this class.
-\end{frame}
-
-\begin{frame}{\chg{The Cluster: Do and Don't}}
-\footnotesize
-\begin{columns}[T]
-\column{0.48\textwidth}
-\textbf{\textcolor{titleblue}{Do}}
-\begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item Send heavy work to Slurm: \texttt{sbatch}, or a session in ScienceApps.
-    \item Ask for what the job needs: time, cores, memory, GPUs. Small requests start sooner.
-    \item Copy what you want to keep from \texttt{scratch} to \texttt{home} or \texttt{shares}.
-    \item Delete Jupyter sessions you no longer use.
-    \item Read what an agent runs before you approve.
-\end{itemize}
-\column{0.48\textwidth}
-\textbf{\textcolor{accentred}{Don't}}
-\begin{itemize}
-    \setlength{\itemsep}{4pt}
-    \item Run heavy code on the login node: it is shared by everyone.
-    \item Ask for more GPUs than your code uses: you wait much longer in the queue, your group pays, and the job runs no faster.
-    \item Leave the only copy on \texttt{scratch}: files untouched for 30 days are deleted, with no backup.
-    \item Show an agent interview transcripts or personal data: it sends what it reads to its provider.
-    \item Approve a command you do not understand.
-\end{itemize}
-\end{columns}
 \end{frame}
 
 \begin{frame}{\chg{Block 1. Your Route}}
@@ -1145,19 +1142,17 @@ A PDF is a container: \textbf{text} (written on a computer) or \textbf{pictures 
 \begin{frame}{\new{The Pipeline}}
 \centering
 \begin{tikzpicture}[font=\scriptsize]
-  \tikzset{box/.style={draw,rounded corners,minimum height=0.95cm,text width=1.75cm,align=center,fill=gray!12},
-           key/.style={draw,rounded corners,minimum height=0.95cm,text width=2.3cm,align=center,fill=titleblue!70,text=white}}
+  \tikzset{box/.style={draw,rounded corners,minimum height=0.85cm,text width=1.7cm,align=center,fill=gray!12},
+           key/.style={draw,rounded corners,minimum height=0.8cm,text width=2.6cm,align=center,fill=titleblue!70,text=white}}
   \node[box] (pdf) at (0,0) {A PDF};
-  \node[box] (img) at (2.5,0) {Pictures of its pages};
-  \node[key] (tes) at (5.6,0.85) {Tesseract:\\a table of words};
-  \node[key] (llm) at (5.6,-0.85) {An LLM:\\a text and a form};
+  \node[box] (img) at (2.4,0) {Pictures of its pages};
+  \node[key] (tes) at (5.5,1.05) {Tesseract: a table of words};
+  \node[key] (ds) at (5.5,0) {DeepSeek-OCR: a text};
+  \node[key] (llm) at (5.5,-1.05) {GPT: a text and a form};
   \node[box] (cmp) at (8.6,0) {Compare};
-  \node[box] (tab) at (8.6,-2.0) {One row per page};
+  \node[box] (tab) at (8.6,-2.1) {One row per page};
   \draw[-{Latex},thick] (pdf) -- (img);
-  \draw[-{Latex},thick] (img.east) -- (tes.west);
-  \draw[-{Latex},thick] (img.east) -- (llm.west);
-  \draw[-{Latex},thick] (tes.east) -- (cmp.west);
-  \draw[-{Latex},thick] (llm.east) -- (cmp.west);
+  \foreach \r in {tes,ds,llm} {\draw[-{Latex},thick] (img.east) -- (\r.west); \draw[-{Latex},thick] (\r.east) -- (cmp.west);}
   \draw[-{Latex},thick] (cmp) -- (tab);
   \draw[-{Latex},thick,dashed,gray] (tab.west) -| node[below,pos=0.25]{the loop: the next page, the next document} (pdf.south);
 \end{tikzpicture}
@@ -1165,41 +1160,26 @@ A PDF is a container: \textbf{text} (written on a computer) or \textbf{pictures 
 \vspace{0.4cm}
 \raggedright
 \small
-\begin{enumerate}
-    \setlength{\itemsep}{2pt}
-    \item \textbf{Look} at the PDF, in the notebook.
-    \item \textbf{A classical OCR}: every word, where it is, how sure the OCR is.
-    \item \textbf{An LLM} on the same picture: the text, and five variables.
-    \item \textbf{Compare} the two readings.
-    \item \textbf{Loop}: 5 documents or 5,000, the same code.
-\end{enumerate}
+Three readers of the same picture: a classical OCR, a free OCR model on your machine, and a large model on OpenAI's servers. Then compare, then loop: 5 documents or 5,000, the same code.
 \end{frame}
 
-\begin{frame}{\chg{OCR: Two Ways to Read a Page}}
-\small
-\begin{columns}[T]
-\column{0.47\textwidth}
-\textbf{Classical OCR} (Tesseract)
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item Shapes, then letters, then words
-    \item Free, local, the same answer every time
-    \item Fails on names, accents, columns, stamps, slogans in large type
-    \item Its errors look like errors: ``f\'eagtion''
-\end{itemize}
-\column{0.47\textwidth}
-\textbf{A vision model} (an LLM that reads images)
-\begin{itemize}
-    \setlength{\itemsep}{3pt}
-    \item Reads the page as a whole: layout, columns, context
-    \item A fraction of a cent per page
-    \item Can \textbf{correct} and \textbf{complete}: fluent text that is not on the page
-    \item Its errors look like French
-\end{itemize}
-\end{columns}
+\begin{frame}{\new{Three Ways to Read a Page}}
+\footnotesize
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.7cm}@{}}
+\toprule
+& \textbf{Tesseract} & \textbf{DeepSeek-OCR} & \textbf{GPT, Claude} \\
+\midrule
+What it is & a classical OCR: shapes, letters, words & an open model trained only to read documents (3B) & a large model that also reads images \\
+Where & your CPU & your GPU, through Ollama & the provider's servers \\
+Cost & free & free & a fraction of a cent per page \\
+Its errors look like & errors: ``f\'eagtion'' & in between & French \\
+\bottomrule
+\end{tabular}
 
 \vspace{0.5cm}
 \centering
+\small
 \alert{A wrong word you can see is better than a right-looking word nobody printed.}
 \end{frame}
 
@@ -1228,29 +1208,30 @@ words = pytesseract.image_to_data(page, lang="fra",
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{\new{One Call: a Page In, a Form Out}}
+\begin{frame}[fragile]{\new{Two Calls: a Page In, a Text Out}}
 \vspace{0.1cm}
+\small
+\textbf{A free OCR model, on your machine} (Ollama, Session 3)
 {\scriptsize
 \begin{verbatim}
-class PageForm(BaseModel):
-    transcription: str
-    document_type: str
-    date: str
-    title: str
-    people: list[str]
-    places: list[str]
-
-r = claude.messages.parse(model="claude-haiku-5-5", max_tokens=8000,
-      system=INSTRUCTIONS, output_format=PageForm,
-      messages=[{"role": "user", "content": [
-          {"type": "image", "source": {"type": "base64",
-               "media_type": "image/jpeg", "data": picture_of_the_page}},
-          {"type": "text", "text": "Fill in the form for this page."}]}])
+r = ollama.chat(model="deepseek-ocr",
+                messages=[{"role": "user", "content": "Free OCR.",
+                           "images": ["page.png"]}])
+text = r.message.content
 \end{verbatim}}
 
-\vspace{0.2cm}
+\textbf{A large model, through an API}: the picture, the instructions, a form
+{\scriptsize
+\begin{verbatim}
+r = gpt.responses.parse(model="gpt-6-luna", instructions=INSTRUCTIONS,
+      input=[{"role": "user", "content": [
+          {"type": "input_image", "image_url": picture_of_the_page},
+          {"type": "input_text", "text": "Fill in the form for this page."}]}],
+      text_format=PageForm)   # the text, and five variables
+\end{verbatim}}
+
 \small
-\textbf{The instructions do the work}: transcribe what is printed, do not correct; never complete what you cannot read, write \texttt{[illisible]}; the variables from this page only, never from your own knowledge.
+\textbf{The instructions do the work}: transcribe, do not correct; write \texttt{[illisible]} rather than guess; the variables from this page only.
 \end{frame}
 
 \begin{frame}{\new{Which Reading Is Better?}}
@@ -1261,8 +1242,8 @@ Nobody typed these pages by hand: there is no ground truth.
 \begin{enumerate}
     \setlength{\itemsep}{7pt}
     \item \textbf{The OCR's own doubt.} Low confidence: a page to read yourself.
-    \item \textbf{Two readings.} The share of words they have in common, and the words only one of them has. A disagreement is a place to look, with the picture open.
-    \item \textbf{Your eyes}, on a random sample of pages. On handwriting, Tesseract returns almost nothing: only you can check the model.
+    \item \textbf{\new{Three readings.}} The share of words each pair has in common, and the words only one reader has. A disagreement is a place to look, with the picture open. Two readers that agree can be wrong together.
+    \item \textbf{Your eyes}, on a random sample of pages. On handwriting, Tesseract returns almost nothing: only you can check the models.
     \item \textbf{A fact you did not produce}, when there is one: a catalogue. Part 5.
 \end{enumerate}
 
@@ -1277,10 +1258,11 @@ Nobody typed these pages by hand: there is no ground truth.
 \begin{verbatim}
 def process(page):                     # everything, for one page
     words = tesseract_words(page)
-    form  = claude_page(page)
-    return {"text": text_of(words), "conf": words.conf.mean(), **form}
+    form  = llm_page(page)
+    ocr   = deepseek_page(page)
+    return {"tesseract": text_of(words), "deepseek": ocr, **form}
 
-for row in pool.map(process, pages_not_done_yet):      # four at a time
+for row in pool.map(process, pages_not_done_yet):
     file.write(json.dumps(row) + "\n")                 # kept as it arrives
 \end{verbatim}}
 
@@ -1289,9 +1271,9 @@ for row in pool.map(process, pages_not_done_yet):      # four at a time
 \begin{itemize}
     \setlength{\itemsep}{4pt}
     \item \textbf{Every answer in a file}: a rerun does not pay twice, a crash loses nothing.
-    \item \textbf{Tesseract at scale}: one core per page; a cluster job with 32 cores reads 32 at a time.
+    \item \textbf{Tesseract and DeepSeek-OCR at scale}: a core, a GPU, one page at a time; on the cluster, as many as the queue gives you.
     \item \textbf{The model at scale}: the batch API, half price, within a day. Session 3.
-    \item \textbf{You at scale}: a random sample, and the pages where the two readings disagree.
+    \item \textbf{You at scale}: a random sample, and the pages where the readers disagree.
 \end{itemize}
 \end{frame}
 
@@ -1318,15 +1300,15 @@ Each step has an error rate, measured on a sample you checked yourself. And newe
 
 \begin{frame}{\new{Block 2. From a PDF to a Table}}
 \small
-\textbf{I show.} The notebook \texttt{s4\_ocr.ipynb}, on the 1958 leaflet: the picture, Tesseract's table, the model's form, the comparison. Then the loop on the five documents.
+\textbf{I show.} The notebook \texttt{s4\_ocr.ipynb}, on the 1958 leaflet: the picture, Tesseract's table, GPT's form, DeepSeek-OCR's text, the comparison. \new{Then three pages side by side}, and the loop.
 
 \vspace{0.3cm}
 \textbf{You do}
 \begin{enumerate}
     \setlength{\itemsep}{3pt}
-    \item Parts 1 to 4 on \textbf{another} document: \texttt{DOC = "decree\_1793"}, or the manuscript.
-    \item Part 5: the loop, and the table.
-    \item Faster? Part 6: a PDF of your own.
+    \item \new{Runtime: T4 GPU, before anything.} Parts 1 to 5 on \textbf{another} document: \texttt{DOC = "decree\_1793"}, or the manuscript.
+    \item Part 6: three pages, three readers. Part 7: the loop, and the table.
+    \item Faster? Part 8: a PDF of your own.
 \end{enumerate}
 
 \vspace{0.3cm}
@@ -1596,7 +1578,6 @@ Brown, T.\ et al.\ (2020). Language Models Are Few-Shot Learners. \textit{NeurIP
 Denny, M.\ J.\ and Spirling, A.\ (2018). Text Preprocessing for Unsupervised Learning: Why It Matters, When It Misleads, and What to Do About It. \textit{Political Analysis} 26(2).\\[0.06cm]
 Firth, J.\ R.\ (1957). A Synopsis of Linguistic Theory, 1930--1955. In \textit{Studies in Linguistic Analysis}. Blackwell.\\[0.06cm]
 Garg, N., Schiebinger, L., Jurafsky, D.\ and Zou, J.\ (2018). Word Embeddings Quantify 100 Years of Gender and Ethnic Stereotypes. \textit{PNAS} 115(16).\\[0.06cm]
-Gauthier, G.\ and Widmer, P.\ (2026). \textit{Text as Data for the Social Sciences}. Lecture slides and notebooks.\\[0.06cm]
 
 Gentzkow, M., Kelly, B.\ and Taddy, M.\ (2019). Text as Data. \textit{Journal of Economic Literature} 57(3).\\[0.06cm]
 Gentzkow, M., Shapiro, J.\ M.\ and Taddy, M.\ (2019). Measuring Group Differences in High-Dimensional Choices. \textit{Econometrica} 87(4).\\[0.06cm]
@@ -1614,7 +1595,6 @@ Laver, M., Benoit, K.\ and Garry, J.\ (2003). Extracting Policy Positions from P
 Loughran, T.\ and McDonald, B.\ (2011). When Is a Liability Not a Liability? \textit{Journal of Finance} 66(1).\\[0.06cm]
 Ouyang, L.\ et al.\ (2022). Training Language Models to Follow Instructions with Human Feedback. \textit{NeurIPS} 35.\\[0.06cm]
 Pennington, J., Socher, R.\ and Manning, C.\ D.\ (2014). GloVe: Global Vectors for Word Representation. \textit{EMNLP}.\\[0.06cm]
-Peterson, A.\ and Spirling, A.\ (2018). Classification Accuracy as a Substantive Quantity of Interest. \textit{Political Analysis} 26(1).\\[0.06cm]
 Rheault, L.\ and Cochrane, C.\ (2020). Word Embeddings for the Analysis of Ideological Placement in Parliamentary Corpora. \textit{Political Analysis} 28(1).\\[0.06cm]
 Roberts, M.\ E.\ et al.\ (2014). Structural Topic Models for Open-Ended Survey Responses. \textit{AJPS} 58(4).\\[0.06cm]
 Slapin, J.\ B.\ and Proksch, S.-O.\ (2008). A Scaling Model for Estimating Time-Series Party Positions from Texts. \textit{AJPS} 52(3).\\[0.06cm]
