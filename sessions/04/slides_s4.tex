@@ -602,7 +602,40 @@ Session 5: train a reader on your own codes (fine-tuning).
 \textbf{What appears at scale}: it follows instructions it was never trained on, and learns a task from a few examples in the prompt (Brown et al.\ 2020).
 
 \vspace{0.4cm}
-\textbf{For your research}: zero-shot (an instruction), then few-shot (a few examples), then fine-tuning (hundreds of codes). Start with the first.
+\textbf{For your research}: three ways to give it your task. Next slide.
+\end{frame}
+
+\begin{frame}{\new{Zero-Shot, Few-Shot, Fine-Tuning}}
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.9cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\toprule
+& \textcolor{titleblue}{\textbf{Zero-shot}} & \textcolor{orange!80!black}{\textbf{Few-shot}} & \textcolor{green!45!black}{\textbf{Fine-tuning}} \\
+\midrule
+You give & instructions only & instructions and 3 to 10 examples & hundreds of coded texts, or more \\
+What changes & nothing & nothing: the examples sit in the prompt & the model's weights \\
+Effort & low & medium & high \\
+Quality & varies & often good & best on your task \\
+When & start here & experiment & if needed (Session 5) \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.35cm}
+\raggedright
+\setlength{\fboxsep}{5pt}
+\fbox{\parbox{0.95\textwidth}{\scriptsize\ttfamily
+Does this leaflet promise something for a place? yes or no.\hfill\textrm{\textcolor{titleblue}{zero-shot}}\\[3pt]
+"A new bypass for our town." -> yes\hfill\textrm{\textcolor{orange!80!black}{+ examples:}}\\
+"Lower taxes for all." -> no\hfill\textrm{\textcolor{orange!80!black}{few-shot}}\\[3pt]
+Text: "Save our maternity ward."}}
+
+\vspace{0.3cm}
+\small
+The examples steer one answer; the model keeps nothing. Choose them like a codebook, and report them.
+
+\vspace{0.05cm}
+{\tiny Few-shot prompting: Brown et al.\ (2020).}
 \end{frame}
 
 \begin{frame}{\chg{LLMs: the Black Box}}
