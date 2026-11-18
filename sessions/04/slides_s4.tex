@@ -501,48 +501,38 @@ The same direction carries the same meaning:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{\new{Embeddings in Social Science}}
+\begin{frame}{\new{doc2vec in Practice: the Technique}}
 \small
-\begin{itemize}
-    \setlength{\itemsep}{6pt}
-    \item \textbf{A century of stereotypes}: how close ``woman'' sits to occupation words in each decade's texts tracks women's share of those occupations in the census (Garg et al.\ 2018).
-    \item \textbf{Class as a direction}: rich minus poor, and which words lie along it, from 1900 to 2000 (Kozlowski, Taddy and Evans 2019).
-    \item \textbf{Ideology from speeches}: one vector per party, learned with its words (doc2vec), places parties on a left-right line (Rheault and Cochrane 2020; next slide).
-    \item \textbf{Narratives}: who does what to whom, in speeches and newspapers (Ash, Gauthier and Widmer 2024).
-\end{itemize}
+The ``document'' is a party in one legislature, for example Labour in 2005. It enters the model like one more word, present in every window of that party's speeches.
 
-\vspace{0.4cm}
+\vspace{0.2cm}
 \centering
-\alert{Trained on texts you did not choose: check before you trust\\ (Rodriguez and Spirling 2022).}
+\includegraphics[width=0.62\textwidth]{figures/party_embeddings_model.png}
+
+\vspace{0.15cm}
+\raggedright
+\small
+Predict a word from its neighbours \emph{and} from the party: ``overcoming barriers to \underline{\ \ \ \ } and tackling inequalities'', Labour, 2005 $\to$ ``work''. The party's vector $\zeta$ is learned along the way, in the same space as the words.
+
+\vspace{0.15cm}
+{\scriptsize Rheault and Cochrane (2020); doc2vec: Le and Mikolov (2014).}
 \end{frame}
 
-\begin{frame}{\new{doc2vec in Practice: One Vector per Party}}
+\begin{frame}{\new{doc2vec in Practice: the Result}}
+\centering
+\includegraphics[width=0.8\textwidth]{figures/party_embeddings_us_house.png}
+
+\vspace{0.1cm}
+\raggedright
 \small
-The ``document'' is a party in one legislature: Labour in 2005, the Democrats in 1993. Its vector is learned with the words, like an extra word present in all of its speeches (Rheault and Cochrane 2020).
+US House, 1873--2016: one point per party and Congress, the party vectors reduced to two dimensions. Democrats and Republicans apart, and further apart from the 1990s.
 
 \vspace{0.25cm}
-\begin{columns}[T]
-\column{0.45\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/party_embeddings_model.png}
-
-\vspace{0.1cm}
-\raggedright
-\scriptsize
-Predict a word from its neighbours \emph{and} from the party: ``overcoming barriers to \underline{\ \ \ \ } and tackling inequalities'', said by Labour in 2005. The party's vector $\zeta$ is learned along the way.
-\column{0.55\textwidth}
-\centering
-\includegraphics[width=\textwidth]{figures/party_embeddings_us_house.png}
-
-\vspace{0.1cm}
-\raggedright
-\scriptsize
-US House, 1873--2016: one point per party and Congress, in two dimensions. Democrats and Republicans apart, and further apart from the 1990s.
-\end{columns}
-
-\vspace{0.3cm}
 \centering
 \alert{The model gives the points. ``Component 1 is left--right'' is a claim:\\ the authors check it against roll-call votes and expert surveys.}
+
+\vspace{0.1cm}
+{\scriptsize Rheault and Cochrane (2020), Figure 2.}
 \end{frame}
 
 \begin{frame}{Three Uses}
