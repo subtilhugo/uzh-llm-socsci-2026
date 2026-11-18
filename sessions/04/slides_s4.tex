@@ -184,48 +184,41 @@ A text is not a variable. Every method turns documents into numbers, and loses s
 
 \begin{frame}{\new{One Pipeline, Three Steps}}
 \centering
-\vspace{0.3cm}
 \begin{tikzpicture}[font=\scriptsize]
-  \tikzset{box/.style={draw,rounded corners,minimum height=1.0cm,text width=1.7cm,align=center,fill=gray!12},
-           key/.style={draw,rounded corners,minimum height=1.0cm,text width=1.7cm,align=center,fill=titleblue!70,text=white},
-           ex/.style={text width=2.2cm,align=center,font=\scriptsize\itshape,text=titleblue}}
+  \tikzset{box/.style={draw,rounded corners,minimum height=0.8cm,text width=1.7cm,align=center,fill=gray!12},
+           key/.style={draw,rounded corners,minimum height=0.8cm,text width=1.7cm,align=center,fill=titleblue!70,text=white},
+           ex/.style={text width=2.1cm,align=center,font=\tiny\itshape,text=titleblue}}
   \node[box] (c) at (0,0) {Texts};
   \node[box] (w) at (2.75,0) {Numbers};
   \node[key] (y) at (5.5,0) {A measure};
   \node[box] (r) at (8.25,0) {A result};
-  \draw[-{Latex},thick] (c) -- node[below=14pt]{1. represent} (w);
-  \draw[-{Latex},thick] (w) -- node[below=14pt]{2. measure} (y);
-  \draw[-{Latex},thick] (y) -- node[below=14pt]{3. analyse} (r);
-  \node[ex] at (0,-1.6) {US Congress\\speeches,\\1873--2016};
-  \node[ex] at (2.75,-1.6) {counts of\\two-word\\phrases};
-  \node[ex] at (5.5,-1.6) {how partisan\\each speaker\\sounds};
-  \node[ex] at (8.25,-1.6) {partisanship\\rose sharply\\from the 1990s};
+  \draw[-{Latex},thick] (c) -- node[above=9pt]{1. represent} (w);
+  \draw[-{Latex},thick] (w) -- node[above=9pt]{2. measure} (y);
+  \draw[-{Latex},thick] (y) -- node[above=9pt]{3. analyse} (r);
+  \node[ex] at (0,-0.85) {US Congress speeches,\\1873--2016};
+  \node[ex] at (2.75,-0.85) {counts of\\two-word phrases};
+  \node[ex] at (5.5,-0.85) {how partisan\\each speaker sounds};
+  \node[ex] at (8.25,-0.85) {partisanship rose\\sharply from the 1990s};
 \end{tikzpicture}
 
-\vspace{0.3cm}
-{\footnotesize Example: Gentzkow, Shapiro and Taddy (2019).}
-\end{frame}
+{\tiny Example: Gentzkow, Shapiro and Taddy (2019).}
 
-\begin{frame}{\new{The Three Steps, in Detail}}
-\vspace{0.2cm}
+\vspace{0.25cm}
+\raggedright
 \small
 \begin{enumerate}
-    \setlength{\itemsep}{10pt}
+    \setlength{\itemsep}{4pt}
     \item \textbf{Represent}: turn each text into numbers. Word counts, vectors, or nothing at all (an LLM reads the text itself).
     \item \textbf{Measure}: from these numbers to one variable. A rule you write, weights learned from your codes, patterns found without codes, or an instruction.
     \item \textbf{Analyse}: the measure goes into a regression, a figure, a description.
 \end{enumerate}
 
-\vspace{0.7cm}
-\centering
-\alert{Sixty years changed steps 1 and 2.\\ Step 3 did not: the measure is a variable measured with error.}
-
 \vspace{0.2cm}
-{\footnotesize Session 5 comes back to it.}
+\centering
+\alert{Sixty years changed steps 1 and 2. Step 3 did not:\\ the measure is a variable measured with error (Session 5).}
 
-\vspace{0.5cm}
-\raggedright
-{\footnotesize Gentzkow, Kelly and Taddy (2019), ``Text as Data'', \textit{J. of Economic Literature}.}
+\vspace{0.1cm}
+{\tiny Gentzkow, Kelly and Taddy (2019), ``Text as Data'', \textit{J. of Economic Literature}.}
 \end{frame}
 
 \begin{frame}{\chg{Three Generations}}
@@ -332,7 +325,7 @@ Before counting, you decide what counts as a word.
 \begin{frame}{\new{A Dictionary That Moved a Field}}
 \vspace{0.1cm}
 \small
-\textbf{Economic Policy Uncertainty} (Baker, Bloom and Davis 2016). \new{A newspaper article counts if it has a word from each list: \emph{uncertain, uncertainty}; \emph{economic, economy}; \emph{Congress, deficit, regulation}\dots}
+\textbf{Economic Policy Uncertainty} (Baker, Bloom and Davis 2016). A newspaper article counts if it has a word from each list: \emph{uncertain, uncertainty}; \emph{economic, economy}; \emph{Congress, deficit, regulation}\dots
 
 \vspace{0.15cm}
 \centering
@@ -359,57 +352,72 @@ Before counting, you decide what counts as a word.
 \alert{A dictionary is a theory of the concept.\\ Validate it like one.}
 \end{frame}
 
-\begin{frame}{\new{Without Codes: Topics and Positions}}
+\begin{frame}{\new{Without Codes (1): Topics}}
 \small
-No hand codes at all: the model finds the structure, you give it a meaning.
+\textbf{The idea.} Each text is a mix of topics; a topic is a group of words that appear together. You choose how many topics; the model finds them.
 
 \vspace{0.3cm}
-\begin{columns}[T]
-\column{0.49\textwidth}
 \centering
-\textbf{Topics}: what is each text about?
-
-\vspace{0.25cm}
 \begin{tikzpicture}[font=\scriptsize]
-  \fill[titleblue!70] (0,0) rectangle (2.25,0.45);
-  \fill[accentred!55] (2.25,0) rectangle (3.6,0.45);
-  \fill[gray!45] (3.6,0) rectangle (4.5,0.45);
-  \node[text=white,font=\tiny\bfseries] at (1.12,0.22) {50\%};
-  \node[text=white,font=\tiny\bfseries] at (2.92,0.22) {30\%};
-  \node[font=\tiny\bfseries] at (4.05,0.22) {20\%};
-  \node[above] at (1.12,0.45) {economy};
-  \node[above] at (2.92,0.45) {health};
-  \node[above] at (4.05,0.45) {local};
-  \node[below,align=center,font=\tiny\itshape] at (1.12,0) {jobs, prices,\\wages};
-  \node[below,align=center,font=\tiny\itshape] at (2.92,0) {hospital,\\doctors};
-  \node[below,align=center,font=\tiny\itshape] at (4.05,0) {road,\\station};
+  \tikzset{box/.style={draw,rounded corners,align=center,fill=gray!12,minimum height=0.8cm},
+           top/.style={draw,rounded corners,align=left,minimum height=0.55cm,text width=3.3cm,font=\scriptsize\itshape}}
+  \node[box,text width=1.8cm] (in) at (0,0) {4,000 leaflets,\\as word counts};
+  \node[box,text width=1.4cm,fill=titleblue!70,text=white] (m) at (2.5,0) {Topic model,\\3 topics};
+  \node[top,fill=titleblue!15] (t1) at (5.9,0.75) {jobs, wages, prices};
+  \node[top,fill=accentred!12] (t2) at (5.9,0) {hospital, doctors, care};
+  \node[top,fill=gray!20] (t3) at (5.9,-0.75) {road, station, town hall};
+  \draw[-{Latex},thick] (in) -- (m);
+  \foreach \t in {t1,t2,t3} \draw[-{Latex},thick] (m.east) -- (\t.west);
+  \node[right,text=accentred,font=\scriptsize\bfseries] at (t1.east) {``economy''};
+  \node[right,text=accentred,font=\scriptsize\bfseries] at (t2.east) {``health''};
+  \node[right,text=accentred,font=\scriptsize\bfseries] at (t3.east) {``local''};
+  \node[anchor=east,font=\scriptsize] at (1.2,-1.75) {Leaflet no.\ 17:};
+  \fill[titleblue!70] (1.4,-1.95) rectangle (4.4,-1.55);
+  \fill[accentred!55] (4.4,-1.95) rectangle (6.2,-1.55);
+  \fill[gray!45] (6.2,-1.95) rectangle (7.4,-1.55);
+  \node[text=white,font=\tiny\bfseries] at (2.9,-1.75) {50\% economy};
+  \node[text=white,font=\tiny\bfseries] at (5.3,-1.75) {30\% health};
+  \node[font=\tiny\bfseries] at (6.8,-1.75) {20\% local};
 \end{tikzpicture}
+
+\vspace{0.3cm}
+\raggedright
+\textbf{What you get}: each text's share of each topic, a variable. Do incumbent mayors talk more about local issues?
 
 \vspace{0.2cm}
-\raggedright
-\footnotesize
-The model finds groups of words that appear together. You read them, and name them (LDA; structural topic models for survey answers, Roberts et al.\ 2014).
-\column{0.49\textwidth}
 \centering
-\textbf{Positions}: where does each text stand?
+\alert{The model gives lists of words. The names are yours:\\ read the words, and the texts high on each topic.}
 
-\vspace{0.25cm}
+\vspace{0.15cm}
+{\tiny LDA: Blei, Ng and Jordan (2003). Structural topic models: Roberts et al.\ (2014).}
+\end{frame}
+
+\begin{frame}{\new{Without Codes (2): Positions}}
+\small
+\textbf{The idea.} Some words are used more at one end, others at the other end. The model finds the one line that best explains which words each text uses, and places every text, and every word, on it.
+
+\vspace{0.35cm}
+\centering
 \begin{tikzpicture}[font=\scriptsize]
-  \draw[thick,gray] (0,0) -- (4.5,0);
-  \foreach \x/\l in {0.3/A,1.2/B,1.9/C,3.2/D,4.2/E} {\fill[titleblue] (\x,0) circle (2.6pt); \node[above] at (\x,0.08) {\l};}
-  \node[below,font=\scriptsize] at (0,-0.12) {?};
-  \node[below,font=\scriptsize] at (4.5,-0.12) {?};
+  \draw[thick,gray,{Latex}-{Latex}] (-0.3,0) -- (9.3,0);
+  \foreach \x/\l in {0.5/A,2.3/B,3.6/C,6.4/D,8.4/E} {\fill[titleblue] (\x,0) circle (3pt); \node[above=3pt,font=\scriptsize\bfseries] at (\x,0) {\l};}
+  \node[below=6pt,align=center,font=\scriptsize\itshape,text=titleblue] at (1.2,0) {workers, public,\\solidarity, strike};
+  \node[below=6pt,align=center,font=\scriptsize\itshape,text=titleblue] at (7.8,0) {market, enterprise,\\taxes, freedom};
+  \node[below=6pt,align=center,font=\scriptsize\itshape,text=gray] at (4.5,0) {country, people\\(used by all: no weight)};
+  \node[above=18pt,font=\scriptsize] at (4.5,0) {Five party manifestos, A to E, placed by their words alone};
 \end{tikzpicture}
 
-\vspace{0.5cm}
+\vspace{0.35cm}
 \raggedright
-\footnotesize
-Five manifestos, placed on one line by their words alone (Wordfish, Slapin and Proksch 2008). You decide what the line means: left and right? old and new?
-\end{columns}
+\small
+\textbf{What you get}: one number per text, and one per word. The words at each end tell you what the line is.
 
-\vspace{0.5cm}
+\vspace{0.15cm}
+\textbf{With or without anchors.} Wordscores: two reference texts whose positions you know (Laver, Benoit and Garry 2003). Wordfish: none at all (Slapin and Proksch 2008).
+
+\vspace{0.25cm}
 \centering
-\alert{No codes in. Your judgement still out.}
+\alert{The model finds a line. Left and right? Old and new?\\ That is your claim: check it against experts, votes, or a reading.}
 \end{frame}
 
 \begin{frame}[plain]
