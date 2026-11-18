@@ -330,31 +330,17 @@ Before counting, you decide what counts as a word.
 \end{frame}
 
 \begin{frame}{\new{A Dictionary That Moved a Field}}
+\vspace{0.1cm}
 \small
-\textbf{Economic Policy Uncertainty} (Baker, Bloom and Davis 2016)
+\textbf{Economic Policy Uncertainty} (Baker, Bloom and Davis 2016). \new{A newspaper article counts if it has a word from each list: \emph{uncertain, uncertainty}; \emph{economic, economy}; \emph{Congress, deficit, regulation}\dots}
 
+\vspace{0.15cm}
 \centering
-\begin{tikzpicture}[font=\scriptsize]
-  \fill[titleblue!18] (0,0) circle (1.45);
-  \fill[accentred!15] (2.1,0) circle (1.45);
-  \fill[gray!25] (1.05,-1.7) circle (1.45);
-  \draw[titleblue,thick] (0,0) circle (1.45);
-  \draw[accentred,thick] (2.1,0) circle (1.45);
-  \draw[gray,thick] (1.05,-1.7) circle (1.45);
-  \node[align=center] at (-0.55,0.45) {\textbf{Uncertainty}\\uncertain\\uncertainty};
-  \node[align=center] at (2.65,0.45) {\textbf{Economy}\\economic\\economy};
-  \node[align=center] at (1.05,-2.45) {\textbf{Policy}\\Congress, deficit,\\regulation \dots};
-  \node[star,star points=5,fill=titleblue,inner sep=1.8pt] at (1.05,-0.6) {};
-  \draw[-{Latex},thick,titleblue] (4.6,-0.6) node[right,text=black,align=left,font=\small] {an article\\in all three:\\it counts} -- (1.3,-0.6);
-\end{tikzpicture}
+\includegraphics[width=0.9\textwidth]{figures/epu_global.png}
 
-\vspace{0.25cm}
-\raggedright
-\small
-Count such articles per newspaper and month, standardise, average: an index now computed for many countries.
+{\scriptsize Source: policyuncertainty.com; Baker, Bloom and Davis (2016).}
 
-\vspace{0.25cm}
-\centering
+\vspace{0.15cm}
 \alert{Everyone can read the rule, and argue with it.}
 \end{frame}
 
