@@ -248,14 +248,14 @@ Each generation reads more of the meaning, and shows less of how.
 
 \begin{frame}{\chg{Counting Words}}
 \small
-\textit{``La commune a besoin d'une route.''} \quad \textit{``La route de la commune est dangereuse.''}
+\textit{``The town needs a road.''} \quad \textit{``The road through the town is dangerous.''}
 
 \vspace{0.2cm}
 \centering
 \footnotesize
 \begin{tabular}{@{}lccccc@{}}
 \toprule
-& commune & route & besoin & dangereuse & \dots \\
+& town & road & needs & dangerous & \dots \\
 \midrule
 Document 1 & 1 & 1 & 1 & 0 & \\
 Document 2 & 1 & 1 & 0 & 1 & \\
@@ -313,13 +313,13 @@ Before counting, you decide what counts as a word.
 \begin{itemize}
     \setlength{\itemsep}{2pt}
     \item Words, not meaning
-    \item OCR: ``ma\-ter\-nit\'e'' cut by a line break
-    \item Headings: ``la circonscription''
+    \item OCR: ``hos- pital'', cut by a line break
+    \item Headings: ``constituency'', printed on every leaflet
 \end{itemize}
 \end{columns}
 
 \vspace{0.4cm}
-\new{An example: 27 words to find local promises in leaflets} (``notre ville'', ``d\'eviation'', ``h\^opital'', ``usine'', ...) and a rule: two different words or more.
+\new{An example: 27 words to find local promises in leaflets} (``our town'', ``bypass'', ``hospital'', ``factory'', ...) and a rule: two different words or more.
 \end{frame}
 
 \begin{frame}{\new{A Dictionary That Moved a Field}}
@@ -341,7 +341,7 @@ Before counting, you decide what counts as a word.
 \small
 \begin{itemize}
     \setlength{\itemsep}{7pt}
-    \item \textbf{Negation and irony}: ``pas bon''; ``bravo, encore une fermeture''.
+    \item \textbf{Negation and irony}: ``not good''; ``great, another closure''.
     \item \textbf{The domain}: ``liability'' is negative in everyday English, neutral in a balance sheet. General sentiment lists misread financial reports (Loughran and McDonald 2011).
     \item \textbf{The choice of list}: on the same texts, sentiment tools often disagree (Gon\c{c}alves et al.\ 2013).
     \item \textbf{Words, not meaning}: a synonym you did not list is invisible.
@@ -450,7 +450,7 @@ Words used in the same contexts mean similar things. So learn each word from its
 \begin{frame}{\new{From Neighbours to Vectors}}
 \footnotesize
 \centering
-{\normalsize \dots\ la \colorbox{titleblue!15}{d\'eviation} de la route nationale \dots}\\[0.1cm]
+{\normalsize \dots\ a new \colorbox{titleblue!15}{bypass} for the main road \dots}\\[0.1cm]
 {\scriptsize a word, and its neighbours in a window of a few words}
 
 \vspace{0.4cm}
@@ -524,7 +524,7 @@ The same direction carries the same meaning:
 \small
 \begin{enumerate}
     \setlength{\itemsep}{8pt}
-    \item \textbf{Search by meaning.} ``Il faut sauver la maternit\'e de l'h\^opital de notre ville'': the five closest passages in the corpus. Finds what the dictionary misses.
+    \item \textbf{Search by meaning.} ``We must save our town's maternity ward'': the five closest passages in the corpus. Finds what the dictionary misses.
     \item \textbf{A score.} Each document: its passage closest to four examples of local offers. Read as a ranking: the AUC is the probability that a document with a local offer ranks above one without.
     \item \textbf{Features for a classifier.} The document's vector as input, your codes as labels.
 \end{enumerate}
@@ -543,18 +543,18 @@ The same direction carries the same meaning:
 
 \begin{frame}{\new{Attention: Every Word Looks at the Others}}
 \small
-word2vec gives ``mandat'' one point, whatever the sentence.
+word2vec gives ``party'' one point, whatever the sentence.
 
 \vspace{0.3cm}
 \centering
 \begin{tikzpicture}[font=\small]
-  \foreach \w [count=\i] in {Il,d\'etient,un,mandat,de,maire} \node (a\i) at (1.45*\i,0) {\w};
-  \draw[titleblue,line width=2.4pt,-{Latex}] (a4.north) to[bend left=45] (a6.north);
-  \draw[titleblue,line width=1.3pt,-{Latex}] (a4.north) to[bend right=45] (a2.north);
-  \draw[titleblue!40,line width=0.5pt,-{Latex}] (a4.north) to[bend right=50] (a3.north);
-  \foreach \w [count=\i] in {Un,mandat,d'arr\^et,contre,le,maire} \node (b\i) at (1.45*\i,-1.7) {\w};
-  \draw[accentred,line width=2.4pt,-{Latex}] (b2.north) to[bend left=50] (b3.north);
-  \draw[accentred!40,line width=0.5pt,-{Latex}] (b2.north) to[bend left=40] (b6.north);
+  \foreach \w [count=\i] in {The,party,won,the,general,election} \node (a\i) at (1.45*\i,0) {\w};
+  \draw[titleblue,line width=2.4pt,-{Latex}] (a2.north) to[bend left=35] (a6.north);
+  \draw[titleblue,line width=1.3pt,-{Latex}] (a2.north) to[bend left=60] (a3.north);
+  \draw[titleblue!40,line width=0.5pt,-{Latex}] (a2.north) to[bend left=45] (a5.north);
+  \foreach \w [count=\i] in {A,birthday,party,with,cake,tonight} \node (b\i) at (1.45*\i,-1.7) {\w};
+  \draw[accentred,line width=2.4pt,-{Latex}] (b3.north) to[bend right=60] (b2.north);
+  \draw[accentred!40,line width=0.5pt,-{Latex}] (b3.north) to[bend left=50] (b5.north);
 \end{tikzpicture}
 
 \vspace{0.4cm}
@@ -575,7 +575,7 @@ word2vec gives ``mandat'' one point, whatever the sentence.
 & \textbf{Readers} (BERT family) & \textbf{Writers} (GPT family) \\
 \midrule
 Read & the whole text, in both directions & left to right \\
-Trained to & fill in hidden words: ``le [MASK] de Carvin'' & predict the next word \\
+Trained to & fill in hidden words: ``the [MASK] of Chicago'' & predict the next word \\
 You use them to & classify, extract, embed, after training on your codes & answer an instruction \\
 Examples & BERT (2018), ModernBERT (2024), today's sentence model & GPT-3 (2020), Claude, GPT, Llama, Mistral \\
 \bottomrule
