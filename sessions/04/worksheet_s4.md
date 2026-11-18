@@ -53,6 +53,8 @@ Part 3: GPT reads the same page, with a form: the transcription, and five variab
 
 Part 6: three pages chosen to make the readers part ways (handwriting, the long s, columns), side by side. On each, which reader does best, and how does each one fail?
 
+Part 6b: a table, a price list of 1793. Tesseract's lines, GPT's rows and columns, DeepSeek-OCR's markdown, then the numbers only one reader found. Check three rows against the picture.
+
 ### Step 4. The loop
 
 Part 7: every page of the five documents, three readers, one table. Read it by kind of document. Then the time and cost per page, and what 8,000 pages would cost.
