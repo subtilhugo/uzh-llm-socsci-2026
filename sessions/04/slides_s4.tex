@@ -503,16 +503,16 @@ The same direction carries the same meaning:
 
 \begin{frame}{\new{doc2vec in Practice: the Technique}}
 \small
-The ``document'' is a party in one legislature, for example Labour in 2005. It enters the model like one more word, present in every window of that party's speeches.
+The party enters the model like one more word, in every window of its speeches.
 
 \vspace{0.2cm}
 \centering
-\includegraphics[width=0.62\textwidth]{figures/party_embeddings_model.png}
+\includegraphics[width=0.75\textwidth]{figures/party_embeddings_model.png}
 
 \vspace{0.15cm}
 \raggedright
 \small
-Predict a word from its neighbours \emph{and} from the party: ``overcoming barriers to \underline{\ \ \ \ } and tackling inequalities'', Labour, 2005 $\to$ ``work''. The party's vector $\zeta$ is learned along the way, in the same space as the words.
+Neighbours + party $\to$ ``work''. The party's vector $\zeta$ is learned on the way.
 
 \vspace{0.15cm}
 {\scriptsize Rheault and Cochrane (2020); doc2vec: Le and Mikolov (2014).}
@@ -520,16 +520,16 @@ Predict a word from its neighbours \emph{and} from the party: ``overcoming barri
 
 \begin{frame}{\new{doc2vec in Practice: the Result}}
 \centering
-\includegraphics[width=0.8\textwidth]{figures/party_embeddings_us_house.png}
+\includegraphics[width=0.88\textwidth]{figures/party_embeddings_us_house.png}
 
 \vspace{0.1cm}
 \raggedright
 \small
-US House, 1873--2016: one point per party and Congress, the party vectors reduced to two dimensions. Democrats and Republicans apart, and further apart from the 1990s.
+US House, 1873--2016: one point per party and Congress.
 
 \vspace{0.25cm}
 \centering
-\alert{The model gives the points. ``Component 1 is left--right'' is a claim:\\ the authors check it against roll-call votes and expert surveys.}
+\alert{``Component 1 is left--right'' is a claim: check it.}
 
 \vspace{0.1cm}
 {\scriptsize Rheault and Cochrane (2020), Figure 2.}
