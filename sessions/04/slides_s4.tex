@@ -204,9 +204,28 @@ A text is not a variable. Every method turns documents into numbers, and loses s
 
 \vspace{0.3cm}
 {\footnotesize Example: Gentzkow, Shapiro and Taddy (2019).}
+\end{frame}
 
-\vspace{1.0cm}
-\alert{Sixty years changed steps 1 and 2.\\ Step 3 did not: the measure has errors.}
+\begin{frame}{\new{The Three Steps, in Detail}}
+\vspace{0.2cm}
+\small
+\begin{enumerate}
+    \setlength{\itemsep}{10pt}
+    \item \textbf{Represent}: turn each text into numbers. Word counts, vectors, or nothing at all (an LLM reads the text itself).
+    \item \textbf{Measure}: from these numbers to one variable. A rule you write, weights learned from your codes, patterns found without codes, or an instruction.
+    \item \textbf{Analyse}: the measure goes into a regression, a figure, a description.
+\end{enumerate}
+
+\vspace{0.7cm}
+\centering
+\alert{Sixty years changed steps 1 and 2.\\ Step 3 did not: the measure is a variable measured with error.}
+
+\vspace{0.2cm}
+{\footnotesize Session 5 comes back to it.}
+
+\vspace{0.5cm}
+\raggedright
+{\footnotesize Gentzkow, Kelly and Taddy (2019), ``Text as Data'', \textit{J. of Economic Literature}.}
 \end{frame}
 
 \begin{frame}{\chg{Three Generations}}
@@ -271,10 +290,10 @@ Before counting, you decide what counts as a word.
 \vspace{0.3cm}
 \begin{itemize}
     \setlength{\itemsep}{5pt}
-    \item \textbf{Lower case, accents, punctuation}: ``\'Election'' and ``election'', one word or two?
-    \item \textbf{Stop words}: drop ``le'', ``de'', ``et''. Unless you study style, or ``nous''.
-    \item \textbf{Stems and lemmas}: ``\'elections'', ``\'electoral'', ``\'elire'' become one.
-    \item \textbf{N-grams}: ``pouvoir d'achat'' is not ``pouvoir'' plus ``achat''.
+    \item \textbf{Lower case, punctuation}: \new{``Labour'' (the party) and ``labour'' (work)}: one word or two?
+    \item \textbf{Stop words}: drop \new{``the'', ``of'', ``and''}. Unless you study style, or \new{``we'' and ``they''}.
+    \item \textbf{Stems and lemmas}: \new{``elected'', ``elections'', ``electing'' all become ``elect''. So do ``university'' and ``universe'': ``univers''.}
+    \item \textbf{N-grams}: \new{``minimum wage''} is not \new{``minimum''} plus \new{``wage''}.
     \item \textbf{Rare and frequent words}: drop what appears in almost no document, or in all of them.
 \end{itemize}
 
